@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import instance from "../api/axios";
 
 export default function Homepage() {
@@ -88,7 +89,7 @@ export default function Homepage() {
         {error && <p className="error-message">Errore: {error}</p>}
         {data.length > 0 ? (
           data.map((item, index) => (
-            <div key={index} className="last-book">
+            <Link to={`/books/${item.id}`} key={index} className="last-book">
               <img src={item.image} alt={item.title} />
               <div className="last-description">
                 <h3>{item.title}</h3>
@@ -97,7 +98,7 @@ export default function Homepage() {
               <p className="last-price">
                 {item.price ? `€ ${item.price}` : "Prezzo non disponibile"}
               </p>
-            </div>
+            </Link>
           ))
         ) : (
           <p>Nessun elemento disponibile</p>

@@ -52,118 +52,118 @@ nav {
 
 /* --------HOMEPAGE-------- */
 .book-slider-container {
-    text-align: center;
-    background: linear-gradient(135deg, #b9151b, #8d1015);
-    padding: 50px 5%;
-    font-family: "Poppins", sans-serif;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 70vh;
-  }
-  
-  .book-slider-title {
-    font-size: 3.2rem;
-    font-weight: 800;
-    margin-bottom: 35px;
-    text-align: center;
-    max-width: 900px;
-  }
-  
-  /* Box dello slider */
-  .book-slider {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-    background-color: white;
-    padding: 50px;
-    min-height: 500px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .book-slider:hover {
-    transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Immagine del libro */
-  .book-slider-image {
-    width: 50%;
-    max-height: 480px;
-    object-fit: contain;
-    border-radius: 12px;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .book-slider-image:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Info sul libro */
-  .book-slider-info {
-    width: 50%;
-    text-align: left;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .book-slider-title-text {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #2c3e50;
-    margin-bottom: 15px;
-  }
-  
-  .book-slider-price {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #27ae60;
-    margin-top: 20px;
-  }
-  
-  /* Effetto sottolineatura animata */
-  .book-slider-title-text::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 4px;
-    background: #b9151b;
-    margin-top: 5px;
-    transition: width 0.3s ease-in-out;
-  }
-  
-  /* Indicatori sotto lo slider */
-  .book-slider-indicators {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    gap: 12px;
-  }
-  
-  .book-slider-indicator {
-    width: 18px;
-    height: 18px;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    transition: 0.3s ease;
-  }
-  
-  .book-slider-indicator.active {
-    background-color: white;
-    transform: scale(1.5);
-  }
+  text-align: center;
+  background: linear-gradient(135deg, #b9151b, #8d1015);
+  padding: 50px 5%;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.book-slider-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 35px;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* Box dello slider */
+.book-slider {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  padding: 50px;
+  min-height: 500px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.book-slider:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Immagine del libro */
+.book-slider-image {
+  width: 50%;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.book-slider-image:hover {
+  transform: scale(1.1);
+}
+
+/* Info sul libro */
+.book-slider-info {
+  width: 50%;
+  text-align: left;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-slider-title-text {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.book-slider-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #27ae60;
+  margin-top: 20px;
+}
+
+/* Effetto sottolineatura animata */
+.book-slider-title-text::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: #b9151b;
+  margin-top: 5px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Indicatori sotto lo slider */
+.book-slider-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 12px;
+}
+
+.book-slider-indicator {
+  width: 18px;
+  height: 18px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+.book-slider-indicator.active {
+  background-color: white;
+  transform: scale(1.5);
+}
 /* --------HOMEPAGE-------- */
 
 /* --------SEARCH-BAR-------- */
@@ -290,3 +290,12 @@ nav {
 .detail-book {
   text-decoration: none;
 }
+
+/* --------SINGOLA PAGINA-------- */
+.old-price {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+/* --------SINGOLA PAGINA-------- */
