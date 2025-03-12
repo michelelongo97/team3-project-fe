@@ -37,51 +37,61 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="book-slider-container">
-        <h2 className="book-slider-title">📚 Bestseller della Settimana</h2>
-        <div className="book-slider">
-          <img
-            src={books[currentIndex].img}
-            alt={books[currentIndex].title}
-            className={`book-slider-image ${fade ? "fade-in" : "fade-out"}`}
-          />
-          <div className="book-slider-info">
-            <p className="book-slider-title-text">
-              {books[currentIndex].title}
-            </p>
-            <p className="book-slider-price">{books[currentIndex].price}</p>
-          </div>
-        </div>
-        <div className="book-slider-indicators">
-          {books.map((_, index) => (
-            <span
-              key={index}
-              className={`book-slider-indicator ${
-                currentIndex === index ? "active" : ""
-              }`}
+      <div className="homepage">
+        <div className="book-slider-container">
+          <h2 className="book-slider-title">📚 Bestseller della Settimana</h2>
+          <div className="book-slider">
+            <img
+              src={books[currentIndex].img}
+              alt={books[currentIndex].title}
+              className={`book-slider-image ${fade ? "fade-in" : "fade-out"}`}
             />
-          ))}
-        </div>
-      </div>
-      <section className="last">
-        <h2 className="title-last">PIÙ RECENTI</h2>
-        <Link to="/book-detail" className="detail-book">
-          <div className="last-book">
-            <img src="./img/rosa.jpg" alt="Il Nome della Rosa" />
-            <div className="last-description">
-              <h3>Il Nome della Rosa</h3>
-              <p>DESCRIZIONE:</p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                ab aliquid porro corrupti blanditiis quos nihil ullam.
+            <div className="book-slider-info">
+              <p className="book-slider-title-text">
+                {books[currentIndex].title}
               </p>
-            </div>
-            <div className="last-price">
-              <p>15.99 €</p>
+              <p className="book-slider-price">{books[currentIndex].price}</p>
             </div>
           </div>
-        </Link>
-      </section>
+          <div className="book-slider-indicators">
+            {books.map((_, index) => (
+              <span
+                key={index}
+                className={`book-slider-indicator ${
+                  currentIndex === index ? "active" : ""
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        <section className="search-bar">
+          <input
+            type="text"
+            placeholder="Cerca un libro..."
+            className="search-input"
+          />
+          <button className="search-button">🔍</button>
+        </section>
+        <section className="last">
+          <h2 className="title-last">PIÙ RECENTI</h2>
+          <Link to="/book-detail" className="detail-book">
+            <div className="last-book">
+              <img src="./img/rosa.jpg" alt="Il Nome della Rosa" />
+              <div className="last-description">
+                <h3>Il Nome della Rosa</h3>
+                <p>DESCRIZIONE:</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
+                  ab aliquid porro corrupti blanditiis quos nihil ullam.
+                </p>
+              </div>
+              <div className="last-price">
+                <p>15.99 €</p>
+              </div>
+            </div>
+          </Link>
+        </section>
+      </div>
     </>
   );
 }
