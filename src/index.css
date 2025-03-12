@@ -1,9 +1,22 @@
-/* --------HEADER-------- */
+/* --------GENERAL-------- */
+*{
+    margin: 0 auto;
+}
+::-webkit-scrollbar {
+    display: none;
+  }
 
+/* --------GENERAL-------- */
+
+
+/* --------HEADER-------- */
 header {
     background-color: #F2F2F2;
     padding: 20px 0;
     border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .container {
@@ -34,7 +47,6 @@ nav {
 .navbar:hover {
     color: #3333;
 }
-
 /* --------HEADER-------- */
 
 
@@ -116,10 +128,86 @@ nav {
     background-color: #ccc;
     border-radius: 50%;
     transition: 0.3s ease;
+    margin: 0;
 }
 
 .book-slider-indicator.active {
     background-color: #2c3e50;
     transform: scale(1.2);
+}
+/* --------HOMEPAGE-------- */
+
+/* --------RECENTI-------- */
+.last {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.title-last {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+.last-book {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.last-book:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.last-book img {
+    width: 120px;
+    height: 180px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.last-description {
+    flex: 1;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.last-description h3 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.last-description p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.last-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    padding-right: 20px;
+}
+.detail-book{
+    text-decoration: none;
 }
 
