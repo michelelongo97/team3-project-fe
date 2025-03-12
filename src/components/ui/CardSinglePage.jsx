@@ -29,7 +29,7 @@ export default function CardSinglePage({
             </div>
           </div>
         ) : (
-          <p>{price}</p>
+          <p>{price}€</p>
         )}
       </div>
     </div>
