@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import instance from "../api/axios";
+import axios from "../api/axios";
 
 export default function Homepage() {
   const [fade, setFade] = useState(true);
@@ -33,21 +33,19 @@ export default function Homepage() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const backendUrl = "http://localhost:3000";
-
-    instance
-      .get(`${backendUrl}/books`)
-      .then((response) => {
-        console.log("Dati ricevuti:", response.data);
-        setData(Array.isArray(response.data) ? response.data : []);
+  const fetchBook = () => {
+    axios
+      .get(`/books`)
+      .then((res) => {
+        console.log("Dati ricevuti:", res.data);
+        setData(res.data);
       })
       .catch((error) => {
         console.error("Errore API:", error);
         setError(error.message);
       });
-  }, []);
-
+  };
+  useEffect(fetchBook, []);
   return (
     <div className="homepage">
       <div className="book-slider-container">
