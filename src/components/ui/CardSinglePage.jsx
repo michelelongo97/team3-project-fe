@@ -5,9 +5,13 @@ export default function CardSinglePage({
   author,
   category,
   year_of_release,
-  discount_percentage,
-  discounted_price,
+  discountId,
+  discount_type,
+  value,
+  discountDescription,
   format,
+  start_date,
+  end_date,
 }) {
   return (
     <div>
@@ -20,15 +24,31 @@ export default function CardSinglePage({
         <p>Genere: {category}</p>
         <p>Anno: {year_of_release}</p>
         <p>{format}</p>
-        {discount_percentage ? (
-          <div>
-            <span className="old-price">{price}€</span>
+
+        {discountId &&
+        new Date() >= new Date(start_date) &&
+        new Date() <= new Date(end_date) ? (
+          discount_type === "percentage" ? (
+            //sconto percentuale
             <div>
-              <span>-{discount_percentage}%</span>
-              <span>{discounted_price}€</span>
+              <span className="old-price">{price}€</span>
+              <div>
+                <span>{discountDescription}</span>
+                <span>{(price - (price * value) / 100).toFixed(2)}€</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            //sconto fisso
+            <div>
+              <span className="old-price">{price}€</span>
+              <div>
+                <span>{discountDescription}</span>
+                <span>{value}€</span>
+              </div>
+            </div>
+          )
         ) : (
+          //prodotto non scontato
           <p>{price}€</p>
         )}
       </div>
