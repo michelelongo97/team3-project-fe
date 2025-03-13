@@ -16,11 +16,11 @@
   margin-right: 10px;
 }
 
-h1 h2 h3 h4{
+h1 h2 h3 h4 {
   font-family: "Montserrat", sans-serif;
 }
 
-p{
+p {
   font-family: "Playfair Display", serif;
 }
 
@@ -427,7 +427,7 @@ nav {
   color: #000; /* Testo nero */
 }
 
-/* Contenitore con immagine a sinistra e dettagli a destra */
+/* Contenitore principale */
 .product-content {
   display: flex;
   align-items: flex-start;
@@ -442,17 +442,20 @@ nav {
   height: 600px;
 }
 
-/* Dettagli prodotto */
+/* Contenitore dettagli */
 .product-details {
   flex: 1;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Titolo del libro */
+/* Titolo */
 .product-title {
-  font-size: 2.2em; /* Leggermente più grande */
+  font-size: 2.2em;
   font-weight: bold;
-  color: #000; /* Nero */
+  color: #000;
 }
 
 /* Autore */
@@ -461,44 +464,66 @@ nav {
   font-weight: bold;
   color: #888;
   margin-bottom: 10px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
-/* Informazioni sul libro */
+/* Informazioni */
 .product-info {
-  font-size: 1.2em;
-  margin-bottom: 8px;
-  color: #000;
+  font-size: 1.1em;
+  gap: 10px;
 }
 
 .product-info span {
   font-weight: bold;
 }
 
-/* Descrizione del libro */
+/* Descrizione */
 .product-description {
   font-size: 1.1em;
-  color: #000;
+  color: #222;
   line-height: 1.5;
-  margin-top: 10px;
+}
+
+/* Contenitore prezzo e bottone */
+.price-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Allinea prezzo e bottone a destra */
+  margin-top: 15px;
 }
 
 /* Prezzi */
+.discount-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: #f8f8f8;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: right;
+  gap: 5px;
+}
+
 .old-price {
   text-decoration: line-through;
   font-size: 1.3em;
+  color: #888;
+  font-weight: bold;
+}
+
+.discount-container span:nth-child(2) {
+  font-size: 1em;
+  color: #555;
+  font-style: italic;
 }
 
 .new-price {
-  font-size: 1.6em;
-  font-weight: bold;
-}
-
-.price {
   font-size: 1.8em;
   font-weight: bold;
-  color: #000;
+  color: #d32f2f;
 }
+
 
 /* Bottone acquisto */
 .buy-button {
@@ -511,6 +536,7 @@ nav {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: fit-content;
 }
 
 .buy-button:hover {
