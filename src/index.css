@@ -9,6 +9,21 @@
   background-color: #f9f9f9;
 }
 
+.old-price {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+h1 h2 h3 h4{
+  font-family: "Montserrat", sans-serif;
+}
+
+p{
+  font-family: "Playfair Display", serif;
+}
+
 /* --------GENERAL-------- */
 
 /* --------HEADER-------- */
@@ -122,8 +137,8 @@ nav {
 .book-slider-title-text {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #2c3e50;
   margin-bottom: 15px;
+  color: #b9151b;
 }
 
 .book-slider-price {
@@ -218,84 +233,288 @@ nav {
 /* --------SEARCH-BAR-------- */
 
 /* --------RECENTI-------- */
-.last {
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  padding: 50px 0;
+  padding: 20px;
   background-color: #f9f9f9;
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.slider-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  gap: 15px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1400px;
+  background: #b9151b;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(185, 21, 27, 0.2);
+}
+
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-item {
+  flex: 0 0 auto;
+  width: 250px;
+  text-align: center;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  background: white;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 370px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.book-card:has(.old-price)::before {
+  content: "SCONTO";
+  position: absolute;
+  top: 20px;
+  left: -35px;
+  background-color: #178317;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 40px;
+  transform: rotate(-45deg);
+  z-index: 2;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.discount-label {
+  position: absolute;
+  top: 20px;
+  left: -35px;
+  background-color: #b9151b;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 40px;
+  transform: rotate(-45deg);
+  z-index: 2;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.book-card img {
+  width: 100%;
+  height: 260px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.book-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  line-height: 1.2;
+}
+
+.book-price {
+  color: black;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.book-card div:has(.old-price) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.book-card .old-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.book-card div div span {
+  color: #b9151b;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.slider-btn {
+  background: #b9151b;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(185, 21, 27, 0.3);
+  transition: all 0.3s ease;
+  margin: 0 5px;
+}
+
+.slider-btn:hover {
+  background: darkred;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
+}
+
+.slider-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-left {
+  margin-right: 10px;
+}
+
+.btn-right {
+  margin-left: 10px;
 }
 
 .title-last {
   text-align: center;
-  font-size: 30px;
+  margin-top: 55px;
+  margin-bottom: 35px;
   font-weight: bold;
   color: #333;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 40px;
-}
-
-.last-book {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  margin: 0 auto 30px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.last-book:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.last-book img {
-  width: 120px;
-  height: 180px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-.last-description {
-  flex: 1;
-  padding: 0 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.last-description h3 {
-  font-size: 22px;
-  color: #222;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-.last-description p {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-
-.last-price {
-  font-size: 22px;
-  font-weight: bold;
-  color: #444;
-  padding-right: 20px;
-}
-.detail-book {
-  text-decoration: none;
+  font-size: 3em;
 }
 
 /* --------SINGOLA PAGINA-------- */
-.old-price {
-  font-size: 18px;
-  color: #999;
-  text-decoration: line-through;
-  margin-right: 10px;
+/* Stile generale */
+.product-page {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  color: #000; /* Testo nero */
 }
+
+/* Contenitore con immagine a sinistra e dettagli a destra */
+.product-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Immagine prodotto */
+.product-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  height: 600px;
+}
+
+/* Dettagli prodotto */
+.product-details {
+  flex: 1;
+  text-align: left;
+}
+
+/* Titolo del libro */
+.product-title {
+  font-size: 2.2em; /* Leggermente più grande */
+  font-weight: bold;
+  color: #000; /* Nero */
+}
+
+/* Autore */
+.product-author {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+/* Informazioni sul libro */
+.product-info {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.product-info span {
+  font-weight: bold;
+}
+
+/* Descrizione del libro */
+.product-description {
+  font-size: 1.1em;
+  color: #000;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* Prezzi */
+.old-price {
+  text-decoration: line-through;
+  font-size: 1.3em;
+}
+
+.new-price {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Bottone acquisto */
+.buy-button {
+  display: block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2d8f19;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background: #357716;
+}
+
 /* --------SINGOLA PAGINA-------- */
