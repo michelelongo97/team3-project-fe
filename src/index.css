@@ -23,8 +23,10 @@ h1 h2 h3 h4 {
 p {
   font-family: "Playfair Display", serif;
 }
-
 /* --------GENERAL-------- */
+
+
+
 
 /* --------HEADER-------- */
 header {
@@ -64,6 +66,9 @@ nav {
   color: #3333;
 }
 /* --------HEADER-------- */
+
+
+
 
 /* --------HOMEPAGE-------- */
 .book-slider-container {
@@ -181,6 +186,9 @@ nav {
 }
 /* --------HOMEPAGE-------- */
 
+
+
+
 /* --------SEARCH-BAR-------- */
 .search-bar {
   display: flex;
@@ -231,6 +239,9 @@ nav {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 /* --------SEARCH-BAR-------- */
+
+
+
 
 /* --------RECENTI-------- */
 .slider-wrapper {
@@ -415,9 +426,12 @@ nav {
   color: #333;
   font-size: 3em;
 }
+/* --------RECENTI-------- */
+
+
+
 
 /* --------SINGOLA PAGINA-------- */
-/* Stile generale */
 .product-page {
   width: 90%;
   max-width: 1200px;
@@ -426,14 +440,12 @@ nav {
   font-family: Arial, sans-serif;
   color: #000; /* Testo nero */
 }
-
 /* Contenitore principale */
 .product-content {
   display: flex;
   align-items: flex-start;
   gap: 40px;
 }
-
 /* Immagine prodotto */
 .product-image img {
   width: 100%;
@@ -441,7 +453,6 @@ nav {
   border-radius: 10px;
   height: 600px;
 }
-
 /* Contenitore dettagli */
 .product-details {
   flex: 1;
@@ -450,14 +461,12 @@ nav {
   flex-direction: column;
   gap: 12px;
 }
-
 /* Titolo */
 .product-title {
   font-size: 2.2em;
   font-weight: bold;
   color: #000;
 }
-
 /* Autore */
 .product-author {
   font-size: 1.5em;
@@ -465,7 +474,6 @@ nav {
   color: #888;
   margin-top: 5px;
 }
-
 /* Informazioni */
 .box-detail {
   background: white;
@@ -476,7 +484,6 @@ nav {
   margin: 20px auto;
   font-family: Arial, sans-serif;
 }
-
 .product-info {
   display: flex;
   justify-content: space-between;
@@ -484,30 +491,25 @@ nav {
   padding: 10px 0;
   font-size: 16px;
 }
-
 .product-info:last-child {
   border-bottom: none;
 }
-
 .product-info span {
   font-weight: bold;
   color: #333;
 }
-
 .product-info p {
   margin: 0;
   color: #555;
   text-align: right;
   flex: 1;
 }
-
 /* Stile per la descrizione */
 .product-info:last-child {
   text-align: center;
   flex-direction: column;
   padding-top: 15px;
 }
-
 .product-info:last-child span {
   display: block;
   font-size: 18px;
@@ -515,23 +517,19 @@ nav {
   margin-bottom: 5px;
   color: #222;
 }
-
 .product-info:last-child p {
   text-align: center;
   color: #444;
   font-size: 16px;
   line-height: 1.5;
 }
-
-
 /* Contenitore prezzo e bottone */
 .price-button-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Allinea prezzo e bottone a destra */
+  align-items: flex-end;
   margin-top: 15px;
 }
-
 /* Prezzi */
 .discount-container {
   display: flex;
@@ -616,7 +614,7 @@ nav {
 
 .price {
   display: inline-block;
-  background: linear-gradient(135deg, #2e2e38, #46465e); /* Blu notte sfumato con un tocco di grigio */
+  background: linear-gradient(135deg, #2e2e38, #46465e);
   color: #f8f8f8;
   font-size: 22px;
   font-weight: bold;
@@ -645,7 +643,7 @@ nav {
 
 .price:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #3a3a48, #575768); /* Un tono più chiaro per il contrasto */
+  background: linear-gradient(135deg, #3a3a48, #575768);
   box-shadow: 0 6px 18px rgba(150, 150, 170, 0.5);
 }
 
@@ -653,10 +651,6 @@ nav {
   transform: scale(1.3);
   opacity: 0.4;
 }
-
-
-
-
 /* Bottone acquisto */
 .buy-button {
   display: block;
@@ -670,9 +664,255 @@ nav {
   cursor: pointer;
   width: fit-content;
 }
-
 .buy-button:hover {
   background: #357716;
 }
-
 /* --------SINGOLA PAGINA-------- */
+
+
+
+
+/* --------CARRELLO-------- */
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cart-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+/* Header del carrello */
+.cart-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Articoli del carrello */
+.cart-items {
+  margin: 20px 0;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.item-product {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-title {
+  font-size: 1.1rem;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.item-author {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+.item-price, .item-total {
+  font-weight: 600;
+  color: #333;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+  background: #f5f5f5;
+}
+
+.quantity-value {
+  margin: 0 10px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #ff5555;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.remove-btn:hover {
+  color: #ff0000;
+}
+
+/* Riepilogo e checkout */
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.cart-checkout {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.total-value {
+  font-weight: bold;
+  color: #333;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-bottom: 10px;
+}
+
+.checkout-btn:hover {
+  background: #43A047;
+}
+
+.continue-shopping-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.continue-shopping-btn:hover {
+  background: #f5f5f5;
+}
+
+/* Sezione codice promozionale */
+.promo-code {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.promo-code h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.promo-input {
+  display: flex;
+  margin-top: 15px;
+}
+
+.promo-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.9rem;
+}
+
+.promo-input button {
+  padding: 10px 15px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.promo-input button:hover {
+  background: #1E88E5;
+}
+
+/* Carrello vuoto */
+.empty-cart {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.empty-cart-icon {
+  font-size: 4rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.empty-cart p {
+  font-size: 1.2rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+/* --------CARRELLO-------- */
