@@ -417,5 +417,104 @@ nav {
 }
 
 /* --------SINGOLA PAGINA-------- */
+/* Stile generale */
+.product-page {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  color: #000; /* Testo nero */
+}
+
+/* Contenitore con immagine a sinistra e dettagli a destra */
+.product-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Immagine prodotto */
+.product-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  height: 600px;
+}
+
+/* Dettagli prodotto */
+.product-details {
+  flex: 1;
+  text-align: left;
+}
+
+/* Titolo del libro */
+.product-title {
+  font-size: 2.2em; /* Leggermente più grande */
+  font-weight: bold;
+  color: #000; /* Nero */
+}
+
+/* Autore */
+.product-author {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+/* Informazioni sul libro */
+.product-info {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.product-info span {
+  font-weight: bold;
+}
+
+/* Descrizione del libro */
+.product-description {
+  font-size: 1.1em;
+  color: #000;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* Prezzi */
+.old-price {
+  text-decoration: line-through;
+  font-size: 1.3em;
+}
+
+.new-price {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Bottone acquisto */
+.buy-button {
+  display: block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2d8f19;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background: #357716;
+}
 
 /* --------SINGOLA PAGINA-------- */
