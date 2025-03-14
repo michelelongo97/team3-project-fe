@@ -16,6 +16,7 @@ export default function CardSinglePage({
   isbn,
   pages_number,
   description,
+  original_title,
 }) {
   return (
     <div className="product-page">
@@ -24,7 +25,9 @@ export default function CardSinglePage({
           <img src={image} alt={title} />
         </div>
         <div className="product-details">
-          <h1 className="product-title">{title}</h1>
+          <h1 className="product-title">
+            {title} {original_title && `- (${original_title})`}
+          </h1>
           <h2 className="product-author">{author}</h2>
           <div className="box-detail">
             <span className="product-info">
