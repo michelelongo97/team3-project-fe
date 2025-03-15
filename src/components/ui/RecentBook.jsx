@@ -2,11 +2,26 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import { useRef } from "react";
+
 import CardSinglePage from "./CardSinglePage";
 
 export default function RecentBook() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  // const [wishlist, setWishlist] = useState([]);
+  // const [userId, setUserId] = useState(null);
+
+  // const fetchUserId = () => {
+  //   axios
+  //     .get("/get-user-id")
+  //     .then((res) => {
+  //       console.log("ID utente:", res.data);
+  //       setUserId(res.data.user_id);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Errore nel recupero dell'user_id:", error);
+  //     });
+  // };
 
   const fetchBook = () => {
     axios
@@ -19,8 +34,15 @@ export default function RecentBook() {
         console.error("Errore API:", error);
         setError(error.message);
       });
+
+    // Recupera la wishlist salvata nel localStorage
+    // const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    // setWishlist(savedWishlist);
   };
-  useEffect(fetchBook, []);
+  useEffect(() => {
+    //fetchUserId(); // Recupera l'userId quando il componente viene caricato
+    fetchBook(); // Recupera i libri
+  }, []);
 
   const sliderRef = useRef(null);
 
@@ -33,6 +55,34 @@ export default function RecentBook() {
       });
     }
   };
+
+  // const toggleWishlist = (bookId) => {
+  //   if (!userId) {
+  //     console.error("User ID non trovato.");
+  //     return;
+  //   }
+
+  //   setWishlist((prevWishlist) => {
+  //     let newWishlist;
+  //     if (prevWishlist.includes(bookId)) {
+  //       // Se è già nella wishlist, lo rimuove
+  //       newWishlist = prevWishlist.filter((id) => id !== bookId);
+  //       axios
+  //         .delete("/wishlist", { data: { user_id: userId, book_id: bookId } })
+  //         .catch((error) => console.error("Errore nella rimozione:", error));
+  //     } else {
+  //       // Se non è nella wishlist, lo aggiunge
+  //       newWishlist = [...prevWishlist, bookId];
+  //       axios
+  //         .post("/wishlist", { user_id: userId, book_id: bookId })
+  //         .catch((error) => console.error("Errore nell'aggiunta:", error));
+  //     }
+
+  //     // Salva la wishlist nel localStorage
+  //     localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+  //     return newWishlist;
+  //   });
+  // };
 
   return (
     <section className="last">
@@ -79,6 +129,19 @@ export default function RecentBook() {
                     // Prodotto non scontato
                     <p className="book-price">{book.price}€</p>
                   )}
+                  {/* <button
+                    className="wishlist-button"
+                    onClick={(e) => {
+                      e.preventDefault(); // Evita che il click ricarichi la pagina
+                      toggleWishlist(book.id);
+                    }}
+                  >
+                    {wishlist.includes(book.id) ? (
+                      <i className="fa-solid fa-heart"></i>
+                    ) : (
+                      <i className="fa-regular fa-heart"></i>
+                    )}
+                  </button> */}
                 </Link>
               </div>
             ))}
