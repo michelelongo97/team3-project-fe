@@ -1,35 +1,98 @@
+import React, { useState, useEffect } from "react";
+import axios from "../api/axios"
+
 export default function Cart() {
+  const [cartItems, setCartItems] = useState([]); 
+    const [message, setMessage] = useState("");
+
+    const fetchCart = async () => {
+      try {
+          const response = await axios.get("/cart"); // Chiamata GET al backend
+          setCartItems(response.data.cart); // Imposta gli articoli nel carrello
+          setMessage(response.data.message || "Carrello recuperato con successo.");
+      } catch (error) {
+          setMessage(error.response?.data?.message || "Errore durante il recupero del carrello.");
+      }
+  };
+
+  const removeFromCart = async (book_id, quantity) => {
+    try {
+        await axios.delete(`/cart/remove/${book_id}/ ${quantity}`, ); 
+        setMessage("Articolo rimosso dal carrello.");
+        fetchCart(); 
+    } catch (error) {
+        setMessage(error.response?.data?.message || "Errore durante la rimozione dell'articolo.");
+    }
+};
+
+const updateQuantity = async (bookId, newQuantity) => {
+  try {
+      await axios.put('/cart/update-quantity', {
+          book_id: bookId,
+          quantity: newQuantity, // Invia il nuovo valore
+      });
+      setMessage("Quantità aggiornata con successo.");
+      fetchCart(); // Aggiorna il carrello
+  } catch (error) {
+      setMessage(error.response?.data?.message || "Errore durante l'aggiornamento della quantità.");
+  }
+};
+
+const handleIncrement = (bookId, currentQuantity) => {
+  const newQuantity = currentQuantity + 1; // Incrementa
+  updateQuantity(bookId, newQuantity);
+};
+
+const handleDecrement = (bookId, currentQuantity) => {
+  const newQuantity = currentQuantity - 1; // Decrementa
+  if (newQuantity >= 1) {
+      updateQuantity(bookId, newQuantity);
+  } else {
+      setMessage("La quantità non può essere inferiore a 1.");
+  }
+};
+
+
+  
+  useEffect(() => {
+      fetchCart();
+  }, []);
+
+
   return (
     <div className="cart-container">
       <h1 className="cart-title">Il tuo carrello</h1>
-
+      
       <div className="cart-content">
+      {cartItems.length === 0 ? (
         <div className="empty-cart">
           <p>Il tuo carrello è vuoto</p>
           <button className="continue-shopping-btn">
             Continua lo shopping
           </button>
         </div>
-
+        ) : (
         <div className="cart-items">
-          <div className="cart-item">
+          {cartItems.map((item) => (
+          <div className="cart-item" key={item.book_id}>
             <div className="item-details">
               <div className="item-info">
-                <img src="./img/rosa.jpg" alt="Libro" className="item-image" />
+                <img src={item.image} alt={item.book_title} className="item-image" />
 
-                <h3 className="item-title">Titolo del Libro</h3>
-                <p className="item-price">€9.99</p>
+                <h3 className="item-title">{item.book_title}</h3>
+                <p className="item-price">{item.price}</p>
               </div>
             </div>
             <div className="item-actions">
-              <button className="quantity-btn">-</button>
-              <span className="quantity">1</span>
-              <button className="quantity-btn">+</button>
-              <button className="remove-btn">Rimuovi</button>
+              <button onClick={() => handleDecrement(item.book_id, item.quantity)} className="quantity-btn">-</button>
+              <span className="quantity">{item.quantity}</span>
+              <button onClick={() => handleIncrement(item.book_id, item.quantity)} className="quantity-btn">+</button>
+              <button onClick={() => removeFromCart(item.book_id, item.quantity)} className="remove-btn">Rimuovi</button>
             </div>
           </div>
+            ))}
         </div>
-
+          )}
         <div className="cart-summary">
           <div className="cart-total">
             <span>Totale:</span>
@@ -37,6 +100,7 @@ export default function Cart() {
           </div>
           <button className="checkout-btn">Procedi all'acquisto</button>
         </div>
+       
       </div>
     </div>
   );
