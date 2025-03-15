@@ -8,20 +8,20 @@ import CardSinglePage from "./CardSinglePage";
 export default function RecentBook() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  // const [wishlist, setWishlist] = useState([]);
-  // const [userId, setUserId] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
+  const [userId, setUserId] = useState(null);
 
-  // const fetchUserId = () => {
-  //   axios
-  //     .get("/get-user-id")
-  //     .then((res) => {
-  //       console.log("ID utente:", res.data);
-  //       setUserId(res.data.user_id);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Errore nel recupero dell'user_id:", error);
-  //     });
-  // };
+  const fetchUserId = () => {
+    axios
+      .get("/wishlist/get-user-id")
+      .then((res) => {
+        console.log("ID utente:", res.data);
+        setUserId(res.data.user_id);
+      })
+      .catch((error) => {
+        console.error("Errore nel recupero dell'user_id:", error);
+      });
+  };
 
   const fetchBook = () => {
     axios
@@ -36,11 +36,11 @@ export default function RecentBook() {
       });
 
     // Recupera la wishlist salvata nel localStorage
-    // const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    // setWishlist(savedWishlist);
+    const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setWishlist(savedWishlist);
   };
   useEffect(() => {
-    //fetchUserId(); // Recupera l'userId quando il componente viene caricato
+    fetchUserId(); // Recupera l'userId quando il componente viene caricato
     fetchBook(); // Recupera i libri
   }, []);
 
@@ -56,33 +56,45 @@ export default function RecentBook() {
     }
   };
 
-  // const toggleWishlist = (bookId) => {
-  //   if (!userId) {
-  //     console.error("User ID non trovato.");
-  //     return;
-  //   }
+  const toggleWishlist = (bookId) => {
+    if (!userId) {
+      console.error("User ID non trovato.");
+      return;
+    }
 
-  //   setWishlist((prevWishlist) => {
-  //     let newWishlist;
-  //     if (prevWishlist.includes(bookId)) {
-  //       // Se è già nella wishlist, lo rimuove
-  //       newWishlist = prevWishlist.filter((id) => id !== bookId);
-  //       axios
-  //         .delete("/wishlist", { data: { user_id: userId, book_id: bookId } })
-  //         .catch((error) => console.error("Errore nella rimozione:", error));
-  //     } else {
-  //       // Se non è nella wishlist, lo aggiunge
-  //       newWishlist = [...prevWishlist, bookId];
-  //       axios
-  //         .post("/wishlist", { user_id: userId, book_id: bookId })
-  //         .catch((error) => console.error("Errore nell'aggiunta:", error));
-  //     }
+    setWishlist((prevWishlist) => {
+      let newWishlist;
+      if (prevWishlist.includes(bookId)) {
+        // Se è già nella wishlist, lo rimuove
+        newWishlist = prevWishlist.filter((id) => id !== bookId);
+        axios
+          .delete("/wishlist", { params: { user_id: userId, book_id: bookId } })
+          .then((response) => {
+            console.log(
+              "Libro rimosso dalla wishlist con successo:",
+              response.data
+            );
+          })
+          .catch((error) => console.error("Errore nella rimozione:", error));
+      } else {
+        // Se non è nella wishlist, lo aggiunge
+        newWishlist = [...prevWishlist, bookId];
+        axios
+          .post("/wishlist", { user_id: userId, book_id: bookId })
+          .then((response) => {
+            console.log(
+              "Libro aggiunto alla wishlist con successo:",
+              response.data
+            );
+          })
+          .catch((error) => console.error("Errore nell'aggiunta:", error));
+      }
 
-  //     // Salva la wishlist nel localStorage
-  //     localStorage.setItem("wishlist", JSON.stringify(newWishlist));
-  //     return newWishlist;
-  //   });
-  // };
+      // Salva la wishlist nel localStorage
+      localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+      return newWishlist;
+    });
+  };
 
   return (
     <section className="last">
@@ -129,7 +141,7 @@ export default function RecentBook() {
                     // Prodotto non scontato
                     <p className="book-price">{book.price}€</p>
                   )}
-                  {/* <button
+                  <button
                     className="wishlist-button"
                     onClick={(e) => {
                       e.preventDefault(); // Evita che il click ricarichi la pagina
@@ -141,7 +153,7 @@ export default function RecentBook() {
                     ) : (
                       <i className="fa-regular fa-heart"></i>
                     )}
-                  </button> */}
+                  </button>
                 </Link>
               </div>
             ))}
