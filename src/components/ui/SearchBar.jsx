@@ -27,7 +27,12 @@ export default function SearchBar() {
     event.preventDefault();
     handleSearch(search); // Chiama la funzione di ricerca anche al submit
   };
-
+  const generateSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]+/g, "");
+  };
   return (
     <section className="new-container">
       <form onSubmit={handleSubmit} className="search-bar">
@@ -48,7 +53,7 @@ export default function SearchBar() {
       <div>
         {result === null ? null : result.length > 0 ? (
           result.map((book) => (
-            <Link to={`/books/${book.id}`} key={book.id}>
+            <Link to={`/books/${generateSlug(book.title)}`} key={book.id}>
               <div className="book-total">
                 <h2>{book.title}</h2>
 
