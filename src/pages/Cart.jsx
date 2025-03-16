@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../api/axios"
 import { Link } from "react-router";
-import { Outlet } from "react-router";
+
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]); 
@@ -110,7 +110,7 @@ const handleDecrement = (bookId, currentQuantity) => {
         </div>
        
       </div>
-      <Outlet />
+      
     </div>
   );
 }
