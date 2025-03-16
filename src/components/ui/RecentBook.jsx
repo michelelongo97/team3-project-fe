@@ -118,7 +118,12 @@ export default function RecentBook() {
       });
     }
   };
-
+  const generateSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]+/g, "");
+  };
   return (
     <section className="last">
       <h1 className="title-last">PIÙ RECENTI</h1>
@@ -131,7 +136,10 @@ export default function RecentBook() {
           <div className="slider-track" ref={sliderRef}>
             {data.map((book) => (
               <div key={book.id} className="slider-item">
-                <Link to={`/books/${book.id}`} className="book-card">
+                <Link
+                  to={`/books/${generateSlug(book.title)}`}
+                  className="book-card"
+                >
                   <img src={book.image} alt={book.title} />
                   <h4>{book.title}</h4>
                   {book.discountId &&
