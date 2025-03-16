@@ -6,44 +6,45 @@ import BookCard from "../components/ui/BookCard";
 
 export default function BookPage() {
   const [book, setBook] = useState({});
-  const [relatedBooks, setRelatedBooks] = useState([]); 
+  const [relatedBooks, setRelatedBooks] = useState([]);
   const [message, setMessage] = useState("");
-  const { id } = useParams();
-
+  const { slug } = useParams();
+  console.log("Slug ricevuto nel frontend:", slug);
   useEffect(() => {
-
-    axios.get(`/books/${id}`)
-      .then(res => {
-        setBook(res.data);
+    axios
+      .get(`/books/slug/${slug}`)
+      .then((res) => {
+        const bookData = res.data;
+        setBook(bookData);
         console.log("Dettagli libro:", res.data);
+
+        return axios.get(`/related-books/${bookData.id}`);
       })
-      .catch(err => {
+      .then((res) => {
+        setRelatedBooks(res.data);
+        console.log("Libri correlati:", res.data);
+      })
+      .catch((err) => {
         if (err.response?.status === 404) {
           console.log("Libro non trovato");
         }
       });
-
-    axios.get(`/related-books/${id}`)
-      .then(res => {
-        setRelatedBooks(res.data);
-        console.log("Libri correlati:", res.data); 
-      })
-      .catch(err => {
-        console.log("Errore nel caricamento dei libri correlati", err);
-      });
-  }, [id]);
+  }, [slug]);
 
   const addToCart = () => {
     axios
       .post("/cart", {
-        id: book.id, 
-        quantity:1,    
+        id: book.id,
+        quantity: 1,
       })
       .then((res) => {
         setMessage(res.data.message); // Messaggio di successo
       })
       .catch((err) => {
-        setMessage(err.response?.data?.message || "Errore durante l'aggiunta al carrello.");
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
       });
   };
 
@@ -52,12 +53,12 @@ export default function BookPage() {
       <CardSinglePage {...book} />
       <div>
         <button onClick={addToCart}>Aggiungi al Carrello</button>
-        {message && <p>{message}</p>} 
+        {message && <p>{message}</p>}
       </div>
       <h2>Libri correlati</h2>
       <div className="related-books">
         {relatedBooks.length > 0 ? (
-          relatedBooks.map(book => <BookCard key={book.id} {...book} />)
+          relatedBooks.map((book) => <BookCard key={book.id} {...book} />)
         ) : (
           <p>Nessun libro correlato disponibile.</p>
         )}
@@ -65,4 +66,3 @@ export default function BookPage() {
     </section>
   );
 }
-
