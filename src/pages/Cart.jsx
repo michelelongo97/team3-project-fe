@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "../api/axios"
+import { Link } from "react-router";
+import { Outlet } from "react-router";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]); 
     const [message, setMessage] = useState("");
+
+    const calculateTotal = () => {
+      return cartItems.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
 
     const fetchCart = async () => {
       try {
@@ -96,12 +104,13 @@ const handleDecrement = (bookId, currentQuantity) => {
         <div className="cart-summary">
           <div className="cart-total">
             <span>Totale:</span>
-            <span className="total-amount">€9.99</span>
+            <span className="total-amount">{calculateTotal().toFixed(2)}</span>
           </div>
-          <button className="checkout-btn">Procedi all'acquisto</button>
+          <Link to="/checkout" state={{ cartItems }} className="checkout-btn">Procedi all'acquistoì</Link>
         </div>
        
       </div>
+      <Outlet />
     </div>
   );
 }
