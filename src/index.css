@@ -144,7 +144,7 @@ nav {
 .book-slider-price {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #27ae60;
+  color: #010201;
   margin-top: 20px;
 }
 
@@ -331,8 +331,9 @@ nav {
   width: 100%;
   height: 260px;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
   margin-bottom: 10px;
+  background-color: white; /* Per evitare spazi trasparenti */
 }
 
 .book-title {
@@ -416,55 +417,175 @@ nav {
   color: #333;
   font-size: 3em;
 }
+.add-book {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.add-book button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.add-book button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.add-book button:active {
+  transform: scale(0.9);
+}
+
+.wishlist-button {
+  color: #ff4d4d;
+}
+
+.wishlist-button:hover {
+  background-color: rgba(255, 77, 77, 0.2);
+}
+
+.wishlist-button:active {
+  background-color: rgba(255, 77, 77, 0.4);
+}
+
 /* --------RECENTI-------- */
 
 /* --------SEARCH-------- */
-.book-total {
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 10px;
-  background: white;
-  transition: transform 0.2s ease-in-out;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin-bottom: 10px;
+.search-book-link {
+  display: block;
   text-decoration: none;
-  color: black;
+  color: inherit;
+  margin-bottom: 20px;
+  max-width: 1300px;
 }
-/* a:-webkit-any-link {
-  text-decoration: none;
-  color: black;
-} */
-.book-search {
+.search-book-container {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.book-search-image-container {
-  height: 280px;
-  width: 20%;
-}
-.book-info {
-  width: 80%;
-  padding: 20px;
-}
-.book-search-image {
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-}
-.book-total:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-.new-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 25px;
+  background-color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Layout dei dettagli del libro */
+.search-book-details {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Contenitore dell'immagine */
+.search-book-image-wrapper {
+  flex: 0 0 150px;
+  margin-right: 25px;
+}
+.search-book-author {
+  color: gray;
+}
+.search-book-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Contenitore delle informazioni */
+.search-book-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  height: 100%;
+}
+
+/* Contenitore per prezzo e bottone */
+.search-buy-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+}
+
+/* Assicura che il contenitore della card sia relativo */
+.search-book-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 25px;
+  background-color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Prezzo */
+.search-book-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  text-align: right;
+  margin-bottom: 10px;
+}
+.original-price {
+  text-decoration: line-through;
+  color: #757575;
+  margin-right: 8px;
+}
+.final-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1d0404;
+}
+.discount-text {
+  font-size: 14px;
+  color: #0f0c07;
+  margin-left: 5px;
+  margin-right: 7px;
+}
+
+/* Bottone */
+.search-buy-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  width: 240px;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+.search-buy-button:hover {
+  background-color: #45a049;
+}
+.search-header{
+  display: flex;
+  justify-content: space-between;
+}
+.search-book-title{
+  width: 90%;
+}
+.search-wish{
+  width: 10%;
+  padding-right: 25px;
+  text-align: right;
+}
 /* --------SEARCH-------- */
 
 /* --------SINGOLA PAGINA-------- */
@@ -474,7 +595,7 @@ nav {
   margin: auto;
   padding: 40px;
   font-family: Arial, sans-serif;
-  color: #000; /* Testo nero */
+  color: #000;
 }
 /* Contenitore principale */
 .product-content {
@@ -491,25 +612,31 @@ nav {
 }
 /* Contenitore dettagli */
 .product-details {
-  flex: 1;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-width: 600px;
 }
 /* Titolo */
 .product-title {
   font-size: 2.2em;
   font-weight: bold;
   color: #000;
+  text-align: left; /* Allinea il testo a sinistra */
+  margin-left: 0; /* Attaccato al margine sinistro */
 }
+
 /* Autore */
 .product-author {
   font-size: 1.5em;
   font-weight: bold;
   color: #888;
   margin-top: 5px;
+  text-align: left; /* Allinea il testo a sinistra */
+  margin-left: 0; /* Attaccato al margine sinistro */
 }
+
 /* Informazioni */
 .box-detail {
   background: white;
@@ -571,123 +698,54 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;
-  background: linear-gradient(135deg, #1a1a2e, #389654);
-  padding: 16px 28px;
-  border-radius: 14px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
+  gap: 10px;
+  background: linear-gradient(135deg, #1e1e2e, #27ae60);
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-}
-
-.discount-container::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(32, 155, 28, 0.4), transparent);
-  transform: rotate(45deg);
-  transition: transform 0.5s ease-in-out;
-}
-
-.discount-container:hover::before {
-  top: -30%;
-  left: -30%;
-  transform: scale(1.5);
-}
-
-.discount-container:hover {
-  transform: scale(1.07);
-  box-shadow: 0 8px 20px rgba(40, 230, 87, 0.76);
+  cursor: default;
+  color: white;
 }
 
 .old-price {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   text-decoration: line-through;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease-in-out;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .new-price {
-  background: #27a858;
-  color: #fff;
-  font-size: 22px;
+  background: #27ae60;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: bold;
-  padding: 6px 14px;
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
-  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 6px rgba(39, 174, 96, 0.5);
+  transition: box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
 }
 
 .discount-container:hover .new-price {
-  transform: scale(1.15);
-  background: #18a72b;
-  color: #ffffff;
-  box-shadow: 0px 4px 12px rgba(26, 188, 156, 0.6);
-}
-
-.discount-container span {
-  color: #f0f0f0;
-  font-size: 17px;
-  font-weight: 500;
-  transition: color 0.3s ease-in-out;
-}
-
-.discount-container:hover span {
-  color: #ffffff;
-}
-
-.discount-container span:nth-child(2) {
-  font-size: 16px;
-  font-weight: 600;
-  color: #bdc3c7;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(39, 174, 96, 0.7);
 }
 
 .price {
   display: inline-block;
-  background: linear-gradient(135deg, #2e2e38, #46465e);
-  color: #f8f8f8;
-  font-size: 22px;
+  background: linear-gradient(135deg, #2a2a3c, #3c3c5c);
+  color: #ffffff;
+  font-size: 18px;
   font-weight: bold;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 6px 14px;
+  border-radius: 6px;
   text-align: center;
-  letter-spacing: 0.5px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
-    background 0.3s ease-in-out;
-  box-shadow: 0 4px 12px rgba(50, 50, 93, 0.3);
+  box-shadow: 0 2px 6px rgba(50, 50, 93, 0.2);
   position: relative;
-  overflow: hidden;
-  cursor: pointer;
+  cursor: default;
 }
 
-.price::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: rotate(45deg);
-  transition: transform 0.6s ease-in-out;
-}
-
-.price:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #3a3a48, #575768);
-  box-shadow: 0 6px 18px rgba(150, 150, 170, 0.5);
-}
-
-.price:hover::before {
-  transform: scale(1.3);
-  opacity: 0.4;
-}
 /* Bottone acquisto */
 .buy-button {
   display: block;

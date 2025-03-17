@@ -169,19 +169,24 @@ export default function RecentBook() {
                   ) : (
                     <p className="book-price">{book.price}€</p>
                   )}
-                  <button
-                    className="wishlist-button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toggleWishlist(book.id);
-                    }}
-                  >
-                    {wishlist.includes(book.id) ? (
-                      <i className="fa-solid fa-heart"></i>
-                    ) : (
-                      <i className="fa-regular fa-heart"></i>
-                    )}
-                  </button>
+                  <div className="add-book">
+                    <button
+                      className="wishlist-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleWishlist(book.id);
+                      }}
+                    >
+                      {wishlist.includes(book.id) ? (
+                        <i className="fa-solid fa-heart"></i>
+                      ) : (
+                        <i className="fa-regular fa-heart"></i>
+                      )}
+                    </button>
+                    <button>
+                      <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                  </div>
                 </Link>
               </div>
             ))}

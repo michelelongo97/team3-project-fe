@@ -52,7 +52,7 @@ export default function BookPage() {
     <section>
       <CardSinglePage {...book} />
       <div>
-        <button onClick={addToCart}>Aggiungi al Carrello</button>
+        <button onClick={addToCart} className="buy-button">🛒 Aggiungi al Carrello</button>
         {message && <p>{message}</p>}
       </div>
       <h2>Libri correlati</h2>
