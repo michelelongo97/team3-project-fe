@@ -90,7 +90,6 @@ export default function RecentBook() {
                   ) : (
                     <p className="book-price">{book.price}€</p>
                   )}
-
                   <div className="add-book">
                     <button
                       className="wishlist-button"
@@ -107,7 +106,7 @@ export default function RecentBook() {
                     </button>
 
                     <button>
-                      <i class="fa-solid fa-cart-shopping"></i>
+                      <i className="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
                 </Link>
