@@ -23,9 +23,9 @@ export default function Cart() {
       }
   };
 
-  const removeFromCart = async (slug, quantity) => {
+  const removeFromCart = async (book_id, quantity) => {
     try {
-        await axios.delete(`/cart/remove/${slug}/ ${quantity}`, ); 
+        await axios.delete(`/cart/remove/${book_id}/ ${quantity}`, ); 
         setMessage("Articolo rimosso dal carrello.");
         fetchCart(); 
     } catch (error) {
@@ -33,7 +33,7 @@ export default function Cart() {
     }
 };
 
-const updateQuantity = async (slug, newQuantity) => {
+const updateQuantity = async (bookId, newQuantity) => {
   try {
       await axios.put('/cart/update-quantity', {
           book_id: bookId,
@@ -46,15 +46,15 @@ const updateQuantity = async (slug, newQuantity) => {
   }
 };
 
-const handleIncrement = (slug, currentQuantity) => {
+const handleIncrement = (bookId, currentQuantity) => {
   const newQuantity = currentQuantity + 1; // Incrementa
-  updateQuantity(slug, newQuantity);
+  updateQuantity(bookId, newQuantity);
 };
 
-const handleDecrement = (slug, currentQuantity) => {
+const handleDecrement = (bookId, currentQuantity) => {
   const newQuantity = currentQuantity - 1; // Decrementa
   if (newQuantity >= 1) {
-      updateQuantity(slug, newQuantity);
+      updateQuantity(bookId, newQuantity);
   } else {
       setMessage("La quantità non può essere inferiore a 1.");
   }
@@ -92,10 +92,10 @@ const handleDecrement = (slug, currentQuantity) => {
               </div>
             </div>
             <div className="item-actions">
-              <button onClick={() => handleDecrement(item.slug, item.quantity)} className="quantity-btn">-</button>
+              <button onClick={() => handleDecrement(item.book_id, item.quantity)} className="quantity-btn">-</button>
               <span className="quantity">{item.quantity}</span>
-              <button onClick={() => handleIncrement(item.slug, item.quantity)} className="quantity-btn">+</button>
-              <button onClick={() => removeFromCart(item.slug, item.quantity)} className="remove-btn">Rimuovi</button>
+              <button onClick={() => handleIncrement(item.book_id, item.quantity)} className="quantity-btn">+</button>
+              <button onClick={() => removeFromCart(item.book_id, item.quantity)} className="remove-btn">Rimuovi</button>
             </div>
           </div>
             ))}

@@ -12,7 +12,7 @@ export default function BookPage() {
   console.log("Slug ricevuto nel frontend:", slug);
   useEffect(() => {
     axios
-      .get(`/books/slug/${slug}`)
+      .get(`/books/slug/${book_id}`)
       .then((res) => {
         const bookData = res.data;
         setBook(bookData);
@@ -34,7 +34,7 @@ export default function BookPage() {
   const addToCart = () => {
     axios
       .post("/cart", {
-        slug : book.slug,
+        id: book.id,
         quantity: 1,
       })
       .then((res) => {
