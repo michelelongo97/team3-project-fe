@@ -5,6 +5,7 @@ import { Link } from "react-router";
 export default function SearchBar() {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState(null);
+  const [sortBy, setSortBy] = useState("recenti");
 
   const handleSearch = (event) => {
     if (!event.trim()) {
@@ -33,6 +34,19 @@ export default function SearchBar() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
+
+  const sortResults = (books) => {
+    if (!books) return [];
+
+    return [...books].sort((a, b) => {
+      if (sortBy === "prezzo") return a.price - b.price;
+      if (sortBy === "nome")
+        return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+      if (sortBy === "recenti") return new Date(b.date) - new Date(a.date);
+      return 0;
+    });
+  };
+
   return (
     <section className="new-container">
       <form onSubmit={handleSubmit} className="search-bar">
@@ -50,9 +64,21 @@ export default function SearchBar() {
           🔍
         </button>
       </form>
+      <div className="sort-section">
+        <div>Ordina per:</div>
+        <select
+          onChange={(e) => setSortBy(e.target.value)}
+          value={sortBy}
+          className="sort-select"
+        >
+          <option value="recenti">Più recenti</option>
+          <option value="prezzo">Prezzo più basso</option>
+          <option value="nome">Ordine alfabetico</option>
+        </select>
+      </div>
       <div>
         {result === null ? null : result.length > 0 ? (
-          result.map((book) => (
+          sortResults(result).map((book) => (
             <Link to={`/books/${generateSlug(book.title)}`} key={book.id}>
               <div className="book-total">
                 <h2>{book.title}</h2>
