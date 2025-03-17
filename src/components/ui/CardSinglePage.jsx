@@ -28,7 +28,28 @@ export default function CardSinglePage({
           <h1 className="product-title">
             {title} {original_title && `- (${original_title})`}
           </h1>
-          <h2 className="product-author">{author}</h2>
+            <h2 className="product-author">{author}</h2>
+            {discountId &&
+            new Date() >= new Date(start_date) &&
+            new Date() <= new Date(end_date) ? (
+              discount_type === "percentage" ? (
+                <div className="discount-container">
+                  <span className="old-price">{price}€</span>
+                  <span>{discountDescription}</span>
+                  <span className="new-price">
+                    {(price - (price * value) / 100).toFixed(2)}€
+                  </span>
+                </div>
+              ) : (
+                <div className="discount-container">
+                  <span className="old-price">{price}€</span>
+                  <span>{discountDescription}</span>
+                  <span className="new-price">{value}€</span>
+                </div>
+              )
+            ) : (
+              <p className="price">{price}€</p>
+            )}
           <div className="box-detail">
             <span className="product-info">
               Genere: <p>{category}</p>
@@ -52,29 +73,6 @@ export default function CardSinglePage({
               Descrizione: <p>{description}</p>
             </span>
           </div>
-          {discountId &&
-          new Date() >= new Date(start_date) &&
-          new Date() <= new Date(end_date) ? (
-            discount_type === "percentage" ? (
-              <div className="discount-container">
-                <span className="old-price">{price}€</span>
-                <span>{discountDescription}</span>
-                <span className="new-price">
-                  {(price - (price * value) / 100).toFixed(2)}€
-                </span>
-              </div>
-            ) : (
-              <div className="discount-container">
-                <span className="old-price">{price}€</span>
-                <span>{discountDescription}</span>
-                <span className="new-price">{value}€</span>
-              </div>
-            )
-          ) : (
-            <p className="price">{price}€</p>
-          )}
-
-          <button className="buy-button">🛒 Acquista Ora</button>
         </div>
       </div>
     </div>

@@ -8,17 +8,17 @@ export default function Slider() {
     {
       title: "Harry Potter e la Pietra Filosofale",
       img: "/img/potter.jpg",
-      price: "€15.99",
+      price: "15.99€",
     },
     {
       title: "Il Nome della Rosa",
       img: "/img/rosa.jpg",
-      price: "€18.50",
+      price: "18.50€",
     },
     {
       title: "Orgoglio e Pregiudizio",
       img: "/img/orgoglio.jpg",
-      price: "€14.99",
+      price: "14.99€",
     },
   ];
 

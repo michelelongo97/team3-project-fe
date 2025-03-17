@@ -78,6 +78,17 @@ export default function SearchBar() {
       </div>
       <div>
         {result === null ? null : result.length > 0 ? (
+
+          result.map((book) => (
+            <Link
+              to={`/books/${generateSlug(book.title)}`}
+              key={book.id}
+              className="search-book-link"
+            >
+              <div className="search-book-container">
+                <div className="search-book-details">
+                  <div className="search-book-image-wrapper">
+
           sortResults(result).map((book) => (
             <Link to={`/books/${generateSlug(book.title)}`} key={book.id}>
               <div className="book-total">
@@ -85,40 +96,66 @@ export default function SearchBar() {
 
                 <div className="book-search">
                   <div className="book-search-image-container">
+
                     <img
-                      className="book-search-image"
+                      className="search-book-image"
                       src={book.image}
                       alt={book.title}
                     />
                   </div>
-                  <div className="book-info">
-                    <div>di {book.author}</div>
-
-                    {book.discountId &&
-                    new Date() >= new Date(book.start_date) &&
-                    new Date() <= new Date(book.end_date) ? (
-                      book.discount_type === "percentage" ? (
-                        <div>
-                          <span>{book.price}€</span>
-                          <span>{book.discountDescription}</span>
-                          <span>
-                            {(
-                              book.price -
-                              (book.price * book.value) / 100
-                            ).toFixed(2)}
-                            €
-                          </span>
+                  <div>
+                    <div className="search-header">
+                      <div className="search-book-title">
+                        <h2>{book.title}</h2>
+                        <div className="search-book-author">
+                          di {book.author}
                         </div>
-                      ) : (
-                        <div>
-                          <span>{book.price}€</span>
-                          <span>{book.discountDescription}</span>
-                          <span>{book.value}€</span>
-                        </div>
-                      )
-                    ) : (
-                      <p>{book.price}€</p>
-                    )}
+                      </div>
+                      <div className="search-wish">
+                      <i className="fa-regular fa-heart"></i>
+                      </div>
+                    </div>
+                    <div className="search-book-info">
+                      <div>{book.description}</div>
+                      <div className="search-buy-detail">
+                        {book.discountId &&
+                        new Date() >= new Date(book.start_date) &&
+                        new Date() <= new Date(book.end_date) ? (
+                          book.discount_type === "percentage" ? (
+                            <div className="search-book-price">
+                              <span className="original-price">
+                                {book.price}€
+                              </span>
+                              <span className="discount-text">
+                                {book.discountDescription}
+                              </span>
+                              <span className="final-price">
+                                {(
+                                  book.price -
+                                  (book.price * book.value) / 100
+                                ).toFixed(2)}
+                                €
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="search-book-price">
+                              <span className="original-price">
+                                {book.price}€
+                              </span>
+                              <span className="discount-text">
+                                {book.discountDescription}
+                              </span>
+                              <span className="final-price">{book.value}€</span>
+                            </div>
+                          )
+                        ) : (
+                          <p className="search-book-price">{book.price}€</p>
+                        )}
+                        <button className="search-buy-button">
+                          🛒 Aggiungi al Carrello
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
