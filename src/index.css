@@ -181,57 +181,6 @@ nav {
 }
 /* --------HOMEPAGE-------- */
 
-/* --------SEARCH-BAR-------- */
-.search-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background-color: #f9f9f9;
-  border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  max-width: 500px;
-  margin: 20px auto;
-  border: 1px solid #ddd;
-}
-
-.search-input {
-  flex: 1;
-  padding: 12px 18px;
-  font-size: 18px;
-  font-family: "Poppins", sans-serif;
-  border: none;
-  border-radius: 50px;
-  outline: none;
-  background: none;
-  color: #333;
-}
-
-.search-input::placeholder {
-  color: #999;
-  font-weight: 300;
-}
-
-.search-button {
-  padding: 10px 18px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background: #333;
-  color: white;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
-}
-
-.search-button:hover {
-  background: #555;
-  transform: scale(1.08);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* --------SEARCH-BAR-------- */
 
 /* --------RECENTI-------- */
 .slider-wrapper {
@@ -460,7 +409,9 @@ nav {
 
 /* --------RECENTI-------- */
 
-/* --------SEARCH-------- */
+
+
+/* --------SEARCH-BAR-------- */
 .book-total {
   display: block;
   text-decoration: none;
@@ -468,6 +419,7 @@ nav {
   margin-bottom: 20px;
   max-width: 1300px;
 }
+
 .book-search {
   display: flex;
   flex-direction: column;
@@ -490,9 +442,11 @@ nav {
   flex: 0 0 150px;
   margin-right: 25px;
 }
+
 .search-book-author {
   color: gray;
 }
+
 .search-book-image {
   width: 100%;
   height: auto;
@@ -515,7 +469,7 @@ nav {
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  /*position: absolute;*/
+  position: absolute;
   right: 25px;
   bottom: 25px;
 }
@@ -540,16 +494,19 @@ nav {
   text-align: right;
   margin-bottom: 10px;
 }
+
 .original-price {
   text-decoration: line-through;
   color: #757575;
   margin-right: 8px;
 }
+
 .final-price {
   font-size: 20px;
   font-weight: bold;
   color: #1d0404;
 }
+
 .discount-text {
   font-size: 14px;
   color: #0f0c07;
@@ -571,16 +528,21 @@ nav {
   display: block;
   transition: background-color 0.3s ease;
 }
+
 .search-buy-button:hover {
   background-color: #45a049;
 }
+
 .search-header {
   display: flex;
   justify-content: space-between;
+  margin: 0;
 }
+
 .search-book-title {
   width: 90%;
 }
+
 .search-wish {
   width: 10%;
   padding-right: 25px;
@@ -588,22 +550,106 @@ nav {
 }
 
 /* --------filtro searchbar-------- */
+.searchbar-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+/* Contenitore principale: posiziona in fila i due elementi */
+.searchbar-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Forza il filtro a comparire a sinistra */
 .sort-section {
+  margin: 0;
   text-align: center;
   font-size: 18px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  color: #333;
+  padding: 12px;
+}
+
+.sort-section > div {
+  margin-bottom: 4px;
 }
 
 .sort-select {
-  margin: 6px 0;
-  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border: 1.5px solid #bbb;
   font-size: 16px;
   cursor: pointer;
+  background: #f8f8f8;
+  color: #333;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
 }
-.sort-select:focus {
-  border-color: #b9151b;
-}
-/* --------SEARCH-------- */
 
+.sort-select:hover {
+  border-color: #999;
+  background: #f0f0f0;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #666;
+  box-shadow: 0px 0px 4px rgba(100, 100, 100, 0.3);
+}
+
+.search-bar {
+  margin: 0; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #f9f9f9;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 500px;
+  border: 1px solid #ddd;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 18px;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  background: none;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #999;
+  font-weight: 300;
+}
+
+.search-button {
+  padding: 10px 18px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+}
+
+.search-button:hover {
+  background: #555;
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* --------/SEARCH-BAR-------- */
 
 
 
@@ -1110,24 +1156,4 @@ nav {
   text-align: center;
   font-size: 16px;
   color: #999;
-}
-
-/*MOD PROVVISORIE*/
-.book-search-image-container {
-  height: 280px;
-  width: 20%;
-}
-.book-info {
-  width: 80%;
-  padding: 20px;
-}
-.book-search-image {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-.new-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
