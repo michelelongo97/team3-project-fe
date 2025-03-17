@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useWishlistContext } from "../../context/WishlistContext";
 import axios from "../../api/axios";
 import { Link } from "react-router";
 
@@ -6,7 +7,11 @@ export default function SearchBar() {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState(null);
   const [sortBy, setSortBy] = useState("recenti");
+  const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
 
+  useEffect(() => {
+    syncWishlist();
+  }, []);
   const handleSearch = (event) => {
     if (!event.trim()) {
       setResult(null); // Se il campo è vuoto, non mostra nulla
@@ -83,7 +88,7 @@ export default function SearchBar() {
         {result === null ? null : result.length > 0 ? (
           sortResults(result).map((book) => (
             <Link
-              to={`/books/${book.title.replace(/\s+/g, "-").toLowerCase()}`}
+              to={`/books/${generateSlug(book.title)}`}
               key={book.id}
               className="book-total"
             >
@@ -105,7 +110,19 @@ export default function SearchBar() {
                         </div>
                       </div>
                       <div className="search-wish">
-                        <i className="fa-regular fa-heart"></i>
+                        <button
+                          className="wishlist-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toggleWishlist(book.id);
+                          }}
+                        >
+                          {wishlist.some((b) => b.id === book.id) ? (
+                            <i className="fa-solid fa-heart"></i>
+                          ) : (
+                            <i className="fa-regular fa-heart"></i>
+                          )}
+                        </button>
                       </div>
                     </div>
                     <div className="search-book-info">
