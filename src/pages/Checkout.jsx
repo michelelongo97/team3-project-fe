@@ -4,8 +4,7 @@ import axios from "../api/axios";
 
 export default function Checkout() {
   const location = useLocation();
-  // Recupera cartItems 
-  const cartItems = location.state?.cartItems || []; 
+  const cartItems = location.state?.cartItems || [];
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -15,7 +14,7 @@ export default function Checkout() {
     shipment_address: "",
     billing_address: "",
   });
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,38 +23,36 @@ export default function Checkout() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Calcola il totale considerando gli sconti
     const total_price = cartItems.reduce((total, item) => {
-      // Prezzo base senza sconto
-      let finalPrice = item.price; 
+      let finalPrice = item.price;
 
-      // Applica gli sconti
       if (item.discount_type === "percentage" && item.value) {
-        finalPrice = (item.price - item.price * item.value / 100).toFixed(2); // Sconto percentuale
+        finalPrice = (item.price - item.price * item.value / 100).toFixed(2);
       } else if (item.discount_type === "fixed" && item.value) {
-        finalPrice = Math.max(0, item.value); 
+        finalPrice = Math.max(0, item.value);
       }
 
-      // Aggiungi il prezzo totale scontato moltiplicato per la quantità
       return total + finalPrice * item.quantity;
     }, 0);
 
-    // Calcola il costo di spedizione
-    const shipment_cost = total_price > 50 ? 0 : 4.99; // Spedizione gratuita sopra 50€
+    const shipment_cost = total_price > 50 ? 0 : 4.99;
 
     setLoading(true);
     try {
-      // Invio dei dati al backend
       const response = await axios.post("/sales", {
         ...formData,
         total_price,
         shipment_cost,
       });
 
-      alert(`Ordine completato con successo! Numero ordine: ${response.data.order_number}`);
+      alert(
+        `Ordine completato con successo! Numero ordine: ${response.data.order_number}`
+      );
     } catch (error) {
-      console.error("Errore durante il checkout:", error.response?.data?.message || error.message);
+      console.error(
+        "Errore durante il checkout:",
+        error.response?.data?.message || error.message
+      );
       alert("C'è stato un problema con il checkout.");
     } finally {
       setLoading(false);
@@ -63,14 +60,13 @@ export default function Checkout() {
   };
 
   if (!cartItems.length) {
-    // Messaggio se il carrello è vuoto
-    return <p>Il carrello è vuoto. Torna al carrello per aggiungere articoli.</p>;
+    return <p className="checkout-empty-cart-message">Il carrello è vuoto. Torna al carrello per aggiungere articoli.</p>;
   }
 
   return (
-    <div className="checkout-container">
-      <div className="cart-details">
-        <h2>Riepilogo del Carrello</h2>
+    <div className="checkout-container-wrapper">
+      <div className="checkout-cart-table-wrapper">
+        <h2 className="checkout-header">Riepilogo del Carrello</h2>
         <table>
           <thead>
             <tr>
@@ -84,15 +80,11 @@ export default function Checkout() {
           </thead>
           <tbody>
             {cartItems.map((item) => {
-              // Calcola il prezzo finale tenendo conto degli sconti
-               // Prezzo di base senza sconto
               let discountedPrice = item.price;
               if (item.discount_type === "percentage" && item.value) {
-                // Sconto percentuale
-                discountedPrice = (item.price - item.price * item.value / 100).toFixed(2); 
+                discountedPrice = (item.price - item.price * item.value / 100).toFixed(2);
               } else if (item.discount_type === "fixed" && item.value) {
-                // Sconto fisso
-                discountedPrice = Math.max(0, item.value); 
+                discountedPrice = Math.max(0, item.value);
               }
 
               return (
@@ -100,10 +92,8 @@ export default function Checkout() {
                   <td>{item.book_title}</td>
                   <td>{item.quantity}</td>
                   <td>{item.price}€</td>
-                  
                   <td>{item.description || "Nessuno sconto"}</td>
-                  { item.discount_type === null ?  <td>0.00€</td> : <td>{discountedPrice}€</td>}
-                  
+                  {item.discount_type === null ? <td>0.00€</td> : <td>{discountedPrice}€</td>}
                   <td>{(discountedPrice * item.quantity).toFixed(2)}€</td>
                 </tr>
               );
@@ -111,8 +101,8 @@ export default function Checkout() {
           </tbody>
         </table>
       </div>
-      <h1>Completa il Checkout</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="checkout-header">Completa il Checkout</h1>
+      <form className="checkout-form-container" onSubmit={handleSubmit}>
         <input
           type="text"
           name="first_name"
@@ -155,7 +145,7 @@ export default function Checkout() {
           onChange={handleChange}
           required
         />
-        <div className="checkout-summary">
+        <div className="checkout-summary-container">
           <p>
             Subtotale: €
             {cartItems.reduce((total, item) => {
@@ -175,7 +165,7 @@ export default function Checkout() {
               if (item.discount_type === "percentage" && item.value) {
                 discountedPrice = (item.price - item.price * item.value / 100).toFixed(2);
               } else if (item.discount_type === "fixed" && item.value) {
-                discountedPrice = Math.max(0,  item.value);
+                discountedPrice = Math.max(0, item.value);
               }
               return total + discountedPrice * item.quantity;
             }, 0) > 50
@@ -216,3 +206,4 @@ export default function Checkout() {
     </div>
   );
 }
+
