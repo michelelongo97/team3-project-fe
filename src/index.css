@@ -307,6 +307,8 @@ nav {
   align-items: center;
   justify-content: center;
   margin-top: auto;
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 .book-card .old-price {
@@ -539,7 +541,9 @@ nav {
   display: block;
   transition: background-color 0.3s ease;
 }
-
+.margin-cart {
+  margin-left: 10px;
+}
 .search-buy-button:hover {
   background-color: #45a049;
 }
@@ -937,7 +941,7 @@ nav {
 .remove-btn {
   background: none;
   border: none;
-  color: #ff5555;
+  color: black;
   cursor: pointer;
   font-size: 0.9rem;
   transition: color 0.2s;
@@ -945,7 +949,7 @@ nav {
 }
 
 .remove-btn:hover {
-  color: #ff0000;
+  color: grey;
 }
 
 /* Riepilogo e checkout */
@@ -1276,3 +1280,52 @@ nav {
   margin-bottom: 20px;
 }
 /* ----------/RELATE---------- */
+/*----WISHLIST-----*/
+.wishlist {
+  margin: 20px auto;
+  max-width: 1100px;
+}
+.book-wishlist {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+.book-card-wishlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  background: white;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-card-wishlist:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.book-card-wishlist:has(.old-price)::before {
+  content: "SCONTO";
+  position: absolute;
+  top: 20px;
+  left: -35px;
+  background-color: #178317;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 40px;
+  transform: rotate(-45deg);
+  z-index: 2;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

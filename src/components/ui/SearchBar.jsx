@@ -55,7 +55,7 @@ export default function SearchBar() {
   return (
     <section className="new-container">
       <div className="searchbar-filter">
-        <form onSubmit={(e) => e.preventDefault()} className="search-bar">
+        <form onSubmit={handleSubmit} className="search-bar">
           <input
             type="text"
             placeholder="Cerca un libro..."
@@ -162,7 +162,10 @@ export default function SearchBar() {
                           <p className="search-book-price">{book.price}€</p>
                         )}
                         <button className="search-buy-button">
-                          🛒 Aggiungi al Carrello
+                          <i className="fa-solid fa-cart-shopping"></i>
+                          <span className="margin-cart">
+                            Aggiungi al Carrello
+                          </span>
                         </button>
                       </div>
                     </div>
