@@ -56,7 +56,9 @@ export default function BookPage() {
         <button onClick={addToCart} className="buy-button">🛒 Aggiungi al Carrello</button>
         {message && <p>{message}</p>}
       </div>
-      <h2>Libri correlati</h2>
+      <div className="relate-title">
+        <h2 >Libri correlati</h2>
+      </div>
       <div className="related-books">
         {relatedBooks.length > 0 ? (
           relatedBooks.map((book) => <BookCard key={book.id} {...book} />)
