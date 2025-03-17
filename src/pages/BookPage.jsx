@@ -14,11 +14,12 @@ export default function BookPage() {
     axios
       .get(`/books/slug/${slug}`)
       .then((res) => {
+        console.log("Risposta API libro:", res.data);
         const bookData = res.data;
         setBook(bookData);
         console.log("Dettagli libro:", res.data);
 
-        return axios.get(`/related-books/${bookData.id}`);
+        return axios.get(`/books/related-books/${bookData.id}`);
       })
       .then((res) => {
         setRelatedBooks(res.data);

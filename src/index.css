@@ -557,6 +557,7 @@ nav {
   margin-right: 7px;
 }
 
+
 /* Bottone */
 .search-buy-button {
   background-color: #4caf50;
@@ -586,6 +587,23 @@ nav {
   padding-right: 25px;
   text-align: right;
 }
+=======
+/* --------filtro searchbar-------- */
+.sort-section {
+  text-align: center;
+  font-size: 18px;
+}
+
+.sort-select {
+  margin: 6px 0;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  cursor: pointer;
+}
+.sort-select:focus {
+  border-color: #b9151b;
+}
+
 /* --------SEARCH-------- */
 
 /* --------SINGOLA PAGINA-------- */
