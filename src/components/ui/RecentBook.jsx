@@ -99,31 +99,17 @@ export default function RecentBook() {
                         toggleWishlist(book.id);
                       }}
                     >
-                      {wishlist.includes(book.id) ? (
+                      {wishlist.some((b) => b.id === book.id) ? (
                         <i className="fa-solid fa-heart"></i>
                       ) : (
                         <i className="fa-regular fa-heart"></i>
                       )}
                     </button>
+
                     <button>
                       <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
-
-                  <button
-                    className="wishlist-button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toggleWishlist(book.id);
-                    }}
-                  >
-                    {wishlist.some((b) => b.id === book.id) ? (
-                      <i className="fa-solid fa-heart"></i>
-                    ) : (
-                      <i className="fa-regular fa-heart"></i>
-                    )}
-                  </button>
-
                 </Link>
               </div>
             ))}
