@@ -78,16 +78,15 @@ export default function SearchBar() {
       </div>
       <div>
         {result === null ? null : result.length > 0 ? (
-
-          result.map((book) => (
-            <Link
-              to={`/books/${generateSlug(book.title)}`}
-              key={book.id}
-              className="search-book-link"
-            >
-              <div className="search-book-container">
-                <div className="search-book-details">
-                  <div className="search-book-image-wrapper">
+          // result.map((book) => (
+          // <Link
+          //   to={`/books/${generateSlug(book.title)}`}
+          //   key={book.id}
+          //   className="search-book-link"
+          // >
+          //   <div className="search-book-container">
+          //     <div className="search-book-details">
+          //       <div className="search-book-image-wrapper">
 
           sortResults(result).map((book) => (
             <Link to={`/books/${generateSlug(book.title)}`} key={book.id}>
@@ -96,9 +95,8 @@ export default function SearchBar() {
 
                 <div className="book-search">
                   <div className="book-search-image-container">
-
                     <img
-                      className="search-book-image"
+                      className="book-search-image"
                       src={book.image}
                       alt={book.title}
                     />
@@ -112,7 +110,7 @@ export default function SearchBar() {
                         </div>
                       </div>
                       <div className="search-wish">
-                      <i className="fa-regular fa-heart"></i>
+                        <i className="fa-regular fa-heart"></i>
                       </div>
                     </div>
                     <div className="search-book-info">

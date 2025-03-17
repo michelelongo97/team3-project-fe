@@ -509,13 +509,13 @@ nav {
   height: 100%;
 }
 
-/* Contenitore per prezzo e bottone */
+/* Contenitore per prezzo e bottone*/
 .search-buy-detail {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  position: absolute;
+  /*position: absolute;*/
   right: 25px;
   bottom: 25px;
 }
@@ -557,7 +557,6 @@ nav {
   margin-right: 7px;
 }
 
-
 /* Bottone */
 .search-buy-button {
   background-color: #4caf50;
@@ -575,19 +574,19 @@ nav {
 .search-buy-button:hover {
   background-color: #45a049;
 }
-.search-header{
+.search-header {
   display: flex;
   justify-content: space-between;
 }
-.search-book-title{
+.search-book-title {
   width: 90%;
 }
-.search-wish{
+.search-wish {
   width: 10%;
   padding-right: 25px;
   text-align: right;
 }
-=======
+
 /* --------filtro searchbar-------- */
 .sort-section {
   text-align: center;
