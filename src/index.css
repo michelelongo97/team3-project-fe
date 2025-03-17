@@ -602,8 +602,10 @@ nav {
 .sort-select:focus {
   border-color: #b9151b;
 }
-
 /* --------SEARCH-------- */
+
+
+
 
 /* --------SINGOLA PAGINA-------- */
 .product-page {
@@ -780,6 +782,9 @@ nav {
   background: #357716;
 }
 /* --------SINGOLA PAGINA-------- */
+
+
+
 
 /* --------CARRELLO-------- */
 .cart-container {
@@ -1027,8 +1032,11 @@ nav {
 }
 /* --------CARRELLO-------- */
 
-/* --------CHECKOUT-------- */
 
+
+
+
+/* --------CHECKOUT-------- */
 /* Contenitore principale */
 .checkout-container-wrapper {
   max-width: 800px;
