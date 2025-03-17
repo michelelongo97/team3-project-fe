@@ -28,6 +28,7 @@ export default function CardSinglePage({
           <h1 className="product-title">
             {title} {original_title && `- (${original_title})`}
           </h1>
+          <div className="discount-price-author-container">
             <h2 className="product-author">{author}</h2>
             {discountId &&
             new Date() >= new Date(start_date) &&
@@ -50,6 +51,7 @@ export default function CardSinglePage({
             ) : (
               <p className="price">{price}€</p>
             )}
+            </div>
           <div className="box-detail">
             <span className="product-info">
               Genere: <p>{category}</p>

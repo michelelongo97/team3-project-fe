@@ -181,7 +181,6 @@ nav {
 }
 /* --------HOMEPAGE-------- */
 
-
 /* --------RECENTI-------- */
 .slider-wrapper {
   display: flex;
@@ -368,46 +367,41 @@ nav {
 }
 .add-book {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px;
+  margin-top: 5px;
 }
 
 .add-book button {
   background-color: #f0f0f0;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 32px; 
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
-
 .add-book button:hover {
   background-color: #e0e0e0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); 
 }
-
 .add-book button:active {
   transform: scale(0.9);
 }
-
 .wishlist-button {
   color: #ff4d4d;
 }
-
 .wishlist-button:hover {
   background-color: rgba(255, 77, 77, 0.2);
 }
-
 .wishlist-button:active {
   background-color: rgba(255, 77, 77, 0.4);
 }
-
 /* --------RECENTI-------- */
+
 
 
 
@@ -602,7 +596,7 @@ nav {
 }
 
 .search-bar {
-  margin: 0; 
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -650,8 +644,6 @@ nav {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 /* --------/SEARCH-BAR-------- */
-
-
 
 /* --------SINGOLA PAGINA-------- */
 .product-page {
@@ -756,18 +748,19 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-top: 15px;
+  margin-top: 10px; /* Ridotto margine superiore */
 }
+
 /* Prezzi */
 .discount-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 6px; /* Ridotto spazio tra i prezzi */
   background: linear-gradient(135deg, #1e1e2e, #27ae60);
-  padding: 10px 20px;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  padding: 6px 12px; /* Ridotto padding per occupare meno spazio */
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
   cursor: default;
@@ -775,7 +768,7 @@ nav {
 }
 
 .old-price {
-  font-size: 16px;
+  font-size: 14px; /* Ridotto font */
   font-weight: 600;
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.6);
@@ -784,29 +777,29 @@ nav {
 .new-price {
   background: #27ae60;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 16px; /* Ridotto font */
   font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 6px;
-  box-shadow: 0px 2px 6px rgba(39, 174, 96, 0.5);
+  padding: 4px 8px; /* Ridotto padding */
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(39, 174, 96, 0.5);
   transition: box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
 }
 
 .discount-container:hover .new-price {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(39, 174, 96, 0.7);
+  transform: scale(1.03);
+  box-shadow: 0px 3px 8px rgba(39, 174, 96, 0.6);
 }
 
 .price {
   display: inline-block;
   background: linear-gradient(135deg, #2a2a3c, #3c3c5c);
   color: #ffffff;
-  font-size: 18px;
+  font-size: 16px; /* Ridotto font */
   font-weight: bold;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 5px 12px; /* Ridotto padding */
+  border-radius: 5px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(50, 50, 93, 0.2);
+  box-shadow: 0 2px 5px rgba(50, 50, 93, 0.2);
   position: relative;
   cursor: default;
 }
@@ -827,10 +820,13 @@ nav {
 .buy-button:hover {
   background: #357716;
 }
+.discount-price-author-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spinge gli elementi ai lati opposti */
+  width: 100%; /* Occupa tutto lo spazio disponibile */
+}
 /* --------SINGOLA PAGINA-------- */
-
-
-
 
 /* --------CARRELLO-------- */
 .cart-container {
@@ -864,12 +860,12 @@ nav {
 }
 
 .cart-item {
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+  display: flex;
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
   align-items: center;
 }
+
 
 .item-product {
   display: flex;
@@ -885,33 +881,17 @@ nav {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.item-details {
+.item-actions {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.item-title {
-  font-size: 1.1rem;
-  margin: 0 0 5px 0;
-  color: #333;
-}
-
-.item-author {
-  font-size: 0.9rem;
-  color: #777;
-  margin: 0;
-}
-
-.item-price,
-.item-total {
-  font-weight: 600;
-  color: #333;
-}
-
-.item-quantity {
+.item-button-add-remove {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px; /* Ridotto lo spazio per un aspetto più compatto */
+  margin-bottom: 5px;
 }
 
 .quantity-btn {
@@ -932,10 +912,9 @@ nav {
   background: #f5f5f5;
 }
 
-.quantity-value {
-  margin: 0 10px;
-  font-weight: 600;
-  min-width: 20px;
+.quantity {
+  font-weight: bold;
+  min-width: 24px;
   text-align: center;
 }
 
@@ -944,8 +923,9 @@ nav {
   border: none;
   color: #ff5555;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: color 0.2s;
+  margin-top: 5px; /* Distanza minima tra i bottoni */
 }
 
 .remove-btn:hover {
@@ -1078,10 +1058,6 @@ nav {
 }
 /* --------CARRELLO-------- */
 
-
-
-
-
 /* --------CHECKOUT-------- */
 /* Contenitore principale */
 .checkout-container-wrapper {
@@ -1157,3 +1133,133 @@ nav {
   font-size: 16px;
   color: #999;
 }
+/* --------/CHECKOUT-------- */
+
+
+
+
+/* ----------RELATE---------- */
+.related-books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Stile della card */
+.book-relate-card {
+  width: 200px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word; /* Impedisce il testo lungo di uscire */
+  overflow-wrap: break-word;
+}
+
+.book-relate-card:hover {
+  transform: scale(1.05);
+}
+
+/* Stile del link */
+.book-relate-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+  width: 100%; /* Evita che il contenuto superi i limiti della card */
+}
+
+/* Stile dell'immagine */
+.book-relate-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 8px 8px 0 0;
+  background-color: #f0f0f0;
+}
+
+/* Contenitore delle informazioni */
+.book-relate-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+}
+
+/* Titolo */
+.book-relate-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  white-space: nowrap; /* Mantiene il testo su una sola riga */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Impedisce che il testo superi la larghezza della card */
+  margin-top: 10px;
+}
+
+/* Autore */
+.book-relate-author {
+  font-size: 14px;
+  color: #666;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Prezzo */
+.book-relate-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #b9151b;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Titolo della sezione */
+.relate-title h2 {
+  color: #333;
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #888;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.relate-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+/* ----------/RELATE---------- */
