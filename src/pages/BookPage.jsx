@@ -34,7 +34,7 @@ export default function BookPage() {
   const addToCart = () => {
     axios
       .post("/cart", {
-        id: book.id,
+        slug : book.slug,
         quantity: 1,
       })
       .then((res) => {
