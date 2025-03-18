@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useWishlistContext } from "../../context/WishlistContext";
+import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
 export default function RecentBook() {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  const { setAlert } = useAlertContext();
+  const [message, setMessage] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
@@ -53,6 +56,10 @@ export default function RecentBook() {
       })
       .then((res) => {
         setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
       })
       .catch((err) => {
         setMessage(
@@ -64,7 +71,7 @@ export default function RecentBook() {
 
   return (
     <section className="last">
-      <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1> 
+      <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
         <div className="slider-wrapper">
@@ -121,10 +128,12 @@ export default function RecentBook() {
                         <i className="fa-regular fa-heart"></i>
                       )}
                     </button>
-
-                    <button onClick={(e) => {
-                          e.preventDefault();
-                          addToCart(book); }}>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addToCart(book);
+                      }}
+                    >
                       <i className="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>

@@ -1,13 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWishlistContext } from "../context/WishlistContext";
+import { useAlertContext } from "../context/AlertContext";
+import axios from "../api/axios";
 
 export default function WishlistPage() {
   const { wishlist, error, toggleWishlist, syncWishlist } =
     useWishlistContext();
+  const { setAlert } = useAlertContext();
+  const [message, setMessage] = useState("");
   useEffect(() => {
     syncWishlist();
   }, []);
+
+  //Carrello
+  const addToCart = (book) => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
   //slug
   const generateSlug = (title) => {
     return title
@@ -93,7 +119,13 @@ export default function WishlistPage() {
                         ) : (
                           <p className="search-book-price">{book.price}€</p>
                         )}
-                        <button className="search-buy-button">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addToCart(book);
+                          }}
+                          className="search-buy-button"
+                        >
                           <i className="fa-solid fa-cart-shopping"></i>
                           <span className="margin-cart">
                             Aggiungi al Carrello

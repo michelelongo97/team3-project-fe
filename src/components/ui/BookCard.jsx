@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useWishlistContext } from "../../context/WishlistContext";
+import { useAlertContext } from "../../context/AlertContext";
+import axios from "../../api/axios";
+
 export default function BookCard({ title, image, author, price, id }) {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  const { setAlert } = useAlertContext();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     syncWishlist();
@@ -12,6 +17,27 @@ export default function BookCard({ title, image, author, price, id }) {
     window.scrollTo(0, 0);
   }, []);
 
+  //Carrello
+  const addToCart = () => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
   const generateSlug = (title) => {
     return title
       .toLowerCase()
@@ -41,7 +67,12 @@ export default function BookCard({ title, image, author, price, id }) {
               )}
             </button>
 
-            <button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                addToCart(book);
+              }}
+            >
               <i className="fa-solid fa-cart-shopping"></i>
             </button>
           </div>
