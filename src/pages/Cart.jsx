@@ -80,9 +80,11 @@ export default function Cart() {
         {cartItems.length === 0 ? (
           <div className="empty-cart">
             <p>Il tuo carrello è vuoto</p>
-            <button className="continue-shopping-btn">
-              Continua lo shopping
-            </button>
+            <Link to="/">
+              <button className="continue-shopping-btn">
+                Continua lo shopping
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="cart-items">
