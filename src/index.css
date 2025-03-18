@@ -28,12 +28,22 @@ p {
 
 /* --------HEADER-------- */
 header {
-  background-color: #f2f2f2;
-  padding: 20px 0;
-  border-bottom: 2px solid #ddd;
+  background-color: #e4c7b2;
+  padding: 15px;
   position: sticky;
   top: 0;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav i, h4{
+  color: #7a4615;
+}
+
+nav h4 {
+  font-size: 18px;
 }
 
 .container {
@@ -41,34 +51,33 @@ header {
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 15px;
 }
 
 .logo {
-  height: 90px;
+  height: 100px;
 }
 
 nav {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .navbar {
   text-decoration: none;
-  color: black;
-  font-weight: bold;
   transition: color 0.3s;
 }
 
-.navbar:hover {
-  color: #3333;
+nav h4:hover {
+  color: #995925;
 }
 /* --------HEADER-------- */
 
 /* --------HOMEPAGE-------- */
 .book-slider-container {
   text-align: center;
-  background: linear-gradient(135deg, #b9151b, #8d1015);
+  background: linear-gradient(135deg, #a4a8ce, #d6a987);
   padding: 50px 5%;
   font-family: "Poppins", sans-serif;
   color: white;
@@ -138,7 +147,7 @@ nav {
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 15px;
-  color: #b9151b;
+  color: #7a4615;
 }
 
 .book-slider-price {
@@ -154,7 +163,7 @@ nav {
   display: block;
   width: 100%;
   height: 4px;
-  background: #b9151b;
+  background: #7a4615;
   margin-top: 5px;
   transition: width 0.3s ease-in-out;
 }
