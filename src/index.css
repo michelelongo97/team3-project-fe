@@ -420,6 +420,11 @@ nav {
 .search-wish button:active {
   transform: scale(0.9);
 }
+.no-results {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 1300px;
+}
 /*-----Modifiche bottone cuore-------*/
 
 /* --------RECENTI-------- */
@@ -565,37 +570,33 @@ nav {
 }
 
 /* --------filtro searchbar-------- */
-.searchbar-filter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
+/* Container searchBar */
+.new-container {
+  max-width: 1300px;
+  padding: 10px;
 }
 /* Contenitore principale: posiziona in fila i due elementi */
 .searchbar-filter {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   gap: 0;
+  margin: 30px 0;
 }
-
-/* Forza il filtro a comparire a sinistra */
+/* Forza il filtro a comparire a destra */
 .sort-section {
+  display: flex;
+  align-items: center;
   margin: 0;
-  text-align: center;
+  gap: 10px;
   font-size: 18px;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   color: #333;
   padding: 12px;
 }
-
-.sort-section > div {
-  margin-bottom: 4px;
-}
-
 .sort-select {
-  padding: 8px 12px;
+  padding: 8px;
   border: 1.5px solid #bbb;
   font-size: 16px;
   cursor: pointer;
@@ -604,18 +605,15 @@ nav {
   border-radius: 6px;
   transition: all 0.3s ease-in-out;
 }
-
 .sort-select:hover {
   border-color: #999;
   background: #f0f0f0;
 }
-
 .sort-select:focus {
   outline: none;
   border-color: #666;
   box-shadow: 0px 0px 4px rgba(100, 100, 100, 0.3);
 }
-
 .search-bar {
   margin: 0;
   display: flex;
@@ -628,7 +626,6 @@ nav {
   width: 500px;
   border: 1px solid #ddd;
 }
-
 .search-input {
   flex: 1;
   padding: 12px 18px;
@@ -640,12 +637,10 @@ nav {
   background: none;
   color: #333;
 }
-
 .search-input::placeholder {
   color: #999;
   font-weight: 300;
 }
-
 .search-button {
   padding: 10px 18px;
   font-size: 18px;
@@ -658,7 +653,6 @@ nav {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
 }
-
 .search-button:hover {
   background: #555;
   transform: scale(1.08);

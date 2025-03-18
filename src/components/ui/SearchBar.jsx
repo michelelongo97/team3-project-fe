@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useWishlistContext } from "../../context/WishlistContext";
 import axios from "../../api/axios";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 
 export default function SearchBar() {
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") || "");
   const [result, setResult] = useState(null);
-  const [sortBy, setSortBy] = useState("recenti");
+  const [sortBy, setSortBy] = useState(searchParams.get("sort") || "recenti");
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
 
   useEffect(() => {
     syncWishlist();
   }, []);
-  const handleSearch = (event) => {
-    if (!event.trim()) {
-      setResult(null); // Se il campo è vuoto, non mostra nulla
+
+  // 🔹 Esegui la ricerca solo se ci sono parametri nell'URL al caricamento della pagina
+  useEffect(() => {
+    if (searchParams.get("q")) {
+      fetchSearch();
+    }
+  }, []); // Si attiva solo al primo render
+
+  const fetchSearch = () => {
+    if (!search.trim()) {
+      setResult(null);
       return;
     }
-
     axios
       .get(`/books/search?q=${search}`)
       .then((response) => {
         setResult(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Errore nella ricerca:", error);
@@ -31,7 +38,10 @@ export default function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSearch(search); // Chiama la funzione di ricerca anche al submit
+    if (!search.trim()) return;
+    // 🚀 Aggiorna l'URL con i query params
+    setSearchParams({ q: search, sort: sortBy });
+    fetchSearch();
   };
   const generateSlug = (title) => {
     return title
@@ -62,7 +72,6 @@ export default function SearchBar() {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              handleSearch(e.target.value);
             }}
             className="search-input"
           />
@@ -74,7 +83,10 @@ export default function SearchBar() {
         <div className="sort-section">
           <div>Ordina per:</div>
           <select
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) => {
+              setSortBy(e.target.value);
+              setSearchParams({ q: search, sort: e.target.value });
+            }}
             value={sortBy}
             className="sort-select"
           >
@@ -175,7 +187,10 @@ export default function SearchBar() {
             </Link>
           ))
         ) : (
-          <p>Nessun risultato</p>
+          <div className="no-results">
+            <h2>La tua ricerca: {search}</h2>
+            <p>Ops! Purtroppo non siamo riusciti a trovare alcun risultato.</p>
+          </div>
         )}
       </div>
     </section>
