@@ -46,6 +46,23 @@ export default function BestSellers() {
       .replace(/[^\w-]+/g, "");
   };
 
+  const addToCart = (book) => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message);
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
+
   return (
     <section className="best-sellers">
       <h1 className="title-last">I NOSTRI BESTSELLER</h1>
@@ -78,6 +95,14 @@ export default function BestSellers() {
                       ) : (
                         <i className="fa-regular fa-heart"></i>
                       )}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addToCart(book);
+                      }}
+                    >
+                      <i className="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
                 </Link>
