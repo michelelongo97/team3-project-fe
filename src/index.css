@@ -212,9 +212,9 @@ nav h4:hover {
   padding: 20px;
   width: 90%;
   max-width: 1400px;
-  background: #b9151b;
+  background: #e4c7b2;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(185, 21, 27, 0.2);
+  box-shadow: 0 4px 12px rgb(167, 167, 167);
 }
 
 .slider-track::-webkit-scrollbar {
@@ -290,7 +290,7 @@ nav h4:hover {
   border-radius: 8px;
   object-fit: contain;
   margin-bottom: 10px;
-  background-color: white; /* Per evitare spazi trasparenti */
+  background-color: white; 
 }
 
 .book-title {
@@ -334,7 +334,7 @@ nav h4:hover {
 }
 
 .slider-btn {
-  background: #b9151b;
+  background: #b68969;
   color: white;
   border: none;
   width: 50px;
@@ -345,15 +345,15 @@ nav h4:hover {
   cursor: pointer;
   font-size: 22px;
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(185, 21, 27, 0.3);
+  box-shadow: 0 4px 8px rgb(95, 73, 45);
   transition: all 0.3s ease;
   margin: 0 5px;
 }
 
 .slider-btn:hover {
-  background: darkred;
+  background: #b68969;
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
+  box-shadow: 0 6px 12px rgb(95, 73, 45);
 }
 
 .slider-btn:active {
@@ -370,11 +370,9 @@ nav h4:hover {
 
 .title-last {
   text-align: center;
-  margin-top: 55px;
-  margin-bottom: 35px;
+  font-size: 38px;
   font-weight: bold;
-  color: #333;
-  font-size: 3em;
+  color: #000000;
 }
 .add-book {
   display: flex;
@@ -457,14 +455,12 @@ nav h4:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Layout dei dettagli del libro */
 .search-book-details {
   display: flex;
   align-items: flex-start;
   position: relative;
 }
 
-/* Contenitore dell'immagine */
 .search-book-image-wrapper {
   flex: 0 0 150px;
   margin-right: 25px;
@@ -480,7 +476,6 @@ nav h4:hover {
   border-radius: 4px;
 }
 
-/* Contenitore delle informazioni */
 .search-book-info {
   flex: 2;
   display: flex;
@@ -490,7 +485,6 @@ nav h4:hover {
   height: 100%;
 }
 
-/* Contenitore per prezzo e bottone*/
 .search-buy-detail {
   display: flex;
   flex-direction: column;
@@ -501,7 +495,6 @@ nav h4:hover {
   bottom: 25px;
 }
 
-/* Assicura che il contenitore della card sia relativo */
 .search-book-container {
   position: relative;
   display: flex;
@@ -513,7 +506,6 @@ nav h4:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Prezzo */
 .search-book-price {
   font-size: 18px;
   font-weight: bold;
@@ -541,7 +533,6 @@ nav h4:hover {
   margin-right: 7px;
 }
 
-/* Bottone */
 .search-buy-button {
   background-color: #4caf50;
   color: white;
@@ -579,12 +570,11 @@ nav h4:hover {
 }
 
 /* --------filtro searchbar-------- */
-/* Container searchBar */
 .new-container {
   max-width: 1300px;
   padding: 10px;
 }
-/* Contenitore principale: posiziona in fila i due elementi */
+
 .searchbar-filter {
   display: flex;
   align-items: center;
@@ -592,7 +582,7 @@ nav h4:hover {
   gap: 0;
   margin: 30px 0;
 }
-/* Forza il filtro a comparire a destra */
+
 .sort-section {
   display: flex;
   align-items: center;
@@ -1264,13 +1254,13 @@ nav h4:hover {
 
 /* Titolo della sezione */
 .relate-title h2 {
-  color: #333;
+  color: #7a4615;
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #888;
+  border-bottom: 2px solid #7a4615;
   padding-bottom: 5px;
   display: inline-block;
 }
