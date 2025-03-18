@@ -14,8 +14,8 @@ export default function Cart() {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get("/cart"); // Chiamata GET al backend
-      setCartItems(response.data.cart); // Imposta gli articoli nel carrello
+      const response = await axios.get("/cart");
+      setCartItems(response.data.cart); 
       setMessage(response.data.message || "Carrello recuperato con successo.");
     } catch (error) {
       setMessage(
@@ -42,10 +42,10 @@ export default function Cart() {
     try {
       await axios.put("/cart/update-quantity", {
         book_id: bookId,
-        quantity: newQuantity, // Invia il nuovo valore
+        quantity: newQuantity, 
       });
       setMessage("Quantità aggiornata con successo.");
-      fetchCart(); // Aggiorna il carrello
+      fetchCart();
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -55,12 +55,12 @@ export default function Cart() {
   };
 
   const handleIncrement = (bookId, currentQuantity) => {
-    const newQuantity = currentQuantity + 1; // Incrementa
+    const newQuantity = currentQuantity + 1; 
     updateQuantity(bookId, newQuantity);
   };
 
   const handleDecrement = (bookId, currentQuantity) => {
-    const newQuantity = currentQuantity - 1; // Decrementa
+    const newQuantity = currentQuantity - 1;
     if (newQuantity >= 1) {
       updateQuantity(bookId, newQuantity);
     } else {

@@ -1,13 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useWishlistContext } from "../../context/WishlistContext";
-import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
-export default function RecentBook() {
+export default function BestSellers() {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
-  const { setAlert } = useAlertContext();
-  const [message, setMessage] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
@@ -16,20 +13,20 @@ export default function RecentBook() {
     syncWishlist();
   }, []);
 
-  const fetchBooks = () => {
+  const fetchBestSellers = () => {
     axios
-      .get("/books")
+      .get("/books/best-sellers")
       .then((res) => {
         setData(res.data);
       })
       .catch((error) => {
         setError(error.message);
-        console.error("Errore nell'ottenere i libri:", error);
+        console.error("Errore nell ottenere i libri più venduti:", error);
       });
   };
 
   useEffect(() => {
-    fetchBooks();
+    fetchBestSellers();
   }, []);
 
   const scroll = (direction) => {
@@ -41,6 +38,7 @@ export default function RecentBook() {
       });
     }
   };
+
   const generateSlug = (title) => {
     return title
       .toLowerCase()
@@ -56,10 +54,6 @@ export default function RecentBook() {
       })
       .then((res) => {
         setMessage(res.data.message);
-        setAlert({
-          type: "success",
-          message: "Articolo aggiunto al carrello",
-        });
       })
       .catch((err) => {
         setMessage(
@@ -70,8 +64,8 @@ export default function RecentBook() {
   };
 
   return (
-    <section className="last">
-      <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1>
+    <section className="best-sellers">
+      <h1 className="title-last">I NOSTRI BESTSELLER</h1>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
         <div className="slider-wrapper">
@@ -87,33 +81,7 @@ export default function RecentBook() {
                 >
                   <img src={book.image} alt={book.title} />
                   <h4>{book.title}</h4>
-                  {book.discountId &&
-                  new Date() >= new Date(book.start_date) &&
-                  new Date() <= new Date(book.end_date) ? (
-                    book.discount_type === "percentage" ? (
-                      <div>
-                        <span className="old-price">{book.price}€</span>
-                        <div>
-                          <span>
-                            {(
-                              book.price -
-                              (book.price * book.value) / 100
-                            ).toFixed(2)}
-                            €
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <span className="old-price">{book.price}€</span>
-                        <div>
-                          <span>{book.value}€</span>
-                        </div>
-                      </div>
-                    )
-                  ) : (
-                    <p className="book-price">{book.price}€</p>
-                  )}
+                  <p className="book-price">{book.price}€</p>
                   <div className="add-book">
                     <button
                       className="wishlist-button"
@@ -146,7 +114,7 @@ export default function RecentBook() {
           </button>
         </div>
       ) : (
-        <p>Nessun elemento disponibile</p>
+        <p>Nessun bestseller disponibile</p>
       )}
     </section>
   );
