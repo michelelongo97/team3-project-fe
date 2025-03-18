@@ -8,7 +8,7 @@ export default function Header() {
         <Link to="/">
           <img className="logo" src="./img/bookstore.jpg" alt="" />
         </Link>
-        <h1>BOOKSTORE</h1>
+        <h1>BOOKHEAVEN</h1>
         <Navbar />
       </div>
     </header>
