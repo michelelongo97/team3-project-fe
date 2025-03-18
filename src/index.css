@@ -1131,75 +1131,270 @@ nav h4:hover {
 /* --------CARRELLO-------- */
 
 /* --------CHECKOUT-------- */
-.checkout-container-wrapper {
-  max-width: 800px;
-  margin: 20px auto;
-  background: #fff;
+
+/* Contenitore principale */
+.checkout-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   padding: 20px;
+  max-width: 1000px;
+  height: 100vh;
+}
+
+/* Colonna destra: riepilogo ordine */
+.order-summary {
+  flex: 2;
+  max-width: 300px;
+  height: fit-content;
+  background-color: #ffffff;
+  padding: 40px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.checkout-header h1,
-.checkout-header h2 {
+
+.order-summary h2 {
+  font-size: 20px;
+  font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-  color: #4caf50;
 }
 
-.checkout-cart-table-wrapper table {
-  width: 100%;
-  border-collapse: collapse;
+
+.order-items {
   margin-bottom: 20px;
 }
 
-.checkout-cart-table-wrapper th,
-.checkout-cart-table-wrapper td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+.order-item {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
 }
 
-.checkout-cart-table-wrapper th {
-  background-color: #4caf50;
-  color: white;
+.order-item .title{
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
-.checkout-form-container input {
-  display: block;
+
+.order-item p {
+  margin: 5px 0;
+}
+
+.order-total {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.order-total p {
+  margin: 5px 0;
+}
+
+.order-total p strong {
+  font-weight: bold;
+  color: #000;
+
+
+}
+
+/* Bottone per il form */
+.show-form-button {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.checkout-form-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+  background-color: #2d8f19;
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 
-.checkout-form-container button:hover {
-  background-color: #45a049;
+.show-form-button:hover {
+  background-color: #357716;
 }
 
-.checkout-summary-container p {
-  font-size: 18px;
-  margin: 10px 0;
+
+/* Colonna sinistra: dettagli libri */
+.books-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.book-item {
+  display: flex;
+  background-color: #ffffff;
+  width: 80%;
+  justify-content: start;
+  margin: 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  align-items: start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-item img.book-image {
+  width: 80px;
+  margin: 0;
+  border-radius: 5px;
+  
+}
+
+.book-info{
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 15px;
+  width: 100%;
+}
+.book-info h4 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin: 0;
+}
+
+.book-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555555;
+}
+
+
+.book-info .checkout-card-info{
+  margin: 0;
+  padding: 0;
+  
+}
+
+.book-info .book-price{
+  font-size: 20px;
+  color: #263238ff;
+ 
+  font-weight: bold;
+  padding: 0;
+}
+
+.checkout-card-info p{
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #555555;
+}
+
+
+
+.checkout-card-details{
+  margin: 0;
+}
+
+.checkout-card-details h6 {
+  margin: 5px 0;
+  font-size: 20px;
+  font-weight: 400;
+  color: #263238ff;
+  
+}
+
+.checkout-card-details p{
+  margin: 5px 0;
+  font-size: 20px;
+  color: #263238ff;
+  
+}
+
+.book-info .discounted-price {
+  font-size: 20px;
+  color: red;
   font-weight: bold;
 }
-
-.checkout-empty-cart-message {
-  text-align: center;
+.price-deprecated {
+  text-decoration: line-through;
+  color: #555555;
   font-size: 16px;
-  color: #999;
 }
-/* --------/CHECKOUT-------- */
+
+/* Form Checkout */
+.checkout-form-container {
+  display: none; /* Nascondi inizialmente */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 90%;
+  max-width: 500px;
+
+
+  text-align: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 40px 0;
+  
+}
+
+form input {
+  padding: 10px 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 80%;
+}
+
+form button {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 20px;
+  background-color: #2d8f19;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+form button:hover {
+  background-color: #357716;
+}
+/* Overlay */
+.checkout-overlay {
+  display: none; /* Nascondi inizialmente */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* Livello dietro al form */
+}
+
+.checkout-container.show-form .checkout-form-container {
+  display: block; /* Mostra il form quando attivato */
+}
+
+.checkout-container.show-form .checkout-overlay {
+  display: block; /* Mostra l'overlay */
+}
+
 
 /* ----------RELATE---------- */
 .related-books {
