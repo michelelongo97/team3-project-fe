@@ -21,6 +21,9 @@ export default function Alert() {
     return () => clearTimeout(timer);
   }, [alert]);
 
+  // Se non c'è nessun messaggio, non mostrare nulla
+  if (!alert.message) return null;
+
   return (
     <div className="container-alert">
       <div className={classes[alert.type]}>
