@@ -53,11 +53,15 @@ export default function BookPage() {
     <section>
       <CardSinglePage {...book} />
       <div>
-        <button onClick={addToCart} className="buy-button">🛒 Aggiungi al Carrello</button>
+        <button onClick={addToCart} className="buy-button">
+          {" "}
+          <i className="fa-solid fa-cart-shopping"></i>
+          <span className="margin-cart">Aggiungi al Carrello</span>
+        </button>
         {message && <p>{message}</p>}
       </div>
       <div className="relate-title">
-        <h2 >Libri correlati</h2>
+        <h2>Libri correlati</h2>
       </div>
       <div className="related-books">
         {relatedBooks.length > 0 ? (
