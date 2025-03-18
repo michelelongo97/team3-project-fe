@@ -138,9 +138,15 @@ export default function Cart() {
             <span>Totale:</span>
             <span className="total-amount">{calculateTotal().toFixed(2)}</span>
           </div>
+          {cartItems.length > 0 ? (
           <Link to="/checkout" state={{ cartItems }} className="checkout-btn">
-            Procedi all'acquisto
+          Procedi all'acquisto
           </Link>
+        ) : (
+          <button className="checkout-btn disabled" disabled>
+              Carrello vuoto
+           </button>
+           )}
         </div>
       </div>
     </div>

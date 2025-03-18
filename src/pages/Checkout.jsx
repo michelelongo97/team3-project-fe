@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
 export default function Checkout() {
   const location = useLocation();
-  const [cartItems, setCartItems] = useState(location.state?.cartItems || []); // Aggiunto useState per svuotare il carrello
+  const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
+  const [formVisible, setFormVisible] = useState(false); // Stato per controllare la visibilità del form
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -14,42 +16,112 @@ export default function Checkout() {
     shipment_address: "",
     billing_address: "",
   });
+  const [shipmentDetails, setShipmentDetails] = useState({
+    street: "",
+    house_number: "",
+    city: "",
+    zip_code: "",
+    province: "",
+  });
+
+  const [billingDetails, setBillingDetails] = useState({
+    street: "",
+    house_number: "",
+    city: "",
+    zip_code: "",
+    province: "",
+  });
+
+  const [useSameAddress, setUseSameAddress] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Calcolo del subtotale e del costo di spedizione
+  const subtotal = cartItems.reduce((total, item) => {
+    let discountedPrice = item.price;
+
+    if (item.discount_type === "percentage" && item.value) {
+      discountedPrice = item.price - (item.price * item.value) / 100;
+    } else if (item.discount_type === "fixed" && item.value) {
+      discountedPrice = Math.max(0, item.value);
+    }
+
+    return total + discountedPrice * item.quantity;
+  }, 0);
+
+  const shippingCost = subtotal > 50 ? 0 : 4.99; // Calcola la spedizione solo se il totale è inferiore a 50€
+
+  const handleShipmentChange = (e) => {
+    const { name, value } = e.target;
+    setShipmentDetails({ ...shipmentDetails, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      shipment_address: `${shipmentDetails.street}, ${shipmentDetails.house_number}, ${shipmentDetails.city}, ${shipmentDetails.province}, ${shipmentDetails.zip_code}`,
+    }));
+  };
+
+  const handleBillingChange = (e) => {
+    const { name, value } = e.target;
+    setBillingDetails({ ...billingDetails, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      billing_address: `${billingDetails.street}, ${billingDetails.house_number}, ${billingDetails.city}, ${billingDetails.province}, ${billingDetails.zip_code}`,
+    }));
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    console.log("Checkbox selezionata:", isChecked);
+  
+    const fullShipmentAddress = `${shipmentDetails.street}, ${shipmentDetails.house_number}, ${shipmentDetails.city}, ${shipmentDetails.province}, ${shipmentDetails.zip_code}`;
+    console.log("Shipment Address:", fullShipmentAddress);
+  
+    setUseSameAddress(isChecked);
+  
+    if (isChecked) {
+      setFormData((prev) => ({
+        ...prev,
+        billing_address: fullShipmentAddress,
+      }));
+      setBillingDetails({ ...shipmentDetails });
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        billing_address: "",
+      }));
+      setBillingDetails({
+        street: "",
+        house_number: "",
+        city: "",
+        zip_code: "",
+        province: "",
+      });
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const total_price = cartItems.reduce((total, item) => {
-      let finalPrice = item.price;
-
-      if (item.discount_type === "percentage" && item.value) {
-        finalPrice = (item.price - item.price * item.value / 100).toFixed(2);
-      } else if (item.discount_type === "fixed" && item.value) {
-        finalPrice = Math.max(0, item.value);
-      }
-
-      return total + finalPrice * item.quantity;
-    }, 0);
-
-    const shipment_cost = total_price > 50 ? 0 : 4.99;
 
     setLoading(true);
     try {
       const response = await axios.post("/sales", {
         ...formData,
-        total_price,
-        shipment_cost,
+        total_price: subtotal + shippingCost,
+        shipment_cost: shippingCost,
       });
 
       alert(
         `Ordine completato con successo! Numero ordine: ${response.data.order_number}`
       );
 
-      // Svuota i campi del modulo
+      // Svuota il carrello e il form
+      setCartItems([]);
       setFormData({
         first_name: "",
         last_name: "",
@@ -58,9 +130,25 @@ export default function Checkout() {
         shipment_address: "",
         billing_address: "",
       });
+      
+      setShipmentDetails({
+        street: "",
+        house_number: "",
+        city: "",
+        zip_code: "",
+        province: "",
+      });
+      setBillingDetails({
+        street: "",
+        house_number: "",
+        city: "",
+        zip_code: "",
+        province: "",
+      });
 
-      // Svuota il carrello (tabella)
-      setCartItems([]);
+      setFormVisible(false); // Nasconde il form dopo il completamento
+
+      navigate("/");
     } catch (error) {
       console.error(
         "Errore durante il checkout:",
@@ -72,156 +160,240 @@ export default function Checkout() {
     }
   };
 
-  if (!cartItems.length) {
-    return <p className="checkout-empty-cart-message">Il carrello è vuoto. Torna al carrello per aggiungere articoli.</p>;
-  }
-
   return (
-    <div className="checkout-container-wrapper">
-      <div className="checkout-cart-table-wrapper">
-        <h2 className="checkout-header">Riepilogo del Carrello</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Titolo</th>
-              <th>Quantità</th>
-              <th>Prezzo Unitario</th>
-              <th>Sconto</th>
-              <th>Prezzo Scontato</th>
-              <th>Totale</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((item) => {
-              let discountedPrice = item.price;
-              if (item.discount_type === "percentage" && item.value) {
-                discountedPrice = (item.price - item.price * item.value / 100).toFixed(2);
-              } else if (item.discount_type === "fixed" && item.value) {
-                discountedPrice = Math.max(0, item.value);
-              }
+    <div className={`checkout-container ${formVisible ? "show-form" : ""}`}>
+      {/* Overlay per il form */}
+      {formVisible && (
+        <div
+          className="checkout-overlay"
+          onClick={() => setFormVisible(false)} // Nasconde il form al clic sull'overlay
+        ></div>
+      )}
 
-              return (
-                <tr key={item.book_id}>
-                  <td>{item.book_title}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.price}€</td>
-                  <td>{item.description || "Nessuno sconto"}</td>
-                  {item.discount_type === null ? <td>0.00€</td> : <td>{discountedPrice}€</td>}
-                  <td>{(discountedPrice * item.quantity).toFixed(2)}€</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+    
+      {/* Colonna sinistra: dettagli libri */}
+      <div className="books-details">
+        {cartItems.map((item) => {
+          let discountedPrice = item.price;
+
+          if (item.discount_type === "percentage" && item.value) {
+            discountedPrice = item.price - (item.price * item.value) / 100;
+          } else if (item.discount_type === "fixed" && item.value) {
+            discountedPrice = Math.max(0, item.value);
+          }
+
+          return (
+            <div key={item.book_id} className="book-item">
+              <img src={item.image} alt={item.book_title} className="book-image" />
+              <div className="book-info">
+                <div className="checkout-card-details">
+                <h4>{item.book_title}</h4>
+                <h6>Quantità:</h6>
+                <p>{item.description  || ""}</p>
+                </div>
+                <div className="checkout-card-info">
+                  
+                <p><span className={`book-price ${item.discount_type &&  "price-deprecated"}`}>{item.price}€</span></p>
+                <p>({item.quantity})</p>
+                <p className="discounted-price">
+                  {item.discount_type && discountedPrice !== item.price
+                    ? ` ${discountedPrice.toFixed(2)}€`
+                    : null}
+                </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <h1 className="checkout-header">Completa il Checkout</h1>
-      <form className="checkout-form-container" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="first_name"
-          placeholder="Nome"
-          onChange={handleChange}
-          value={formData.first_name} // Gestione del valore
-          required
-        />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Cognome"
-          onChange={handleChange}
-          value={formData.last_name} // Gestione del valore
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          value={formData.email} // Gestione del valore
-          required
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Telefono"
-          onChange={handleChange}
-          value={formData.phone} // Gestione del valore
-          required
-        />
-        <input
-          type="text"
-          name="shipment_address"
-          placeholder="Indirizzo di Spedizione"
-          onChange={handleChange}
-          value={formData.shipment_address} // Gestione del valore
-          required
-        />
-        <input
-          type="text"
-          name="billing_address"
-          placeholder="Indirizzo di Fatturazione"
-          onChange={handleChange}
-          value={formData.billing_address} // Gestione del valore
-          required
-        />
-        <div className="checkout-summary-container">
-          <p>
-            Subtotale: 
-            {cartItems.reduce((total, item) => {
-              let discountedPrice = item.price;
-              if (item.discount_type === "percentage" && item.value) {
-                discountedPrice = item.price - (item.price * item.value / 100);
-              } else if (item.discount_type === "fixed" && item.value) {
-                discountedPrice = Math.max(0, item.value);
-              }
-              return total + discountedPrice * item.quantity;
-            }, 0).toFixed(2)}€
-          </p>
-          <p>
-            Spedizione: 
-            {cartItems.reduce((total, item) => {
-              let discountedPrice = item.price;
-              if (item.discount_type === "percentage" && item.value) {
-                discountedPrice = (item.price - item.price * item.value / 100).toFixed(2);
-              } else if (item.discount_type === "fixed" && item.value) {
-                discountedPrice = Math.max(0, item.value);
-              }
-              return total + discountedPrice * item.quantity;
-            }, 0) > 50
-              ? "0.00"
-              : "4.99"}€
-          </p>
-          <p>
-            Totale ordine (con spedizione): 
-            {(
-              cartItems.reduce((total, item) => {
-                let discountedPrice = item.price;
-                if (item.discount_type === "percentage" && item.value) {
-                  discountedPrice = (item.price - item.price * item.value / 100).toFixed(2);
-                } else if (item.discount_type === "fixed" && item.value) {
-                  discountedPrice = Math.max(0, item.value);
-                }
-                return total + discountedPrice * item.quantity;
-              }, 0) +
-              (cartItems.reduce((total, item) => {
-                let discountedPrice = item.price;
-                if (item.discount_type === "percentage" && item.value) {
-                  discountedPrice =
-                  (item.price - item.price * item.value / 100).toFixed(2);
-                } else if (item.discount_type === "fixed" && item.value) {
-                  discountedPrice = Math.max(0, item.value);
-                }
-                return total + discountedPrice * item.quantity;
-              }, 0 ) > 50
-                ? 0
-                : 4.99)
-            ).toFixed(2)}€
-          </p>
+        {/* Colonna destra: riepilogo ordine */}
+        <div className="order-summary">
+        <h2 className="checkout-header">Riepilogo Ordine</h2>
+        <div className="order-items">
+          {cartItems.map((item) => {
+            let discountedPrice = item.price;
+
+            if (item.discount_type === "percentage" && item.value) {
+              discountedPrice =( item.price - item.price * item.value / 100).toFixed(2);
+            } else if (item.discount_type === "fixed" && item.value) {
+              discountedPrice = Math.max(0, item.value);
+            }
+
+            return (
+              <div key={item.book_id} className="order-item">
+                <p className="title"><strong>{item.book_title}</strong></p>
+                <p>Quantità: {item.quantity}</p>
+                <p>Prezzo: {item.price}€</p>
+                {item.description && <p>{item.description}</p>}
+                {item.discount_type ?(<p>Prezzo Scontato: {discountedPrice}€</p>):null}
+                
+                <p>Totale: {(discountedPrice * item.quantity).toFixed(2)}€</p>
+              </div>
+            );
+          })}
         </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Elaborazione in corso..." : "Conferma Ordine"}
+        <div className="order-total">
+          <p>Subtotale: {subtotal.toFixed(2)}€</p>
+          <p>Spedizione: {shippingCost.toFixed(2)}€</p>
+          <p><strong>Totale: {(subtotal + shippingCost).toFixed(2)}€</strong></p>
+        </div>
+        <button
+          className="show-form-button"
+          onClick={() => setFormVisible(true)} // Mostra il form
+        >
+          Procedi al Checkout
         </button>
-      </form>
+      </div>
+
+
+      {/* Form */}
+      {formVisible && (
+        <div className="checkout-form-container">
+          <h1 className="checkout-header">Completa Ordine </h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="first_name"
+              placeholder="Nome"
+              value={formData.first_name}
+              onChange={handleChange}
+              required
+               minLength="2" 
+               title="Il nome deve contenere almeno 2 caratteri."
+            />
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Cognome"
+              value={formData.last_name}
+              onChange={handleChange}
+              required
+               minLength="2" // Almeno 2 caratteri
+              title="Il cognome deve contenere almeno 2 caratteri."
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+               
+               title="Inserisci un indirizzo email valido."
+            />
+            <input
+              type="text"
+              name="phone"
+              placeholder="Telefono"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              
+              title="Il numero di telefono deve contenere solo cifre."
+            />
+              <input
+              type="text"
+              name="street"
+              placeholder="Via"
+              value={shipmentDetails.street}
+              onChange={handleShipmentChange}
+              required
+            />
+            <input
+              type="text"
+              name="house_number"
+              placeholder="Numero Civico"
+              value={shipmentDetails.house_number}
+              onChange={handleShipmentChange}
+              required
+            />
+            <input
+              type="text"
+              name="city"
+              placeholder="Città"
+              value={shipmentDetails.city}
+              onChange={handleShipmentChange}
+              required
+            />
+            <input
+              type="text"
+              name="zip_code"
+              placeholder="CAP"
+              value={shipmentDetails.zip_code}
+              onChange={handleShipmentChange}
+              required
+            />
+            <input
+              type="text"
+              name="province"
+              placeholder="Provincia"
+              value={shipmentDetails.province}
+              onChange={handleShipmentChange}
+              required
+            />
+
+<div>
+              <input
+                type="checkbox"
+                id="sameAddress"
+                checked={useSameAddress}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="sameAddress">
+                Usa lo stesso indirizzo per la fatturazione
+              </label>
+            </div>
+            {!useSameAddress && (
+              <>
+                <h3>Indirizzo di Fatturazione</h3>
+                <input
+                  type="text"
+                  name="street"
+                  placeholder="Via"
+                  value={billingDetails.street}
+                  onChange={handleBillingChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="house_number"
+                  placeholder="Numero Civico"
+                  value={billingDetails.house_number}
+                  onChange={handleBillingChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Città"
+                  value={billingDetails.city}
+                  onChange={handleBillingChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="zip_code"
+                  placeholder="CAP"
+                  value={billingDetails.zip_code}
+                  onChange={handleBillingChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="province"
+                  placeholder="Provincia"
+                  value={billingDetails.province}
+                  onChange={handleBillingChange}
+                  required
+                />
+              </>
+            )}
+            <button type="submit" disabled={loading}>
+              {loading ? "Elaborazione in corso..." : "Conferma Ordine"}
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
