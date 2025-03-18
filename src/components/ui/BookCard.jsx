@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useWishlistContext } from "../../context/WishlistContext";
+export default function BookCard({ title, image, author, price, id }) {
+  const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
 
-export default function BookCard({ title, image, author, price }) {
+  useEffect(() => {
+    syncWishlist();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const generateSlug = (title) => {
     return title
       .toLowerCase()
@@ -15,6 +26,25 @@ export default function BookCard({ title, image, author, price }) {
           <h3 className="book-relate-title">{title}</h3>
           <p className="book-relate-author">{author}</p>
           <p className="book-relate-price">{price}€</p>
+          <div className="add-book">
+            <button
+              className="wishlist-button"
+              onClick={(e) => {
+                e.preventDefault();
+                toggleWishlist(id);
+              }}
+            >
+              {wishlist.some((b) => b.id === id) ? (
+                <i className="fa-solid fa-heart"></i>
+              ) : (
+                <i className="fa-regular fa-heart"></i>
+              )}
+            </button>
+
+            <button>
+              <i className="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
         </Link>
       </div>
     </div>
