@@ -4,6 +4,8 @@ import { useParams } from "react-router";
 import CardSinglePage from "../components/ui/CardSinglePage";
 import BookCard from "../components/ui/BookCard";
 import { useAlertContext } from "../context/AlertContext";
+import { Link } from "react-router-dom";
+
 
 export default function BookPage() {
   const [book, setBook] = useState({});
@@ -62,6 +64,9 @@ export default function BookPage() {
 
   return (
     <section>
+      <div className="container-book-btn">
+      <Link to="/"> <button className="return-home-btn">←</button> </Link>
+      </div>
       <CardSinglePage {...book} />
       <div>
         <button onClick={addToCart} className="buy-button">

@@ -130,7 +130,6 @@ nav h4:hover {
   max-width: 900px;
 }
 
-/* Box dello slider */
 .book-slider {
   width: 100%;
   max-width: 1200px;
@@ -155,7 +154,6 @@ nav h4:hover {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Immagine del libro */
 .book-slider-image {
   width: 50%;
   max-height: 480px;
@@ -168,7 +166,6 @@ nav h4:hover {
   transform: scale(1.1);
 }
 
-/* Info sul libro */
 .book-slider-info {
   width: 50%;
   text-align: left;
@@ -192,7 +189,6 @@ nav h4:hover {
   margin-top: 20px;
 }
 
-/* Effetto sottolineatura animata */
 .book-slider-title-text::after {
   content: "";
   display: block;
@@ -203,7 +199,7 @@ nav h4:hover {
   transition: width 0.3s ease-in-out;
 }
 
-/* Indicatori sotto lo slider */
+
 .book-slider-indicators {
   display: flex;
   justify-content: center;
@@ -532,7 +528,7 @@ nav h4:hover {
   text-align: right;
   margin: 0;
 }
-/* Contenitore per prezzo e bottone*/
+
 .search-buy-detail {
   display: flex;
   flex-direction: column;
@@ -713,20 +709,20 @@ nav h4:hover {
   font-family: Arial, sans-serif;
   color: #000;
 }
-/* Contenitore principale */
+
 .product-content {
   display: flex;
   align-items: flex-start;
   gap: 40px;
 }
-/* Immagine prodotto */
+
 .product-image img {
   width: 100%;
   max-width: 500px;
   border-radius: 10px;
   height: 600px;
 }
-/* Contenitore dettagli */
+
 .product-details {
   text-align: left;
   display: flex;
@@ -734,26 +730,24 @@ nav h4:hover {
   gap: 12px;
   max-width: 600px;
 }
-/* Titolo */
+
 .product-title {
   font-size: 2.2em;
   font-weight: bold;
   color: #000;
-  text-align: left; /* Allinea il testo a sinistra */
-  margin-left: 0; /* Attaccato al margine sinistro */
+  text-align: left;
+  margin-left: 0; 
 }
 
-/* Autore */
 .product-author {
   font-size: 1.5em;
   font-weight: bold;
   color: #888;
   margin-top: 5px;
-  text-align: left; /* Allinea il testo a sinistra */
-  margin-left: 0; /* Attaccato al margine sinistro */
+  text-align: left;
+  margin-left: 0; 
 }
 
-/* Informazioni */
 .box-detail {
   background: white;
   padding: 20px;
@@ -783,7 +777,7 @@ nav h4:hover {
   text-align: right;
   flex: 1;
 }
-/* Stile per la descrizione */
+
 .product-info:last-child {
   text-align: center;
   flex-direction: column;
@@ -802,22 +796,21 @@ nav h4:hover {
   font-size: 16px;
   line-height: 1.5;
 }
-/* Contenitore prezzo e bottone */
+
 .price-button-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-top: 10px; /* Ridotto margine superiore */
+  margin-top: 10px; 
 }
 
-/* Prezzi */
 .discount-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px; /* Ridotto spazio tra i prezzi */
+  gap: 6px; 
   background: linear-gradient(135deg, #1e1e2e, #27ae60);
-  padding: 6px 12px; /* Ridotto padding per occupare meno spazio */
+  padding: 6px 12px; 
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -827,7 +820,7 @@ nav h4:hover {
 }
 
 .old-price {
-  font-size: 14px; /* Ridotto font */
+  font-size: 14px; 
   font-weight: 600;
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.6);
@@ -836,9 +829,9 @@ nav h4:hover {
 .new-price {
   background: #27ae60;
   color: #ffffff;
-  font-size: 16px; /* Ridotto font */
+  font-size: 16px; 
   font-weight: bold;
-  padding: 4px 8px; /* Ridotto padding */
+  padding: 4px 8px;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(39, 174, 96, 0.5);
   transition: box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
@@ -853,9 +846,9 @@ nav h4:hover {
   display: inline-block;
   background: linear-gradient(135deg, #2a2a3c, #3c3c5c);
   color: #ffffff;
-  font-size: 16px; /* Ridotto font */
+  font-size: 16px;
   font-weight: bold;
-  padding: 5px 12px; /* Ridotto padding */
+  padding: 5px 12px; 
   border-radius: 5px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(50, 50, 93, 0.2);
@@ -863,7 +856,6 @@ nav h4:hover {
   cursor: default;
 }
 
-/* Bottone acquisto */
 .buy-button {
   display: block;
   margin-top: 20px;
@@ -882,8 +874,35 @@ nav h4:hover {
 .discount-price-author-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Spinge gli elementi ai lati opposti */
-  width: 100%; /* Occupa tutto lo spazio disponibile */
+  justify-content: space-between; 
+  width: 100%;
+}
+
+.return-home-btn {
+  background-color: #e4c7b2;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s, transform 0.2s;
+  text-decoration: none;
+  margin-top: 40px;
+}
+
+.return-home-btn:hover {
+  background-color: #b68969;
+  transform: scale(1.05);
+}
+
+.container-book-btn {
+  max-width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
 }
 /* --------SINGOLA PAGINA-------- */
 
@@ -903,7 +922,6 @@ nav h4:hover {
   padding-bottom: 10px;
 }
 
-/* Header del carrello */
 .cart-header {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
@@ -913,7 +931,6 @@ nav h4:hover {
   color: #555;
 }
 
-/* Articoli del carrello */
 .cart-items {
   margin: 20px 0;
 }
@@ -948,7 +965,7 @@ nav h4:hover {
 .item-button-add-remove {
   display: flex;
   align-items: center;
-  gap: 10px; /* Ridotto lo spazio per un aspetto più compatto */
+  gap: 10px; 
   margin-bottom: 5px;
 }
 
@@ -983,14 +1000,13 @@ nav h4:hover {
   cursor: pointer;
   font-size: 0.9rem;
   transition: color 0.2s;
-  margin-top: 5px; /* Distanza minima tra i bottoni */
+  margin-top: 5px; 
 }
 
 .remove-btn:hover {
   color: grey;
 }
 
-/* Riepilogo e checkout */
 .cart-summary {
   display: flex;
   justify-content: space-between;
@@ -1056,7 +1072,6 @@ nav h4:hover {
   background: #f5f5f5;
 }
 
-/* Sezione codice promozionale */
 .promo-code {
   flex: 1;
   min-width: 300px;
@@ -1097,7 +1112,6 @@ nav h4:hover {
   background: #1e88e5;
 }
 
-/* Carrello vuoto */
 .empty-cart {
   text-align: center;
   padding: 50px 0;
@@ -1117,7 +1131,6 @@ nav h4:hover {
 /* --------CARRELLO-------- */
 
 /* --------CHECKOUT-------- */
-/* Contenitore principale */
 .checkout-container-wrapper {
   max-width: 800px;
   margin: 20px auto;
@@ -1127,7 +1140,6 @@ nav h4:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Titoli */
 .checkout-header h1,
 .checkout-header h2 {
   text-align: center;
@@ -1135,7 +1147,6 @@ nav h4:hover {
   color: #4caf50;
 }
 
-/* Riepilogo del carrello */
 .checkout-cart-table-wrapper table {
   width: 100%;
   border-collapse: collapse;
@@ -1154,7 +1165,6 @@ nav h4:hover {
   color: white;
 }
 
-/* Form */
 .checkout-form-container input {
   display: block;
   width: 100%;
@@ -1178,14 +1188,12 @@ nav h4:hover {
   background-color: #45a049;
 }
 
-/* Sommario del checkout */
 .checkout-summary-container p {
   font-size: 18px;
   margin: 10px 0;
   font-weight: bold;
 }
 
-/* Messaggio di carrello vuoto */
 .checkout-empty-cart-message {
   text-align: center;
   font-size: 16px;
@@ -1202,7 +1210,6 @@ nav h4:hover {
   align-items: stretch;
 }
 
-/* Stile della card */
 .book-relate-card {
   width: 200px;
   background: #fff;
@@ -1214,7 +1221,7 @@ nav h4:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  word-wrap: break-word; /* Impedisce il testo lungo di uscire */
+  word-wrap: break-word; 
   overflow-wrap: break-word;
 }
 
@@ -1222,7 +1229,6 @@ nav h4:hover {
   transform: scale(1.05);
 }
 
-/* Stile del link */
 .book-relate-link {
   text-decoration: none;
   color: inherit;
@@ -1231,10 +1237,9 @@ nav h4:hover {
   align-items: center;
   padding: 10px;
   height: 100%;
-  width: 100%; /* Evita che il contenuto superi i limiti della card */
+  width: 100%; 
 }
 
-/* Stile dell'immagine */
 .book-relate-image {
   width: 100%;
   height: 200px;
@@ -1243,7 +1248,6 @@ nav h4:hover {
   background-color: #f0f0f0;
 }
 
-/* Contenitore delle informazioni */
 .book-relate-info {
   flex: 1;
   display: flex;
@@ -1254,20 +1258,18 @@ nav h4:hover {
   height: 100%;
 }
 
-/* Titolo */
 .book-relate-title {
   font-size: 16px;
   font-weight: bold;
   color: #333;
   text-align: center;
-  white-space: nowrap; /* Mantiene il testo su una sola riga */
+  white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%; /* Impedisce che il testo superi la larghezza della card */
+  max-width: 100%;
   margin-top: 10px;
 }
 
-/* Autore */
 .book-relate-author {
   font-size: 14px;
   color: #666;
@@ -1282,7 +1284,6 @@ nav h4:hover {
   white-space: nowrap;
 }
 
-/* Prezzo */
 .book-relate-price {
   font-size: 16px;
   font-weight: bold;
@@ -1297,7 +1298,6 @@ nav h4:hover {
   white-space: nowrap;
 }
 
-/* Titolo della sezione */
 .relate-title h2 {
   color: #7a4615;
   font-size: 32px;
@@ -1318,7 +1318,9 @@ nav h4:hover {
   margin-bottom: 20px;
 }
 /* ----------/RELATE---------- */
+
 /*----WISHLIST-----*/
+
 .wishlist {
   margin: 20px auto;
   max-width: 1100px;
