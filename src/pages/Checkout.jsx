@@ -166,7 +166,7 @@ export default function Checkout() {
         />
         <div className="checkout-summary-container">
           <p>
-            Subtotale: €
+            Subtotale: 
             {cartItems.reduce((total, item) => {
               let discountedPrice = item.price;
               if (item.discount_type === "percentage" && item.value) {
@@ -175,10 +175,10 @@ export default function Checkout() {
                 discountedPrice = Math.max(0, item.value);
               }
               return total + discountedPrice * item.quantity;
-            }, 0).toFixed(2)}
+            }, 0).toFixed(2)}€
           </p>
           <p>
-            Spedizione: €
+            Spedizione: 
             {cartItems.reduce((total, item) => {
               let discountedPrice = item.price;
               if (item.discount_type === "percentage" && item.value) {
@@ -189,10 +189,10 @@ export default function Checkout() {
               return total + discountedPrice * item.quantity;
             }, 0) > 50
               ? "0.00"
-              : "4.99"}
+              : "4.99"}€
           </p>
           <p>
-            Totale ordine (con spedizione): €
+            Totale ordine (con spedizione): 
             {(
               cartItems.reduce((total, item) => {
                 let discountedPrice = item.price;
@@ -215,7 +215,7 @@ export default function Checkout() {
               }, 0 ) > 50
                 ? 0
                 : 4.99)
-            ).toFixed(2)}
+            ).toFixed(2)}€
           </p>
         </div>
         <button type="submit" disabled={loading}>
