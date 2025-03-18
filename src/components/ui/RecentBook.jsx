@@ -45,6 +45,24 @@ export default function RecentBook() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
+
+  const addToCart = (book) => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message); // Messaggio di successo
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
+
   return (
     <section className="last">
       <h1 className="title-last">PIÙ RECENTI</h1>
@@ -105,7 +123,9 @@ export default function RecentBook() {
                       )}
                     </button>
 
-                    <button>
+                    <button onClick={(e) => {
+                          e.preventDefault();
+                          addToCart(book); }}>
                       <i className="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
