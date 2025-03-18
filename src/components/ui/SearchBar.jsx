@@ -17,12 +17,12 @@ export default function SearchBar() {
     syncWishlist();
   }, []);
 
-  // 🔹 Esegui la ricerca solo se ci sono parametri nell'URL al caricamento della pagina
+  
   useEffect(() => {
     if (searchParams.get("q")) {
       fetchSearch();
     }
-  }, []); // Si attiva solo al primo render
+  }, []); 
 
   const fetchSearch = () => {
     if (!search.trim()) {
@@ -42,7 +42,6 @@ export default function SearchBar() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!search.trim()) return;
-    // 🚀 Aggiorna l'URL con i query params
     setSearchParams({ q: search, sort: sortBy });
     fetchSearch();
   };
@@ -91,7 +90,7 @@ export default function SearchBar() {
   return (
     <section className="new-container">
       <div className="searchbar-filter">
-        <form onSubmit={handleSubmit} className="search-bar">
+        <form onSubmit={handleSubmit} className="search-bar" id="searchbar">
           <input
             type="text"
             placeholder="Cerca un libro..."
@@ -232,3 +231,4 @@ export default function SearchBar() {
     </section>
   );
 }
+

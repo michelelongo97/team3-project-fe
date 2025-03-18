@@ -22,6 +22,7 @@ export default function App() {
               <Route path="/books/:slug" element={<BookPage />} />
               <Route index path="/cart" element={<Cart />} />
               <Route index path="/wishlist" element={<Wishlist />} />
+              
             </Route>
           </Routes>
         </WishlistProvider>

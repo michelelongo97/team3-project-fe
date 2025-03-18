@@ -58,6 +58,9 @@ p {
   font-family: "Playfair Display", serif;
 }
 
+body {
+  font-family: "Crimson Text", serif;
+}
 /* --------GENERAL-------- */
 
 /* --------HEADER-------- */
@@ -122,12 +125,54 @@ nav h4:hover {
   min-height: 70vh;
 }
 
-.book-slider-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  margin-bottom: 35px;
+.book-slider-title h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
+  color: #d5ecdc;
+}
+
+
+.book-slider-title p {
+  font-size: 26px;
+  margin-top: 10px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+
+}
+
+.merienda {
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.esplora-btn {
+  background-color: #e4c7b2;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
   text-align: center;
-  max-width: 900px;
+  display: inline-block;
+  transition: background-color 0.3s, transform 0.2s;
+  text-decoration: none;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.esplora-btn:hover {
+  background-color: #f7cfb2;
+  transform: scale(1.05);
+}
+
+
+.esplora-btn i {
+  margin-left: 10px;
 }
 
 .book-slider {
@@ -1369,3 +1414,6 @@ nav h4:hover {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+
+ /* FOOTER */
+
