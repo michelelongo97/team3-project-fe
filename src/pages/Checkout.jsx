@@ -4,7 +4,7 @@ import axios from "../api/axios";
 
 export default function Checkout() {
   const location = useLocation();
-  const cartItems = location.state?.cartItems || [];
+  const [cartItems, setCartItems] = useState(location.state?.cartItems || []); // Aggiunto useState per svuotare il carrello
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -48,6 +48,19 @@ export default function Checkout() {
       alert(
         `Ordine completato con successo! Numero ordine: ${response.data.order_number}`
       );
+
+      // Svuota i campi del modulo
+      setFormData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        shipment_address: "",
+        billing_address: "",
+      });
+
+      // Svuota il carrello (tabella)
+      setCartItems([]);
     } catch (error) {
       console.error(
         "Errore durante il checkout:",
@@ -108,6 +121,7 @@ export default function Checkout() {
           name="first_name"
           placeholder="Nome"
           onChange={handleChange}
+          value={formData.first_name} // Gestione del valore
           required
         />
         <input
@@ -115,6 +129,7 @@ export default function Checkout() {
           name="last_name"
           placeholder="Cognome"
           onChange={handleChange}
+          value={formData.last_name} // Gestione del valore
           required
         />
         <input
@@ -122,6 +137,7 @@ export default function Checkout() {
           name="email"
           placeholder="Email"
           onChange={handleChange}
+          value={formData.email} // Gestione del valore
           required
         />
         <input
@@ -129,6 +145,7 @@ export default function Checkout() {
           name="phone"
           placeholder="Telefono"
           onChange={handleChange}
+          value={formData.phone} // Gestione del valore
           required
         />
         <input
@@ -136,6 +153,7 @@ export default function Checkout() {
           name="shipment_address"
           placeholder="Indirizzo di Spedizione"
           onChange={handleChange}
+          value={formData.shipment_address} // Gestione del valore
           required
         />
         <input
@@ -143,6 +161,7 @@ export default function Checkout() {
           name="billing_address"
           placeholder="Indirizzo di Fatturazione"
           onChange={handleChange}
+          value={formData.billing_address} // Gestione del valore
           required
         />
         <div className="checkout-summary-container">
@@ -206,4 +225,3 @@ export default function Checkout() {
     </div>
   );
 }
-
