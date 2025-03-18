@@ -49,12 +49,15 @@ export default function BookPage() {
       });
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section>
       <CardSinglePage {...book} />
       <div>
         <button onClick={addToCart} className="buy-button">
-          {" "}
           <i className="fa-solid fa-cart-shopping"></i>
           <span className="margin-cart">Aggiungi al Carrello</span>
         </button>
