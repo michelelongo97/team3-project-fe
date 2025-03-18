@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useWishlistContext } from "../../context/WishlistContext";
+import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
 export default function BestSellers() {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  const { setAlert } = useAlertContext();
+  const [message, setMessage] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
@@ -54,6 +57,10 @@ export default function BestSellers() {
       })
       .then((res) => {
         setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
       })
       .catch((err) => {
         setMessage(
