@@ -28,12 +28,22 @@ p {
 
 /* --------HEADER-------- */
 header {
-  background-color: #f2f2f2;
-  padding: 20px 0;
-  border-bottom: 2px solid #ddd;
+  background-color: #e4c7b2;
+  padding: 15px;
   position: sticky;
   top: 0;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav i, h4{
+  color: #7a4615;
+}
+
+nav h4 {
+  font-size: 18px;
 }
 
 .container {
@@ -41,34 +51,33 @@ header {
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 15px;
 }
 
 .logo {
-  height: 90px;
+  height: 100px;
 }
 
 nav {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .navbar {
   text-decoration: none;
-  color: black;
-  font-weight: bold;
   transition: color 0.3s;
 }
 
-.navbar:hover {
-  color: #3333;
+nav h4:hover {
+  color: #995925;
 }
 /* --------HEADER-------- */
 
 /* --------HOMEPAGE-------- */
 .book-slider-container {
   text-align: center;
-  background: linear-gradient(135deg, #b9151b, #8d1015);
+  background: linear-gradient(135deg, #a4a8ce, #d6a987);
   padding: 50px 5%;
   font-family: "Poppins", sans-serif;
   color: white;
@@ -138,7 +147,7 @@ nav {
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 15px;
-  color: #b9151b;
+  color: #7a4615;
 }
 
 .book-slider-price {
@@ -154,7 +163,7 @@ nav {
   display: block;
   width: 100%;
   height: 4px;
-  background: #b9151b;
+  background: #7a4615;
   margin-top: 5px;
   transition: width 0.3s ease-in-out;
 }
@@ -203,9 +212,9 @@ nav {
   padding: 20px;
   width: 90%;
   max-width: 1400px;
-  background: #b9151b;
+  background: #e4c7b2;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(185, 21, 27, 0.2);
+  box-shadow: 0 4px 12px rgb(167, 167, 167);
 }
 
 .slider-track::-webkit-scrollbar {
@@ -281,7 +290,7 @@ nav {
   border-radius: 8px;
   object-fit: contain;
   margin-bottom: 10px;
-  background-color: white; /* Per evitare spazi trasparenti */
+  background-color: white; 
 }
 
 .book-title {
@@ -325,7 +334,7 @@ nav {
 }
 
 .slider-btn {
-  background: #b9151b;
+  background: #b68969;
   color: white;
   border: none;
   width: 50px;
@@ -336,15 +345,15 @@ nav {
   cursor: pointer;
   font-size: 22px;
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(185, 21, 27, 0.3);
+  box-shadow: 0 4px 8px rgb(95, 73, 45);
   transition: all 0.3s ease;
   margin: 0 5px;
 }
 
 .slider-btn:hover {
-  background: darkred;
+  background: #b68969;
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
+  box-shadow: 0 6px 12px rgb(95, 73, 45);
 }
 
 .slider-btn:active {
@@ -361,11 +370,9 @@ nav {
 
 .title-last {
   text-align: center;
-  margin-top: 55px;
-  margin-bottom: 35px;
+  font-size: 38px;
   font-weight: bold;
-  color: #333;
-  font-size: 3em;
+  color: #000000;
 }
 .add-book {
   display: flex;
@@ -448,14 +455,12 @@ nav {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Layout dei dettagli del libro */
 .search-book-details {
   display: flex;
   align-items: flex-start;
   position: relative;
 }
 
-/* Contenitore dell'immagine */
 .search-book-image-wrapper {
   flex: 0 0 150px;
   margin-right: 25px;
@@ -471,7 +476,6 @@ nav {
   border-radius: 4px;
 }
 
-/* Contenitore delle informazioni */
 .search-book-info {
   flex: 2;
   display: flex;
@@ -484,7 +488,6 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
   text-align: left;
   height: 100%;
 }
@@ -494,9 +497,6 @@ nav {
   text-align: right;
   margin: 0;
 }
-/* .vuoto {
-  width: 50%;
-} */
 /* Contenitore per prezzo e bottone*/
 .search-buy-detail {
   display: flex;
@@ -504,14 +504,12 @@ nav {
   align-items: flex-end;
   margin-top: 40px;
   text-align: right;
-
   /* justify-content: flex-end; */
   /* position: absolute;
   right: 25px;
   bottom: 25px; */
 }
 
-/* Assicura che il contenitore della card sia relativo */
 .search-book-container {
   position: relative;
   display: flex;
@@ -523,7 +521,6 @@ nav {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Prezzo */
 .search-book-price {
   font-size: 18px;
   font-weight: bold;
@@ -551,7 +548,6 @@ nav {
   padding-right: 7px;
 }
 
-/* Bottone */
 .search-buy-button {
   background-color: #4caf50;
   color: white;
@@ -584,12 +580,11 @@ nav {
   text-align: right;
 }
 /* --------filtro searchbar-------- */
-/* Container searchBar */
 .new-container {
   max-width: 1200px;
   padding: 10px;
 }
-/* Contenitore principale: posiziona in fila i due elementi */
+
 .searchbar-filter {
   display: flex;
   align-items: center;
@@ -597,7 +592,7 @@ nav {
   gap: 0;
   margin: 30px 0;
 }
-/* Forza il filtro a comparire a destra */
+
 .sort-section {
   display: flex;
   align-items: center;
@@ -1269,13 +1264,13 @@ nav {
 
 /* Titolo della sezione */
 .relate-title h2 {
-  color: #333;
+  color: #7a4615;
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #888;
+  border-bottom: 2px solid #7a4615;
   padding-bottom: 5px;
   display: inline-block;
 }

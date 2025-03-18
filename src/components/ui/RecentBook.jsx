@@ -13,7 +13,6 @@ export default function RecentBook() {
     syncWishlist();
   }, []);
 
-  //Funzione per ottenere i libri
   const fetchBooks = () => {
     axios
       .get("/books")
@@ -53,7 +52,7 @@ export default function RecentBook() {
         quantity: 1,
       })
       .then((res) => {
-        setMessage(res.data.message); // Messaggio di successo
+        setMessage(res.data.message);
       })
       .catch((err) => {
         setMessage(
@@ -65,7 +64,7 @@ export default function RecentBook() {
 
   return (
     <section className="last">
-      <h1 className="title-last">PIÙ RECENTI</h1>
+      <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1> 
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
         <div className="slider-wrapper">

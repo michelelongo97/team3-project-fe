@@ -31,7 +31,7 @@ export default function Slider() {
 
   return (
     <div className="book-slider-container">
-      <h2 className="book-slider-title">📚 Bestseller della Settimana</h2>
+      <h2 className="book-slider-title">▽ Bestseller della Settimana</h2>
       <div className="book-slider">
         <img
           src={books[currentIndex].img}

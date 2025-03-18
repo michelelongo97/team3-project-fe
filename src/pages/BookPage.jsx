@@ -39,7 +39,7 @@ export default function BookPage() {
         quantity: 1,
       })
       .then((res) => {
-        setMessage(res.data.message); // Messaggio di successo
+        setMessage(res.data.message); 
       })
       .catch((err) => {
         setMessage(
