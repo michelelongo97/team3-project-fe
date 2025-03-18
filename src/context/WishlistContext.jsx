@@ -28,7 +28,16 @@ function WishlistProvider({ children }) {
         setWishlist(res.data);
         localStorage.setItem("wishlist", JSON.stringify(res.data)); // Sincronizza con localStorage
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        if (error.response?.status === 404) {
+          // Se la wishlist non esiste, impostiamo semplicemente un array vuoto
+          setWishlist([]);
+          localStorage.setItem("wishlist", JSON.stringify([]));
+        } else {
+          setError(error.message);
+        }
+      });
+    // .catch((error) => setError(error.message));
   };
 
   // Carica la wishlist all'avvio
