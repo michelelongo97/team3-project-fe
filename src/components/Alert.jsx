@@ -7,13 +7,13 @@ export default function Alert() {
     success: "success",
     danger: "danger",
   };
-  if (!alert.message) return null;
 
   const AlertClose = () => {
     setAlert({ type: "", message: "" });
   };
   // Timer Alert
   useEffect(() => {
+    if (!alert.message) return;
     const timer = setTimeout(() => {
       AlertClose();
     }, 5000);

@@ -140,7 +140,9 @@ export default function WishlistPage() {
           ))}
         </div>
       ) : (
-        <p>La tua wishlist è vuota.</p>
+        <p className="no-result-wishlist">
+          È veramente vuoto qui. Aggiungi un libro ai preferiti.
+        </p>
       )}
     </section>
   );
