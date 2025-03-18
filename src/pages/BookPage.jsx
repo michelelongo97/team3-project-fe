@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import CardSinglePage from "../components/ui/CardSinglePage";
 import BookCard from "../components/ui/BookCard";
+import { useAlertContext } from "../context/AlertContext";
 
 export default function BookPage() {
   const [book, setBook] = useState({});
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [message, setMessage] = useState("");
   const { slug } = useParams();
+  const { setAlert } = useAlertContext();
+
   console.log("Slug ricevuto nel frontend:", slug);
   useEffect(() => {
     axios
@@ -39,7 +42,11 @@ export default function BookPage() {
         quantity: 1,
       })
       .then((res) => {
-        setMessage(res.data.message); 
+        setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
       })
       .catch((err) => {
         setMessage(
@@ -61,7 +68,6 @@ export default function BookPage() {
           <i className="fa-solid fa-cart-shopping"></i>
           <span className="margin-cart">Aggiungi al Carrello</span>
         </button>
-        {message && <p>{message}</p>}
       </div>
       <div className="relate-title">
         <h2>Libri correlati</h2>

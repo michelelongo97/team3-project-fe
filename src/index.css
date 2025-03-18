@@ -1,25 +1,59 @@
 /* --------GENERAL-------- */
 * {
+  /* margin: 0 auto; */
+  box-sizing: border-box;
   margin: 0 auto;
+  padding: 0;
 }
 ::-webkit-scrollbar {
   display: none;
 }
+.success {
+  background-color: #acdc8dfc;
+  padding: 20px;
+  border-radius: 16px;
+  width: 100%;
+}
+.danger {
+  background-color: rgb(219, 96, 96);
+  padding: 20px;
+}
+.btn-alert {
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: 16px;
+  background-color: transparent;
+  vertical-align: center;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  transition: transform 0.3s ease-in-out;
+}
+.btn-alert:hover {
+  transform: scale(1.1);
+}
+.container-alert {
+  position: fixed;
+  font-size: 20px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+  max-width: 300px;
+  text-align: center;
+}
 .homepage {
   background-color: #f9f9f9;
 }
-
 .old-price {
   font-size: 18px;
   color: #999;
   text-decoration: line-through;
   margin-right: 10px;
 }
-
 h1 h2 h3 h4 {
   font-family: "Montserrat", sans-serif;
 }
-
 p {
   font-family: "Playfair Display", serif;
 }
@@ -38,7 +72,8 @@ header {
   align-items: center;
 }
 
-nav i, h4{
+nav i,
+h4 {
   color: #7a4615;
 }
 
@@ -290,7 +325,7 @@ nav h4:hover {
   border-radius: 8px;
   object-fit: contain;
   margin-bottom: 10px;
-  background-color: white; 
+  background-color: white;
 }
 
 .book-title {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useWishlistContext } from "../../context/WishlistContext";
+import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 import { Link, useSearchParams } from "react-router";
 
@@ -9,6 +10,8 @@ export default function SearchBar() {
   const [result, setResult] = useState(null);
   const [sortBy, setSortBy] = useState(searchParams.get("sort") || "recenti");
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  const { setAlert } = useAlertContext();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     syncWishlist();
@@ -43,6 +46,29 @@ export default function SearchBar() {
     setSearchParams({ q: search, sort: sortBy });
     fetchSearch();
   };
+
+  //Carrello
+  const addToCart = (book) => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message);
+        setAlert({
+          type: "success",
+          message: "Articolo aggiunto al carrello",
+        });
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
+
   const generateSlug = (title) => {
     return title
       .toLowerCase()
@@ -176,7 +202,13 @@ export default function SearchBar() {
                           ) : (
                             <p className="search-book-price">{book.price}€</p>
                           )}
-                          <button className="search-buy-button">
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              addToCart(book);
+                            }}
+                            className="search-buy-button"
+                          >
                             <i className="fa-solid fa-cart-shopping"></i>
                             <span className="margin-cart">
                               Aggiungi al Carrello
