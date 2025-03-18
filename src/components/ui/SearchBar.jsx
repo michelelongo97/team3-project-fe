@@ -137,48 +137,52 @@ export default function SearchBar() {
                         </button>
                       </div>
                     </div>
-                    <div className="search-book-info">
+                    <div className="info-book">
                       <div>{book.description}</div>
-                      <div className="search-buy-detail">
-                        {book.discountId &&
-                        new Date() >= new Date(book.start_date) &&
-                        new Date() <= new Date(book.end_date) ? (
-                          book.discount_type === "percentage" ? (
-                            <div className="search-book-price">
-                              <span className="original-price">
-                                {book.price}€
-                              </span>
-                              <span className="discount-text">
-                                {book.discountDescription}
-                              </span>
-                              <span className="final-price">
-                                {(
-                                  book.price -
-                                  (book.price * book.value) / 100
-                                ).toFixed(2)}
-                                €
-                              </span>
-                            </div>
+                      <div className="prova">
+                        <div className="search-buy-detail">
+                          {book.discountId &&
+                          new Date() >= new Date(book.start_date) &&
+                          new Date() <= new Date(book.end_date) ? (
+                            book.discount_type === "percentage" ? (
+                              <div className="search-book-price">
+                                <span className="original-price">
+                                  {book.price}€
+                                </span>
+                                <span className="discount-text">
+                                  {book.discountDescription}
+                                </span>
+                                <span className="final-price">
+                                  {(
+                                    book.price -
+                                    (book.price * book.value) / 100
+                                  ).toFixed(2)}
+                                  €
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="search-book-price">
+                                <span className="original-price">
+                                  {book.price}€
+                                </span>
+                                <span className="discount-text">
+                                  {book.discountDescription}
+                                </span>
+                                <span className="final-price">
+                                  {book.value}€
+                                </span>
+                              </div>
+                            )
                           ) : (
-                            <div className="search-book-price">
-                              <span className="original-price">
-                                {book.price}€
-                              </span>
-                              <span className="discount-text">
-                                {book.discountDescription}
-                              </span>
-                              <span className="final-price">{book.value}€</span>
-                            </div>
-                          )
-                        ) : (
-                          <p className="search-book-price">{book.price}€</p>
-                        )}
-                        <button className="search-buy-button">
-                          <i className="fa-solid fa-cart-shopping"></i>
-                          <span className="margin-cart">
-                            Aggiungi al Carrello
-                          </span>
-                        </button>
+                            <p className="search-book-price">{book.price}€</p>
+                          )}
+                          <button className="search-buy-button">
+                            <i className="fa-solid fa-cart-shopping"></i>
+                            <span className="margin-cart">
+                              Aggiungi al Carrello
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

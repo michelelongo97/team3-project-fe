@@ -480,16 +480,35 @@ nav {
   text-align: left;
   height: 100%;
 }
+.info-book {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
+  text-align: left;
+  height: 100%;
+}
+.prova {
+  display: flex-end;
+  justify-content: space-between;
+  text-align: right;
+  margin: 0;
+}
+/* .vuoto {
+  width: 50%;
+} */
 /* Contenitore per prezzo e bottone*/
 .search-buy-detail {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-end;
-  position: absolute;
+  margin-top: 40px;
+  text-align: right;
+
+  /* justify-content: flex-end; */
+  /* position: absolute;
   right: 25px;
-  bottom: 25px;
+  bottom: 25px; */
 }
 
 /* Assicura che il contenitore della card sia relativo */
@@ -509,14 +528,14 @@ nav {
   font-size: 18px;
   font-weight: bold;
   color: #000;
-  text-align: right;
+  text-align: center;
   margin-bottom: 10px;
 }
 
 .original-price {
   text-decoration: line-through;
   color: #757575;
-  margin-right: 8px;
+  padding-right: 8px;
 }
 
 .final-price {
@@ -528,8 +547,8 @@ nav {
 .discount-text {
   font-size: 14px;
   color: #0f0c07;
-  margin-left: 5px;
-  margin-right: 7px;
+  padding-left: 5px;
+  padding-right: 7px;
 }
 
 /* Bottone */
@@ -542,7 +561,7 @@ nav {
   cursor: pointer;
   font-size: 16px;
   text-align: center;
-  width: 240px;
+  width: 300px;
   display: block;
   transition: background-color 0.3s ease;
 }
@@ -552,27 +571,22 @@ nav {
 .search-buy-button:hover {
   background-color: #45a049;
 }
-
 .search-header {
   display: flex;
   justify-content: space-between;
   margin: 0;
 }
-
 .search-book-title {
   width: 90%;
 }
-
 .search-wish {
   width: 10%;
-  padding-right: 25px;
   text-align: right;
 }
-
 /* --------filtro searchbar-------- */
 /* Container searchBar */
 .new-container {
-  max-width: 1300px;
+  max-width: 1200px;
   padding: 10px;
 }
 /* Contenitore principale: posiziona in fila i due elementi */

@@ -55,9 +55,11 @@ export default function WishlistPage() {
                         </button>
                       </div>
                     </div>
-                    <div className="search-book-info">
+                    <div className="info-book">
                       <div>{book.description}</div>
-                      <div className="search-buy-detail">
+                      <div className="prova">
+                        <div className="search-buy-detail"></div>
+
                         {book.discountId &&
                         new Date() >= new Date(book.start_date) &&
                         new Date() <= new Date(book.end_date) ? (
