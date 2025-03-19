@@ -88,7 +88,33 @@ export default function BestSellers() {
                 >
                   <img src={book.image} alt={book.title} />
                   <h4>{book.title}</h4>
-                  <p className="book-price">{book.price}€</p>
+                  {book.discountId &&
+                  new Date() >= new Date(book.start_date) &&
+                  new Date() <= new Date(book.end_date) ? (
+                    book.discount_type === "percentage" ? (
+                      <div>
+                        <span className="old-price">{book.price}€</span>
+                        <div>
+                          <span>
+                            {(
+                              book.price -
+                              (book.price * book.value) / 100
+                            ).toFixed(2)}
+                            €
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="old-price">{book.price}€</span>
+                        <div>
+                          <span>{book.value}€</span>
+                        </div>
+                      </div>
+                    )
+                  ) : (
+                    <p className="book-price">{book.price}€</p>
+                  )}
                   <div className="add-book">
                     <button
                       className="wishlist-button"
