@@ -5,9 +5,9 @@ import Footer from "../components/Footer";
 export default function DefaultLayout({ cartItems }) {
   return (
     <>
-
       <div className="free-shipping-banner">
-        📦 Spedizione gratuita per ordini superiori a 50€! 🛒
+        📦 Spedizione gratuita per ordini superiori a 50€!
+        <i className="fa-solid fa-cart-shopping"></i>
       </div>
 
       <Header cartItems={cartItems} />
