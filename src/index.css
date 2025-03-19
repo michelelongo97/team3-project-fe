@@ -472,6 +472,10 @@ nav h4:hover {
 .add-book button:active {
   transform: scale(0.9);
 }
+.best-sellers h1 {
+  margin-top: 70px;
+}
+
 /*-----Modifiche bottone cuore-------*/
 .wishlist-button {
   color: #ff4d4d;
