@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
 import { Link } from "react-router";
 
-export default function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+export default function Cart({ cartItems, setCartItems }) {
   const [message, setMessage] = useState("");
   let discount = 0;
 
@@ -16,7 +15,7 @@ export default function Cart() {
   const fetchCart = async () => {
     try {
       const response = await axios.get("/cart");
-      setCartItems(response.data.cart); 
+      setCartItems(response.data.cart);
       setMessage(response.data.message || "Carrello recuperato con successo.");
     } catch (error) {
       setMessage(
@@ -45,7 +44,7 @@ export default function Cart() {
     try {
       await axios.put("/cart/update-quantity", {
         book_id: bookId,
-        quantity: newQuantity, 
+        quantity: newQuantity,
       });
       setMessage("Quantità aggiornata con successo.");
       fetchCart();
@@ -58,7 +57,7 @@ export default function Cart() {
   };
 
   const handleIncrement = (bookId, currentQuantity) => {
-    const newQuantity = currentQuantity + 1; 
+    const newQuantity = currentQuantity + 1;
     updateQuantity(bookId, newQuantity);
   };
 
@@ -211,14 +210,16 @@ export default function Cart() {
          </span>
           </div>
           {cartItems.length > 0 ? (
+
           <Link to="/checkout" state={{ cartItems }} className="checkout-btn">
           Acquista ora
           </Link>
         ) : (
           <button className="checkout-btn disabled" disabled>
+
               Carrello vuoto
-           </button>
-           )}
+            </button>
+          )}
         </div>
       </div>
     </div>

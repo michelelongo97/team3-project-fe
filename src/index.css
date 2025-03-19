@@ -71,17 +71,18 @@ header {
   top: 0;
   z-index: 10;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 nav i,
 h4 {
   color: #7a4615;
+  font-size: 20px;
 }
 
 nav h4 {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .container {
@@ -99,6 +100,7 @@ nav h4 {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 40px;
 }
 
@@ -110,6 +112,35 @@ nav {
 nav h4:hover {
   color: #995925;
 }
+
+/* Contenitore principale della navbar */
+.navbar {
+  position: relative;
+  display: inline-block;
+}
+
+/* Badge per la wishlist */
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Se la wishlist è vuota, nascondi il badge */
+.badge.empty {
+  display: none;
+}
+
 /* --------HEADER-------- */
 
 /* --------HOMEPAGE-------- */
@@ -1756,9 +1787,6 @@ form button:hover {
 }
 /*-----/WISHLIST-----*/
 
-
-
-
 /*--------FOOTER--------*/
 /* Footer.css */
 .bookstore-footer {
@@ -1919,3 +1947,18 @@ address p {
   cursor: default;
 }
 /*--------/FOOTER--------*/
+
+.free-shipping-banner {
+  background-color: #c94a41;
+  color: #333;
+  text-align: center;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}

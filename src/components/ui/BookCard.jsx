@@ -4,7 +4,14 @@ import { useWishlistContext } from "../../context/WishlistContext";
 import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
-export default function BookCard({ title, image, author, price, id }) {
+export default function BookCard({
+  title,
+  image,
+  author,
+  price,
+  id,
+  addToCart,
+}) {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
   const [message, setMessage] = useState("");
@@ -17,26 +24,23 @@ export default function BookCard({ title, image, author, price, id }) {
     window.scrollTo(0, 0);
   }, []);
 
-  //Carrello
-  const addToCart = () => {
-    axios
-      .post("/cart", {
-        id: book.id,
-        quantity: 1,
-      })
-      .then((res) => {
-        setMessage(res.data.message);
-        setAlert({
-          type: "success",
-          message: "Articolo aggiunto al carrello",
-        });
-      })
-      .catch((err) => {
-        setMessage(
-          err.response?.data?.message ||
-            "Errore durante l'aggiunta al carrello."
-        );
-      });
+  //funzione per chiamare addToCart con l'Alert
+  const handleAddToCart = (book) => {
+    addToCart(book); // Chiamata alla funzione passata da App
+
+    setAlert({
+      type: "success",
+      message: "Articolo aggiunto al carrello",
+    });
+  };
+
+  // Crea l'oggetto book
+  const book = {
+    id,
+    title,
+    image,
+    author,
+    price,
   };
   const generateSlug = (title) => {
     return title
@@ -70,7 +74,7 @@ export default function BookCard({ title, image, author, price, id }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                addToCart(book);
+                handleAddToCart(book);
               }}
             >
               <i className="fa-solid fa-cart-shopping"></i>
