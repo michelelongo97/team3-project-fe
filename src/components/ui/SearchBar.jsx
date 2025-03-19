@@ -76,7 +76,11 @@ export default function SearchBar({ addToCart }) {
   return (
     <section className="new-container">
       <div className="searchbar-filter">
-        <form onSubmit={handleSubmit} className="search-bar" id="searchbar">
+        <form
+          onSubmit={handleSubmit}
+          className="search-bar row-x"
+          id="searchbar"
+        >
           <input
             type="text"
             placeholder="Cerca un libro..."

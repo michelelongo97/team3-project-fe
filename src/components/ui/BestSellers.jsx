@@ -57,11 +57,11 @@ export default function BestSellers({ addToCart }) {
     });
   };
   return (
-    <section className="best-sellers">
+    <section>
       <h1 className="title-last">I NOSTRI BESTSELLER</h1>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
-        <div className="slider-wrapper">
+        <div className="slider-wrapper row-x">
           <button className="slider-btn btn-left" onClick={() => scroll(-1)}>
             <i className="fa-solid fa-arrow-left"></i>
           </button>
@@ -73,7 +73,7 @@ export default function BestSellers({ addToCart }) {
                   className="book-card"
                 >
                   <img src={book.image} alt={book.title} />
-                  <h4>{book.title}</h4>
+                  <h4 className="book-title">{book.title}</h4>
                   {book.discountId &&
                   new Date() >= new Date(book.start_date) &&
                   new Date() <= new Date(book.end_date) ? (
