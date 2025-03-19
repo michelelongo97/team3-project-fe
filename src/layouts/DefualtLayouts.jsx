@@ -2,14 +2,14 @@ import { Outlet } from "react-router";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function DefaultLayout() {
+export default function DefaultLayout({ cartItems }) {
   return (
     <>
-      <Header />
+      <Header cartItems={cartItems} />
       <main>
-        <Outlet/>
+        <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
