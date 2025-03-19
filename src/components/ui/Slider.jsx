@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import SearchBar from '../ui/SearchBar'; // Import corretto del componente
-import React, { useRef } from 'react';
+import SearchBar from "../ui/SearchBar"; // Import corretto del componente
+import React, { useRef } from "react";
 
 export default function Slider() {
   const [fade, setFade] = useState(true);
@@ -10,7 +10,7 @@ export default function Slider() {
     {
       title: "Orgoglio e Pregiudizio",
       img: "/img/orgoglio.jpg",
-      price: "14.99€"
+      price: "14.99€",
     },
     {
       title: "Il Nome della Rosa",
@@ -34,11 +34,11 @@ export default function Slider() {
     },
   ];
 
-  const searchBarRef = useRef(null); 
+  const searchBarRef = useRef(null);
 
   const scrollToSearchBar = () => {
     if (searchBarRef.current) {
-      searchBarRef.current.scrollIntoView({ behavior: 'smooth' });
+      searchBarRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -47,7 +47,7 @@ export default function Slider() {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % books.length);
       setFade(false);
       setTimeout(() => setFade(true), 300);
-    }, 5000); 
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [books.length]);
@@ -57,19 +57,24 @@ export default function Slider() {
       <div className="book-slider-container">
         <div className="book-slider-title">
           <h3>Benvenuto nel nostro mondo</h3>
-          <p>Esplora la bellezza delle nostre offerte, scopri un'esperienza unica e inizia il tuo viaggio con noi.</p>
+          <p>
+            Esplora la bellezza delle nostre offerte, scopri un'esperienza unica
+            e inizia il tuo viaggio con noi.
+          </p>
         </div>
         <button onClick={scrollToSearchBar} className="esplora-btn">
           Esplora Ora <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <div className="book-slider">
+        <div className="book-slider row-x">
           <img
             src={books[currentIndex].img}
             alt={books[currentIndex].title}
             className={`book-slider-image ${fade ? "fade-in" : "fade-out"}`}
           />
           <div className="book-slider-info">
-            <p className="book-slider-title-text">{books[currentIndex].title}</p>
+            <p className="book-slider-title-text">
+              {books[currentIndex].title}
+            </p>
             <p className="book-slider-price">{books[currentIndex].price}</p>
           </div>
         </div>
@@ -78,13 +83,14 @@ export default function Slider() {
           {books.map((_, index) => (
             <span
               key={index}
-              className={`book-slider-indicator ${currentIndex === index ? "active" : ""}`}
+              className={`book-slider-indicator ${
+                currentIndex === index ? "active" : ""
+              }`}
             />
           ))}
         </div>
       </div>
-      <div ref={searchBarRef}> 
-      </div>
+      <div ref={searchBarRef}></div>
     </div>
   );
-};
+}

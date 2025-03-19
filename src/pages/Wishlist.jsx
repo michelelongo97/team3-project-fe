@@ -42,7 +42,7 @@ export default function WishlistPage() {
       .replace(/[^\w-]+/g, "");
   };
   return (
-    <section className="wishlist">
+    <section className="wishlist new-container">
       <h1>La tua Wishlist</h1>
       {error && <p>Errore: {error}</p>}
       {wishlist.length > 0 ? (

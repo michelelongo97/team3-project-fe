@@ -48,14 +48,14 @@ export default function BookPage({ addToCart }) {
   }, []);
 
   return (
-    <section>
-      <div className="container-book-btn">
+    <section className="new-container">
+      <div>
         <Link to="/">
           <button className="return-home-btn">←</button>{" "}
         </Link>
       </div>
       <CardSinglePage {...book} />
-      <div>
+      <div className="buy-button-position">
         <button onClick={() => handleAddToCart(book)} className="buy-button">
           <i className="fa-solid fa-cart-shopping"></i>
           <span className="margin-cart">Aggiungi al Carrello</span>

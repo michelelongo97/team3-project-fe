@@ -7,7 +7,7 @@ export default function Navbar({ cartItems }) {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
   return (
-    <nav>
+    <nav className="row-x">
       <Link to="/" className="navbar">
         <h4>HOMEPAGE</h4>
       </Link>

@@ -2,12 +2,38 @@
 * {
   /* margin: 0 auto; */
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
 }
 ::-webkit-scrollbar {
   display: none;
 }
+.container {
+  max-width: 1300px;
+  margin: auto;
+  padding-bottom: 16px;
+}
+
+.homepage {
+  background-color: #f9f9f9;
+}
+.old-price {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+h1 h2 h3 h4 {
+  font-family: "Montserrat", sans-serif;
+}
+p {
+  font-family: "Playfair Display", serif;
+}
+body {
+  font-family: "Crimson Text", serif;
+}
+/* --------GENERAL-------- */
+/*----ALERT-----*/
 .success {
   background-color: #acdc8dfc;
   padding: 20px;
@@ -42,84 +68,49 @@
   max-width: 300px;
   text-align: center;
 }
-.homepage {
-  background-color: #f9f9f9;
-}
-.old-price {
-  font-size: 18px;
-  color: #999;
-  text-decoration: line-through;
-  margin-right: 10px;
-}
-h1 h2 h3 h4 {
-  font-family: "Montserrat", sans-serif;
-}
-p {
-  font-family: "Playfair Display", serif;
-}
-
-body {
-  font-family: "Crimson Text", serif;
-}
-/* --------GENERAL-------- */
+/*----ALERT-----*/
 
 /* --------HEADER-------- */
 header {
   background-color: #e4c7b2;
-  padding: 15px;
   position: sticky;
   top: 0;
   z-index: 10;
+  padding: 0 10px;
+}
+.row-x {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 nav i,
 h4 {
   color: #7a4615;
   font-size: 20px;
 }
-
 nav h4 {
   font-size: 24px;
 }
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  padding: 15px;
+nav i:hover,
+nav h4:hover {
+  color: #995925;
 }
-
 .logo {
   height: 100px;
 }
-
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 40px;
 }
-
 .navbar {
   text-decoration: none;
   transition: color 0.3s;
 }
-
-nav h4:hover {
-  color: #995925;
-}
-
 /* Contenitore principale della navbar */
 .navbar {
   position: relative;
   display: inline-block;
 }
-
-/* Badge per la wishlist */
+/*----BADGE----*/
 .badge {
   position: absolute;
   top: -5px;
@@ -135,19 +126,13 @@ nav h4:hover {
   align-items: center;
   font-weight: bold;
 }
-
-/* Se la wishlist è vuota, nascondi il badge */
-.badge.empty {
-  display: none;
-}
-
 /* --------HEADER-------- */
 
 /* --------HOMEPAGE-------- */
 .book-slider-container {
   text-align: center;
   background: linear-gradient(135deg, #a4a8ce, #d6a987);
-  padding: 50px 5%;
+  padding: 40px 0;
   font-family: "Poppins", sans-serif;
   color: white;
   display: flex;
@@ -155,28 +140,25 @@ nav h4:hover {
   align-items: center;
   min-height: 70vh;
 }
-
 .book-slider-title h3 {
+  margin-top: 30px;
   font-size: 3rem;
   font-weight: bold;
   letter-spacing: 2px;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
   color: #d5ecdc;
 }
-
 .book-slider-title p {
   font-size: 26px;
   margin-top: 10px;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   margin-bottom: 10px;
 }
-
 .merienda {
   font-family: "Merienda", cursive;
   font-optical-sizing: auto;
   font-style: normal;
 }
-
 .esplora-btn {
   background-color: #e4c7b2;
   color: black;
@@ -190,26 +172,18 @@ nav h4:hover {
   display: inline-block;
   transition: background-color 0.3s, transform 0.2s;
   text-decoration: none;
-  margin-top: 40px;
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
-
 .esplora-btn:hover {
   background-color: #f7cfb2;
   transform: scale(1.05);
 }
-
 .esplora-btn i {
   margin-left: 10px;
 }
-
 .book-slider {
   width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  max-width: 1000px;
   gap: 50px;
   margin: auto;
   position: relative;
@@ -217,51 +191,44 @@ nav h4:hover {
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   background-color: white;
-  padding: 50px;
-  min-height: 500px;
+  padding: 40px 6px;
+  max-height: 400px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-
 .book-slider:hover {
   transform: scale(1.02);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
-
 .book-slider-image {
-  width: 50%;
-  max-height: 480px;
+  width: 40%;
+  max-height: 300px;
   object-fit: contain;
   border-radius: 12px;
   transition: transform 0.5s ease-in-out;
 }
-
 .book-slider-image:hover {
   transform: scale(1.1);
 }
-
 .book-slider-info {
-  width: 50%;
+  width: 60%;
   text-align: left;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .book-slider-title-text {
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 15px;
   color: #7a4615;
 }
-
 .book-slider-price {
   font-size: 1.8rem;
   font-weight: 700;
   color: #010201;
   margin-top: 20px;
 }
-
 .book-slider-title-text::after {
   content: "";
   display: block;
@@ -271,14 +238,12 @@ nav h4:hover {
   margin-top: 5px;
   transition: width 0.3s ease-in-out;
 }
-
 .book-slider-indicators {
   display: flex;
   justify-content: center;
   margin-top: 30px;
   gap: 12px;
 }
-
 .book-slider-indicator {
   width: 18px;
   height: 18px;
@@ -286,7 +251,6 @@ nav h4:hover {
   border-radius: 50%;
   transition: 0.3s ease;
 }
-
 .book-slider-indicator.active {
   background-color: white;
   transform: scale(1.5);
@@ -295,17 +259,12 @@ nav h4:hover {
 
 /* --------RECENTI-------- */
 .slider-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: 20px;
   background-color: #f9f9f9;
-  box-sizing: border-box;
-  max-width: 1600px;
+  max-width: 1500px;
   margin: 0 auto;
 }
-
 .slider-track {
   display: flex;
   overflow-x: auto;
@@ -319,17 +278,14 @@ nav h4:hover {
   border-radius: 15px;
   box-shadow: 0 4px 12px rgb(167, 167, 167);
 }
-
 .slider-track::-webkit-scrollbar {
   display: none;
 }
-
 .slider-item {
   flex: 0 0 auto;
   width: 250px;
   text-align: center;
 }
-
 .book-card {
   display: flex;
   flex-direction: column;
@@ -342,18 +298,15 @@ nav h4:hover {
   background: white;
   transition: transform 0.2s ease-in-out;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: 370px;
+  height: 100%;
   width: 100%;
-  box-sizing: border-box;
   overflow: hidden;
   position: relative;
 }
-
 .book-card:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
-
 .book-card:has(.old-price)::before {
   content: "SCONTO";
   position: absolute;
@@ -370,23 +323,6 @@ nav h4:hover {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
-.discount-label {
-  position: absolute;
-  top: 20px;
-  left: -35px;
-  background-color: #b9151b;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 6px 40px;
-  transform: rotate(-45deg);
-  z-index: 2;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 .book-card img {
   width: 100%;
   height: 260px;
@@ -395,24 +331,20 @@ nav h4:hover {
   margin-bottom: 10px;
   background-color: white;
 }
-
 .book-title {
-  font-weight: 600;
-  font-size: 16px;
-  margin: 8px 0;
+  font-size: 18px;
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  line-height: 1.2;
+  max-width: 100%;
+  margin-top: 10px;
 }
-
 .book-price {
   color: black;
   margin-top: auto;
   padding-top: 10px;
 }
-
 .book-card div:has(.old-price) {
   display: flex;
   flex-direction: row;
@@ -422,20 +354,17 @@ nav h4:hover {
   margin-top: auto;
   padding-top: 10px;
 }
-
 .book-card .old-price {
   text-decoration: line-through;
   color: #888;
   font-size: 14px;
   display: inline-block;
 }
-
 .book-card div div span {
   color: #b9151b;
   font-weight: bold;
   font-size: 16px;
 }
-
 .slider-btn {
   background: #b68969;
   color: white;
@@ -452,37 +381,32 @@ nav h4:hover {
   transition: all 0.3s ease;
   margin: 0 5px;
 }
-
 .slider-btn:hover {
   background: #b68969;
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgb(95, 73, 45);
 }
-
 .slider-btn:active {
   transform: scale(0.95);
 }
-
 .btn-left {
   margin-right: 10px;
 }
-
 .btn-right {
   margin-left: 10px;
 }
-
 .title-last {
   text-align: center;
   font-size: 38px;
   font-weight: bold;
   color: #000000;
+  margin-top: 20px;
 }
 .add-book {
   display: flex;
   gap: 8px;
   margin-top: 5px;
 }
-
 .add-book button {
   background-color: #f0f0f0;
   border: none;
@@ -503,20 +427,10 @@ nav h4:hover {
 .add-book button:active {
   transform: scale(0.9);
 }
-.best-sellers h1 {
-  margin-top: 70px;
-}
-
 /*-----Modifiche bottone cuore-------*/
 .wishlist-button {
   color: #ff4d4d;
 }
-/* .wishlist-button:hover {
-  background-color: rgba(255, 77, 77, 0.2);
-}
-.wishlist-button:active {
-  background-color: rgba(255, 77, 77, 0.4);
-} */
 .search-wish button {
   background-color: #f0f0f0;
   border: none;
@@ -555,7 +469,6 @@ nav h4:hover {
   margin-bottom: 20px;
   max-width: 1300px;
 }
-
 .book-search {
   display: flex;
   flex-direction: column;
@@ -565,28 +478,23 @@ nav h4:hover {
   background-color: white;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
-
 .search-book-details {
   display: flex;
   align-items: flex-start;
   position: relative;
 }
-
 .search-book-image-wrapper {
   flex: 0 0 150px;
   margin-right: 25px;
 }
-
 .search-book-author {
   color: gray;
 }
-
 .search-book-image {
   width: 100%;
   height: auto;
   border-radius: 4px;
 }
-
 .search-book-info {
   flex: 2;
   display: flex;
@@ -608,19 +516,13 @@ nav h4:hover {
   text-align: right;
   margin: 0;
 }
-
 .search-buy-detail {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-top: 40px;
   text-align: right;
-  /* justify-content: flex-end; */
-  /* position: absolute;
-  right: 25px;
-  bottom: 25px; */
 }
-
 .search-book-container {
   position: relative;
   display: flex;
@@ -631,34 +533,29 @@ nav h4:hover {
   background-color: white;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
-
 .search-book-price {
   font-size: 18px;
   font-weight: bold;
   color: #000;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 8px auto;
 }
-
 .original-price {
   text-decoration: line-through;
   color: #757575;
   padding-right: 8px;
 }
-
 .final-price {
   font-size: 20px;
   font-weight: bold;
   color: #1d0404;
 }
-
 .discount-text {
   font-size: 14px;
   color: #0f0c07;
   padding-left: 5px;
   padding-right: 7px;
 }
-
 .search-buy-button {
   background-color: #4caf50;
   color: white;
@@ -694,20 +591,18 @@ nav h4:hover {
 .new-container {
   max-width: 1200px;
   padding: 10px;
+  margin: auto;
 }
-
 .searchbar-filter {
   display: flex;
   align-items: center;
   justify-content: end;
-  gap: 0;
-  margin: 30px 0;
+  gap: 10px;
+  margin: 30px auto;
 }
-
 .sort-section {
   display: flex;
   align-items: center;
-  margin: 0;
   gap: 10px;
   font-size: 18px;
   font-family: "Inter", sans-serif;
@@ -735,15 +630,11 @@ nav h4:hover {
   box-shadow: 0px 0px 4px rgba(100, 100, 100, 0.3);
 }
 .search-bar {
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 12px 20px;
   background-color: #f9f9f9;
   border-radius: 50px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 500px;
+  width: 400px;
   border: 1px solid #ddd;
 }
 .search-input {
@@ -779,62 +670,64 @@ nav h4:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 /* --------/SEARCH-BAR-------- */
-
 /* --------SINGOLA PAGINA-------- */
 .product-page {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px;
+  margin: 40px auto;
   font-family: Arial, sans-serif;
   color: #000;
 }
-
 .product-content {
   display: flex;
-  align-items: flex-start;
-  gap: 40px;
+  justify-content: space-between;
 }
-
+.product-image {
+  width: 40%;
+}
 .product-image img {
   width: 100%;
-  max-width: 500px;
   border-radius: 10px;
   height: 600px;
 }
-
 .product-details {
   text-align: left;
   display: flex;
   flex-direction: column;
+  padding-left: 30px;
   gap: 12px;
-  max-width: 600px;
+  width: 60%;
 }
-
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+.single-wish button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+.wish-button button:active {
+  transform: scale(0.9);
+}
 .product-title {
   font-size: 2.2em;
-  font-weight: bold;
-  color: #000;
-  text-align: left;
-  margin-left: 0;
 }
-
 .product-author {
   font-size: 1.5em;
-  font-weight: bold;
   color: #888;
   margin-top: 5px;
-  text-align: left;
-  margin-left: 0;
 }
-
 .box-detail {
   background: white;
-  padding: 20px;
+  padding: 20px 40px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
   font-family: Arial, sans-serif;
 }
 .product-info {
@@ -857,7 +750,6 @@ nav h4:hover {
   text-align: right;
   flex: 1;
 }
-
 .product-info:last-child {
   text-align: center;
   flex-direction: column;
@@ -876,14 +768,12 @@ nav h4:hover {
   font-size: 16px;
   line-height: 1.5;
 }
-
 .price-button-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-top: 10px;
 }
-
 .discount-container {
   display: flex;
   justify-content: center;
@@ -898,14 +788,12 @@ nav h4:hover {
   cursor: default;
   color: white;
 }
-
 .old-price {
   font-size: 14px;
   font-weight: 600;
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.6);
 }
-
 .new-price {
   background: #27ae60;
   color: #ffffff;
@@ -916,12 +804,10 @@ nav h4:hover {
   box-shadow: 0px 2px 4px rgba(39, 174, 96, 0.5);
   transition: box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
 }
-
 .discount-container:hover .new-price {
   transform: scale(1.03);
   box-shadow: 0px 3px 8px rgba(39, 174, 96, 0.6);
 }
-
 .price {
   display: inline-block;
   background: linear-gradient(135deg, #2a2a3c, #3c3c5c);
@@ -935,9 +821,10 @@ nav h4:hover {
   position: relative;
   cursor: default;
 }
-
+.buy-button-position {
+  text-align: center;
+}
 .buy-button {
-  display: block;
   margin-top: 20px;
   padding: 12px 24px;
   background: #2d8f19;
@@ -957,7 +844,6 @@ nav h4:hover {
   justify-content: space-between;
   width: 100%;
 }
-
 .return-home-btn {
   background-color: #e4c7b2;
   color: black;
@@ -973,16 +859,9 @@ nav h4:hover {
   text-decoration: none;
   margin-top: 40px;
 }
-
 .return-home-btn:hover {
   background-color: #b68969;
   transform: scale(1.05);
-}
-
-.container-book-btn {
-  max-width: 1200px;
-  padding: 15px;
-  margin: 0 auto;
 }
 /* --------SINGOLA PAGINA-------- */
 
@@ -1311,25 +1190,24 @@ nav h4:hover {
 
 /* Contenitore principale */
 
-.checkout-title-page{
- width: 80%;
- text-align: start;
- margin: 0;
- padding: 10px;
+.checkout-title-page {
+  width: 80%;
+  text-align: start;
+  margin: 0;
+  padding: 10px;
 }
 .checkout-container {
+  margin-top: 40px;
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 40px;
   padding: 20px;
-  max-width: 1000px;
-  
+  height: 100vh;
 }
 
 /* Colonna destra: riepilogo ordine */
 .order-summary {
-  flex: 2;
-  max-width: 300px;
+  width: 40%;
   height: fit-content;
   background-color: #ffffff;
   padding: 40px 20px;
@@ -1393,38 +1271,29 @@ nav h4:hover {
   cursor: pointer;
   text-align: center;
 }
-
 .show-form-button:hover {
   background-color: #357716;
 }
 
 /* Colonna sinistra: dettagli libri */
 .books-details {
-  flex: 2;
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 .book-item {
   display: flex;
   background-color: #ffffff;
-  width: 80%;
-  justify-content: start;
-  margin: 0;
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  align-items: start;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .book-item img.book-image {
   width: 80px;
-  margin: 0;
   border-radius: 5px;
 }
-
 .book-info {
   display: flex;
   justify-content: space-between;
@@ -1438,7 +1307,6 @@ nav h4:hover {
   margin-bottom: 5px;
   margin: 0;
 }
-
 .book-info p {
   margin: 5px 0;
   font-size: 14px;
@@ -1508,14 +1376,12 @@ nav h4:hover {
   width: 90%;
   max-width: 700px;
   text-align: center;
-  
 }
 
-.checkout-form-container p{
+.checkout-form-container p {
   font-size: 20px;
   color: #555555;
- margin: 5px;
-  
+  margin: 5px;
 }
 
 .checkout-form {
@@ -1525,7 +1391,6 @@ nav h4:hover {
   width: 100%;
   margin: 0;
   padding: 40px 0;
-  
 }
 
 .checkout-form input {
@@ -1533,7 +1398,6 @@ nav h4:hover {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
-  
 }
 
 .double-camp {
@@ -1542,24 +1406,23 @@ nav h4:hover {
   gap: 10px;
   width: 80%;
 }
-.double-camp >.big-input {
+.double-camp > .big-input {
   width: 90%;
 }
-.double-camp >.small-input {
+.double-camp > .small-input {
   width: 20%;
 }
-.camp-container{
+.camp-container {
   margin: 0;
   width: 100%;
 }
 
 .camp-container input {
-  width:80%;
+  width: 80%;
   padding: 10px 10px;
-
 }
 
-.checkbox{
+.checkbox {
   display: flex;
   justify-content: start;
   padding: 10px 0;
@@ -1573,7 +1436,7 @@ nav h4:hover {
   width: 20px;
   height: 20px;
   cursor: pointer;
-} 
+}
 
 .checkbox label {
   font-size: 16px;
@@ -1622,30 +1485,21 @@ form button:hover {
 .related-books {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  justify-content: flex-start;
-  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
 }
-
 .book-relate-card {
-  width: 200px;
+  width: calc((100% / 6) - 40px);
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
-
 .book-relate-card:hover {
   transform: scale(1.05);
 }
-
 .book-relate-link {
   text-decoration: none;
   color: inherit;
@@ -1656,7 +1510,6 @@ form button:hover {
   height: 100%;
   width: 100%;
 }
-
 .book-relate-image {
   width: 100%;
   height: 200px;
@@ -1664,7 +1517,6 @@ form button:hover {
   border-radius: 8px 8px 0 0;
   background-color: #f0f0f0;
 }
-
 .book-relate-info {
   flex: 1;
   display: flex;
@@ -1674,19 +1526,9 @@ form button:hover {
   padding: 10px;
   height: 100%;
 }
-
 .book-relate-title {
-  font-size: 16px;
-  font-weight: bold;
   color: #333;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  margin-top: 10px;
 }
-
 .book-relate-author {
   font-size: 14px;
   color: #666;
@@ -1714,32 +1556,25 @@ form button:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .relate-title h2 {
+  margin-top: 60px;
+  margin-bottom: 20px;
   color: #7a4615;
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #7a4615;
   padding-bottom: 5px;
   display: inline-block;
 }
-
-.relate-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 20px;
-}
 /* ----------/RELATE---------- */
 
 /*-----WISHLIST-----*/
-.wishlist {
-  margin: 20px auto;
-  max-width: 1100px;
+.wishlist h1 {
+  margin-top: 60px;
+  font-size: 32px;
+  color: #333;
 }
 .book-wishlist {
   text-decoration: none;
@@ -1790,36 +1625,28 @@ form button:hover {
 /*--------FOOTER--------*/
 /* Footer.css */
 .bookstore-footer {
+  margin-top: 40px;
   background-color: #f8f9fa;
   color: #333;
-  padding: 3rem 0 1rem;
+  padding: 10px;
   border-top: 1px solid #e7e7e7;
   font-size: 14px;
   line-height: 1.6;
 }
-
 .footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .footer-section {
-  flex: 1 0 200px;
-  margin: 0 15px 30px;
-  min-width: 200px;
+  width: calc(100% / 6);
 }
-
 .footer-section h3 {
   font-size: 18px;
   margin-bottom: 15px;
   color: #333;
   font-weight: 600;
 }
-
 .footer-section h4 {
   font-size: 16px;
   margin-bottom: 12px;

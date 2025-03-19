@@ -1,4 +1,8 @@
+import { useWishlistContext } from "../../context/WishlistContext";
+import { useEffect } from "react";
+
 export default function CardSinglePage({
+  id,
   title,
   image,
   price,
@@ -18,6 +22,11 @@ export default function CardSinglePage({
   description,
   original_title,
 }) {
+  const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  useEffect(() => {
+    syncWishlist();
+  }, []);
+
   return (
     <div className="product-page">
       <div className="product-content">
@@ -25,9 +34,26 @@ export default function CardSinglePage({
           <img src={image} alt={title} />
         </div>
         <div className="product-details">
-          <h1 className="product-title">
-            {title} {original_title && `- (${original_title})`}
-          </h1>
+          <div className="row">
+            <h1 className="product-title">
+              {title} {original_title && `- (${original_title})`}
+            </h1>
+            <div className="single-wish">
+              <button
+                className="wishlist-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleWishlist(id);
+                }}
+              >
+                {wishlist.some((b) => b.id === id) ? (
+                  <i className="fa-solid fa-heart"></i>
+                ) : (
+                  <i className="fa-regular fa-heart"></i>
+                )}
+              </button>
+            </div>
+          </div>
           <div className="discount-price-author-container">
             <h2 className="product-author">{author}</h2>
             {discountId &&
@@ -51,7 +77,7 @@ export default function CardSinglePage({
             ) : (
               <p className="price">{price}€</p>
             )}
-            </div>
+          </div>
           <div className="box-detail">
             <span className="product-info">
               Genere: <p>{category}</p>

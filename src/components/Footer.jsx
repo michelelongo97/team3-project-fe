@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bookstore-footer">
+    <footer className="bookstore-footer container">
       <div className="footer-container">
         <div className="footer-section">
           <h3>La Nostra Libreria</h3>
