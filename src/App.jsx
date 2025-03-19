@@ -9,20 +9,79 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import BookPage from "./pages/BookPage";
 import Checkout from "./pages/Checkout";
+import { useState, useEffect } from "react";
+
+import axios from "./api/axios";
 
 export default function App() {
+  const [cartItems, setCartItems] = useState([]);
+  const [message, setMessage] = useState("");
+
+  // Funzione per ottenere gli articoli nel carrello all'avvio
+  const fetchCart = async () => {
+    try {
+      const response = await axios.get("/cart");
+      setCartItems(response.data.cart); // Imposta gli articoli nel carrello
+    } catch (error) {
+      console.error("Errore durante il recupero del carrello", error);
+    }
+  };
+  // Esegui il fetch quando il componente viene montato
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const addToCart = (book) => {
+    axios
+      .post("/cart", {
+        id: book.id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setMessage(res.data.message);
+        setCartItems((prevItems) => {
+          const existingItem = prevItems.find((item) => item.id === book.id);
+          if (existingItem) {
+            return prevItems.map((item) =>
+              item.id === book.id
+                ? { ...item, quantity: item.quantity + 1 } // Incrementa la quantità
+                : item
+            );
+          }
+          return [...prevItems, { ...book, quantity: 1 }];
+        });
+      })
+      .catch((err) => {
+        setMessage(
+          err.response?.data?.message ||
+            "Errore durante l'aggiunta al carrello."
+        );
+      });
+  };
   return (
     <BrowserRouter>
       <AlertProvider>
         <WishlistProvider>
           <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route index path="/" element={<Homepage />} />
+            <Route element={<DefaultLayout cartItems={cartItems} />}>
+              <Route
+                index
+                path="/"
+                element={<Homepage addToCart={addToCart} />}
+              />
               <Route path="/checkout" element={<Checkout />} />
-              <Route path="/books/:slug" element={<BookPage />} />
-              <Route index path="/cart" element={<Cart />} />
+              <Route
+                path="/books/:slug"
+                element={<BookPage addToCart={addToCart} />}
+              />
+              <Route
+                index
+                path="/cart"
+                element={
+                  <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                }
+              />
               <Route index path="/wishlist" element={<Wishlist />} />
-              
             </Route>
           </Routes>
         </WishlistProvider>

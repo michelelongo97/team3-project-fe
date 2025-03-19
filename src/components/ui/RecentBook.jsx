@@ -4,10 +4,9 @@ import { useWishlistContext } from "../../context/WishlistContext";
 import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
-export default function RecentBook() {
+export default function RecentBook({ addToCart }) {
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
-  const [message, setMessage] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
@@ -47,28 +46,15 @@ export default function RecentBook() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
+  //funzione per chiamare addToCart con l'Alert
+  const handleAddToCart = (book) => {
+    addToCart(book); // Chiamata alla funzione passata da App
 
-  const addToCart = (book) => {
-    axios
-      .post("/cart", {
-        id: book.id,
-        quantity: 1,
-      })
-      .then((res) => {
-        setMessage(res.data.message);
-        setAlert({
-          type: "success",
-          message: "Articolo aggiunto al carrello",
-        });
-      })
-      .catch((err) => {
-        setMessage(
-          err.response?.data?.message ||
-            "Errore durante l'aggiunta al carrello."
-        );
-      });
+    setAlert({
+      type: "success",
+      message: "Articolo aggiunto al carrello",
+    });
   };
-
   return (
     <section className="last">
       <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1>
@@ -131,7 +117,7 @@ export default function RecentBook() {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        addToCart(book);
+                        handleAddToCart(book);
                       }}
                     >
                       <i className="fa-solid fa-cart-shopping"></i>

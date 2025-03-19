@@ -4,25 +4,23 @@ import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 import { Link, useSearchParams } from "react-router";
 
-export default function SearchBar() {
+export default function SearchBar({ addToCart }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("q") || "");
   const [result, setResult] = useState(null);
   const [sortBy, setSortBy] = useState(searchParams.get("sort") || "recenti");
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     syncWishlist();
   }, []);
 
-  
   useEffect(() => {
     if (searchParams.get("q")) {
       fetchSearch();
     }
-  }, []); 
+  }, []);
 
   const fetchSearch = () => {
     if (!search.trim()) {
@@ -46,26 +44,14 @@ export default function SearchBar() {
     fetchSearch();
   };
 
-  //Carrello
-  const addToCart = (book) => {
-    axios
-      .post("/cart", {
-        id: book.id,
-        quantity: 1,
-      })
-      .then((res) => {
-        setMessage(res.data.message);
-        setAlert({
-          type: "success",
-          message: "Articolo aggiunto al carrello",
-        });
-      })
-      .catch((err) => {
-        setMessage(
-          err.response?.data?.message ||
-            "Errore durante l'aggiunta al carrello."
-        );
-      });
+  //funzione per chiamare addToCart con l'Alert
+  const handleAddToCart = (book) => {
+    addToCart(book); // Chiamata alla funzione passata da App
+
+    setAlert({
+      type: "success",
+      message: "Articolo aggiunto al carrello",
+    });
   };
 
   const generateSlug = (title) => {
@@ -204,7 +190,7 @@ export default function SearchBar() {
                           <button
                             onClick={(e) => {
                               e.preventDefault();
-                              addToCart(book);
+                              handleAddToCart(book);
                             }}
                             className="search-buy-button"
                           >
@@ -231,4 +217,3 @@ export default function SearchBar() {
     </section>
   );
 }
-
