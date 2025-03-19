@@ -229,11 +229,7 @@ export default function Checkout() {
   };
 
   return (
-    <div
-      className={`checkout-container new-container${
-        formVisible ? "show-form" : ""
-      }`}
-    >
+    <div className={`checkout-container ${formVisible ? "show-form" : ""}`}>
       {/* Overlay per il form */}
       {formVisible && (
         <div
