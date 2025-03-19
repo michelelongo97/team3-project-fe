@@ -1178,6 +1178,13 @@ nav h4:hover {
 /* --------CHECKOUT-------- */
 
 /* Contenitore principale */
+
+.checkout-title-page{
+ width: 80%;
+ text-align: start;
+ margin: 0;
+ padding: 10px;
+}
 .checkout-container {
   display: flex;
   flex-direction: row;
@@ -1194,6 +1201,7 @@ nav h4:hover {
   height: fit-content;
   background-color: #ffffff;
   padding: 40px 20px;
+  margin-top: 68px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -1366,29 +1374,83 @@ nav h4:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   width: 90%;
-  max-width: 500px;
-
+  max-width: 700px;
   text-align: center;
+  
 }
 
-form {
+.checkout-form-container p{
+  font-size: 20px;
+  color: #555555;
+ margin: 5px;
+  
+}
+
+.checkout-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   margin: 0;
   padding: 40px 0;
+  
 }
 
-form input {
-  padding: 10px 30px;
+.checkout-form input {
+  padding: 10px 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+  
+}
+
+.double-camp {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 80%;
+}
+.double-camp >.big-input {
+  width: 90%;
+}
+.double-camp >.small-input {
+  width: 20%;
+}
+.camp-container{
+  margin: 0;
+  width: 100%;
+}
+
+.camp-container input {
+  width:80%;
+  padding: 10px 10px;
+
+}
+
+.checkbox{
+  display: flex;
+  justify-content: start;
+  padding: 10px 0;
+  margin: 0 auto;
   width: 80%;
 }
 
-form button {
+.checkbox input {
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+} 
+
+.checkbox label {
+  font-size: 16px;
+  width: 100%;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.checkout-form button {
   width: 100%;
   padding: 10px 15px;
   margin-top: 20px;

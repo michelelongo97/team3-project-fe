@@ -7,6 +7,7 @@ export default function Checkout() {
   const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
   const [formVisible, setFormVisible] = useState(false); // Stato per controllare la visibilità del form
   const navigate = useNavigate();
+ 
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -32,8 +33,55 @@ export default function Checkout() {
     province: "",
   });
 
+  const [errors, setErrors] = useState({});
   const [useSameAddress, setUseSameAddress] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const validateField = (fieldName, value) => {
+    let error = "";
+    switch (fieldName) {
+      case "first_name":
+      case "last_name":
+        if (value.trim().length < 2) {
+          error = `${fieldName === "first_name" ? "Il nome" : "Il cognome"} deve avere almeno 2 caratteri.`;
+        }
+        break;
+      case "email":
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
+          error = "Inserisci un'email valida (esempio@email.com).";
+        }
+        break;
+      case "phone":
+        if (!/^\d{9,}$/.test(value)) {
+          error = "Il numero di telefono deve contenere almeno 9 cifre.";
+        }
+        break;
+      case "street":
+        if (value.trim().length < 5) {
+          error = "La via deve avere almeno 5 caratteri.";
+        }
+        break;
+      case "house_number":
+        if (!/^\d+$/.test(value)) {
+          error = "Il numero civico deve essere un valore numerico.";
+        }
+        break;
+      case "city":
+        if (value.trim().length < 2) {
+          error = "La città deve avere almeno 2 caratteri.";
+        }
+        break;
+      case "province":
+        if (value.trim().length < 4) {
+          error = "La provincia deve essere scritta per intero (esempio: Milano).";
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+  
 
   // Calcolo del subtotale e del costo di spedizione
   const subtotal = cartItems.reduce((total, item) => {
@@ -68,11 +116,21 @@ export default function Checkout() {
     }));
   };
 
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    // Validazione quando l'utente lascia il campo
+     const error = validateField(name, value);
+     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+   };
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -107,6 +165,19 @@ export default function Checkout() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validazione di tutti i campi al submit
+    const newErrors = {};
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) newErrors[key] = error;
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      alert("Dati inviati con successo!");
+    }
 
     setLoading(true);
     try {
@@ -161,7 +232,9 @@ export default function Checkout() {
   };
 
   return (
+     
     <div className={`checkout-container ${formVisible ? "show-form" : ""}`}>
+       
       {/* Overlay per il form */}
       {formVisible && (
         <div
@@ -173,6 +246,9 @@ export default function Checkout() {
     
       {/* Colonna sinistra: dettagli libri */}
       <div className="books-details">
+      <div className="checkout-title-page">
+       <h1>Il tuo ordine </h1>
+       </div>
         {cartItems.map((item) => {
           let discountedPrice = item.price;
 
@@ -250,72 +326,108 @@ export default function Checkout() {
       {formVisible && (
         <div className="checkout-form-container">
           <h1 className="checkout-header">Completa Ordine </h1>
-          <form onSubmit={handleSubmit}>
+          <p>Compila tutti i campi per procedere!</p>
+          <form className="checkout-form" onSubmit={handleSubmit}>
+            <div className="camp-container">
             <input
               type="text"
               name="first_name"
               placeholder="Nome"
               value={formData.first_name}
               onChange={handleChange}
+              onBlur={(e) => handleBlur(e, "first_name")}
               required
+              pattern="[A-Za-z]{2,}"
                minLength="2" 
-               title="Il nome deve contenere almeno 2 caratteri."
+               title="Il nome deve contenere almeno 2 lettere ."
             />
+            {errors.first_name && <p style={{ color: "red" }}>{errors.first_name}</p>}
+            </div>
+
+            <div className="camp-container">
             <input
               type="text"
               name="last_name"
               placeholder="Cognome"
               value={formData.last_name}
               onChange={handleChange}
+              onBlur={(e) => handleBlur(e, "last_name")}
               required
-               minLength="2" // Almeno 2 caratteri
-              title="Il cognome deve contenere almeno 2 caratteri."
+               minLength="2" 
+               pattern="[A-Za-z]{2,}"
+              title="Il cognome deve contenere almeno 2 caratteri ."
             />
+            {errors.last_name && <p style={{ color: "red" }}>{errors.last_name}</p>}
+            </div>
+
+            <div className="camp-container">
             <input
               type="email"
               name="email"
               placeholder="Email"
+              pattern="^(?=.{6,254}$)[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
               value={formData.email}
               onChange={handleChange}
+              onBlur={(e) => handleBlur(e, "email")}
               required
-               
                title="Inserisci un indirizzo email valido."
             />
+              {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+            </div>
+            
+            <div className="camp-container">
             <input
               type="text"
               name="phone"
               placeholder="Telefono"
               value={formData.phone}
               onChange={handleChange}
+              onBlur={(e) => handleBlur(e, "phone")}
               required
-              
               title="Il numero di telefono deve contenere solo cifre."
             />
+             {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
+            </div>
+
+            <div className="double-camp"> 
               <input
+              className="big-input"
               type="text"
               name="street"
               placeholder="Via"
               value={shipmentDetails.street}
               onChange={handleShipmentChange}
+              onBlur={(e) => handleBlur(e, "street")}
               required
             />
             <input
+             className="small-input"
               type="text"
               name="house_number"
-              placeholder="Numero Civico"
+              placeholder="N'"
               value={shipmentDetails.house_number}
               onChange={handleShipmentChange}
+              onBlur={(e) => handleBlur(e, "house_number")}
               required
             />
+            {errors.street && <p style={{ color: "red" }}>{errors.street}</p>}
+            {errors.house_number && <p style={{ color: "red" }}>{errors.house_number}</p>}
+            </div>
+
+            <div className="double-camp">
             <input
+            className="big-input"
               type="text"
               name="city"
               placeholder="Città"
               value={shipmentDetails.city}
               onChange={handleShipmentChange}
+              onBlur={(e) => handleBlur(e, "city")}
               required
             />
+            
             <input
+            className="small-input"
               type="text"
               name="zip_code"
               placeholder="CAP"
@@ -323,16 +435,23 @@ export default function Checkout() {
               onChange={handleShipmentChange}
               required
             />
+            {errors.city && <p style={{ color: "red" }}>{errors.city}</p>}
+            </div>
+
+            <div className="camp-container">
             <input
               type="text"
               name="province"
               placeholder="Provincia"
               value={shipmentDetails.province}
               onChange={handleShipmentChange}
+              onBlur={(e) => handleBlur(e, "province")}
               required
             />
+            {errors.province && <p style={{ color: "red" }}>{errors.province}</p>}
+            </div>
 
-<div>
+            <div className="checkbox">
               <input
                 type="checkbox"
                 id="sameAddress"
@@ -345,8 +464,10 @@ export default function Checkout() {
             </div>
             {!useSameAddress && (
               <>
-                <h3>Indirizzo di Fatturazione</h3>
+                <h3>Inserisci l' indirizzo di fatturazione</h3>
+                <div className="double-camp">
                 <input
+                className="big-input"
                   type="text"
                   name="street"
                   placeholder="Via"
@@ -355,14 +476,18 @@ export default function Checkout() {
                   required
                 />
                 <input
+                className="small-input"
                   type="text"
                   name="house_number"
-                  placeholder="Numero Civico"
+                  placeholder="N'"
                   value={billingDetails.house_number}
                   onChange={handleBillingChange}
                   required
                 />
+                </div>
+                <div className="double-camp">
                 <input
+                className="big-input"
                   type="text"
                   name="city"
                   placeholder="Città"
@@ -370,7 +495,9 @@ export default function Checkout() {
                   onChange={handleBillingChange}
                   required
                 />
+                
                 <input
+                className="small-input"
                   type="text"
                   name="zip_code"
                   placeholder="CAP"
@@ -378,14 +505,21 @@ export default function Checkout() {
                   onChange={handleBillingChange}
                   required
                 />
+                </div>
+
+                <div className="camp-container">
                 <input
                   type="text"
                   name="province"
                   placeholder="Provincia"
                   value={billingDetails.province}
                   onChange={handleBillingChange}
+                  onBlur={(e) => handleBlur(e, "province")}
                   required
                 />
+                {errors.province && <p style={{ color: "red" }}>{errors.province}</p>}
+                </div>
+               
               </>
             )}
             <button type="submit" disabled={loading}>
