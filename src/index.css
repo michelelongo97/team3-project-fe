@@ -1901,7 +1901,6 @@ address {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
   }
   nav i,
   h4 {
@@ -1990,7 +1989,6 @@ address {
 /*------/RETURNPOLICY------*/
 
 /*------FAQ------*/
-/* Container principale */
 .faq-container {
   max-width: 700px;
   margin: 50px auto;
@@ -2000,7 +1998,6 @@ address {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Titolo FAQ */
 .faq-title {
   font-size: 26px;
   font-weight: bold;
@@ -2009,14 +2006,12 @@ address {
   margin-bottom: 20px;
 }
 
-/* Lista FAQ */
 .faq-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* FAQ Item */
 .faq-item {
   border-radius: 8px;
   background: #ffffff;
@@ -2025,12 +2020,10 @@ address {
   overflow: hidden;
 }
 
-/* FAQ Item Aperto */
 .faq-item.open {
   background: #e8e8e8;
 }
 
-/* Pulsante Domanda */
 .faq-question {
   width: 100%;
   padding: 15px 20px;
@@ -2051,27 +2044,23 @@ address {
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* Icona "+" e "-" */
 .faq-icon {
   font-size: 22px;
   font-weight: bold;
   color: #555;
 }
 
-/* Contenitore risposta */
 .faq-answer-wrapper {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-/* Risposta aperta */
 .faq-item.open .faq-answer-wrapper {
   max-height: 100px;
   padding: 10px 20px;
 }
 
-/* Testo risposta */
 .faq-answer {
   font-size: 16px;
   color: #555;
@@ -2084,9 +2073,9 @@ address {
   margin: 60px auto;
   padding: 40px;
   border-radius: 12px;
-  background-color: #f5f5f5; /* Grigio chiaro elegante */
-  color: #333; /* Testo scuro per contrasto */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Effetto morbido */
+  background-color: #f5f5f5; 
+  color: #333; 
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
   text-align: center;
   animation: fadeIn 0.8s ease-in-out;
 }
@@ -2094,7 +2083,7 @@ address {
 .our-story-title {
   font-size: 32px;
   font-weight: bold;
-  color: #2c3e50; /* Blu/grigio sofisticato */
+  color: #2c3e50;
   margin-bottom: 20px;
 }
 
@@ -2103,7 +2092,7 @@ address {
   line-height: 1.8;
   margin-bottom: 15px;
   font-weight: 400;
-  color: #4a4a4a; /* Grigio scuro ma non troppo pesante */
+  color: #4a4a4a; 
 }
 /*------/ABOUT------*/
 
@@ -2113,8 +2102,8 @@ address {
   margin: 60px auto;
   padding: 40px;
   border-radius: 12px;
-  background-color: #f8f8f8; /* Grigio molto chiaro */
-  color: #2c3e50; /* Blu/grigio elegante */
+  background-color: #f8f8f8; 
+  color: #2c3e50; 
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   animation: fadeIn 0.8s ease-in-out;
@@ -2151,7 +2140,7 @@ address {
 }
 
 .team-member:hover {
-  color: #e79c3abd; /* Blu raffinato */
+  color: #e79c3abd; 
   transform: translateY(-3px);
 }
 /*------/TEAM------*/
