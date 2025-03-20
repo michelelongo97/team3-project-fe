@@ -10,7 +10,7 @@ export default function Help() {
         </p>
         <ul className="help-list">
           <li>
-            Scrivi un'email a <strong>support@libroecommerce.com</strong> con i
+            Scrivi un'email a <strong>support@bookheaven.com</strong> con i
             dettagli del tuo problema.
           </li>
           <li>Attendi una risposta dal nostro team entro 24-48 ore.</li>

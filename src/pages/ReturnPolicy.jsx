@@ -16,7 +16,7 @@ export default function ReturnPolicy() {
           </li>
           <li>
             Contatta il nostro supporto via email a{" "}
-            <strong>resi@libroecommerce.com</strong> entro 14 giorni
+            <strong>resi@bookheaven.com</strong> entro 14 giorni
             dall'acquisto.
           </li>
           <li>Riceverai le istruzioni per la spedizione del reso.</li>

@@ -48,7 +48,7 @@ export default function Footer() {
               <br />
               20123 Milano, Italia
             </p>
-            <p>Email: info@tualibreria.it</p>
+            <p>Email: info@bookheaven.it</p>
             <p>Tel: +39 012 3456789</p>
           </address>
         </div>
