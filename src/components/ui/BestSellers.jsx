@@ -47,9 +47,9 @@ export default function BestSellers({ addToCart }) {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
-  //funzione per chiamare addToCart con l'Alert
+
   const handleAddToCart = (book) => {
-    addToCart(book); // Chiamata alla funzione passata da App
+    addToCart(book); 
 
     setAlert({
       type: "success",
@@ -58,7 +58,9 @@ export default function BestSellers({ addToCart }) {
   };
   return (
     <section>
+      <div className="title-last-container">
       <h1 className="title-last">I NOSTRI BESTSELLER</h1>
+      </div>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
         <div className="slider-wrapper row-x">

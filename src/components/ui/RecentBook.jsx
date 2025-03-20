@@ -46,10 +46,9 @@ export default function RecentBook({ addToCart }) {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
-  //funzione per chiamare addToCart con l'Alert
-  const handleAddToCart = (book) => {
-    addToCart(book); // Chiamata alla funzione passata da App
 
+  const handleAddToCart = (book) => {
+    addToCart(book); 
     setAlert({
       type: "success",
       message: "Articolo aggiunto al carrello",
@@ -57,7 +56,9 @@ export default function RecentBook({ addToCart }) {
   };
   return (
     <section>
+      <div className="title-last-container">
       <h1 className="title-last">I NOSTRI LIBRI PIÚ RECENTI</h1>
+      </div>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
         <div className="slider-wrapper row-x">

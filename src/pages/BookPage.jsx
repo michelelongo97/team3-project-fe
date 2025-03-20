@@ -36,7 +36,6 @@ export default function BookPage({ addToCart }) {
       });
   }, [slug]);
 
-  // **Nuovo useEffect per filtrare i libri dopo che book e relatedBooks sono stati caricati**
   useEffect(() => {
     if (book && relatedBooks.length > 0) {
       const sameGenreBooks = relatedBooks.filter((b) => b.genre === book.genre);
@@ -48,9 +47,9 @@ export default function BookPage({ addToCart }) {
     }
   }, [book, relatedBooks]);
 
-  //funzione per chiamare addToCart con l'Alert
+
   const handleAddToCart = (book) => {
-    addToCart(book); // Chiamata alla funzione passata da App
+    addToCart(book); 
 
     setAlert({
       type: "success",

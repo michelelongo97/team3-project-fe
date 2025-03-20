@@ -129,10 +129,15 @@ nav {
 /* --------HEADER-------- */
 
 /* --------HOMEPAGE-------- */
+
+  /* background: linear-gradient(135deg, #a4a8ce, #d6a987); */
+
 .book-slider-container {
   text-align: center;
-  background: linear-gradient(135deg, #a4a8ce, #d6a987);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.336), rgba(0, 0, 0, 0.315)), url(../public/img/room86.jpg);
+  background-blend-mode: multiply;
   padding: 40px 0;
+  background-repeat: no-repeat;
   font-family: "Poppins", sans-serif;
   color: white;
   display: flex;
@@ -145,13 +150,13 @@ nav {
   font-size: 3rem;
   font-weight: bold;
   letter-spacing: 2px;
-  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
-  color: #d5ecdc;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.918);
+  color: #ffebbf;
 }
 .book-slider-title p {
   font-size: 26px;
   margin-top: 10px;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.918);
   margin-bottom: 10px;
 }
 .merienda {
@@ -160,11 +165,11 @@ nav {
   font-style: normal;
 }
 .esplora-btn {
-  background-color: #e4c7b2;
-  color: black;
-  border: none;
+  background-color: rgba(0, 0, 0, 0.548);
+  color: white;
+  border: 1px solid white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -173,10 +178,14 @@ nav {
   transition: background-color 0.3s, transform 0.2s;
   text-decoration: none;
   margin: 30px 0;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.918);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.918);
 }
 .esplora-btn:hover {
-  background-color: #f7cfb2;
+  background-color: #ffffff;
+  color: black;
   transform: scale(1.05);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0);
 }
 .esplora-btn i {
   margin-left: 10px;
@@ -190,7 +199,7 @@ nav {
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-  background-color: white;
+  background-color: #ffffff;
   padding: 40px 6px;
   max-height: 400px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -396,12 +405,42 @@ nav {
   margin-left: 10px;
 }
 .title-last {
-  text-align: center;
-  font-size: 38px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
   font-weight: bold;
-  color: #000000;
-  margin-top: 20px;
+  text-align: center;
+  color: #8B5E3C; 
+  margin: 40px 0 20px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  animation: fadeIn 1s ease-in-out;
 }
+
+.title-last:hover {
+  text-shadow: 2px 2px 10px rgba(139, 94, 60, 0.5);
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.title-last-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.title-last::after {
+  content: "";
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #D4AF37, #8B5E3C); 
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
 .add-book {
   display: flex;
   gap: 8px;
