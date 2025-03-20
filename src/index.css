@@ -81,7 +81,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
 }
 nav i,
 h4 {
@@ -191,7 +190,7 @@ nav {
   margin-left: 10px;
 }
 .book-slider {
-  /* width: 100%; */
+  width: 50%;
   max-width: 1000px;
   gap: 50px;
   margin: auto;
@@ -213,11 +212,8 @@ nav {
   max-height: 300px;
   object-fit: contain;
   border-radius: 12px;
-  transition: transform 0.5s ease-in-out;
 }
-.book-slider-image:hover {
-  transform: scale(1.1);
-}
+
 .book-slider-info {
   width: 60%;
   text-align: left;
