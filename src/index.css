@@ -1048,6 +1048,15 @@ nav {
 .remove-btn:hover {
   color: grey;
 }
+.wishlist-btn {
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+  margin-top: 5px;
+}
 
 .cart-summary {
   display: flex;
@@ -1613,39 +1622,35 @@ form button:hover {
 /*-----/WISHLIST-----*/
 
 /*--------FOOTER--------*/
-/* Footer.css */
 .bookstore-footer {
   margin-top: 40px;
   background-color: #f8f9fa;
   color: #333;
-  padding: 10px;
+  padding: 20px;
   border-top: 1px solid #e7e7e7;
   font-size: 14px;
   line-height: 1.6;
 }
+
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-.footer-section {
-  width: calc(100% / 6);
-}
-.footer-section h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  color: #333;
-  font-weight: 600;
-}
-.footer-section h4 {
-  font-size: 16px;
-  margin-bottom: 12px;
-  font-weight: 500;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
-.footer-section p {
-  margin-bottom: 15px;
-  color: #555;
+.footer-section {
+  width: calc(100% / 6);
+  text-align: center;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+  font-weight: 600;
 }
 
 .footer-section ul {
@@ -1654,40 +1659,33 @@ form button:hover {
   margin: 0;
 }
 
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-
-.footer-section ul li p {
+.footer-section ul a {
+  text-decoration: none; /* Rimuove la sottolineatura */
   color: #555;
-  margin: 0;
-  transition: color 0.2s ease;
+  display: block;
+  font-size: 14px;
+  transition: color 0.3s ease;
 }
 
-/* Stile per l'elemento che era un link e ora è un paragrafo */
-.btn-link {
+.footer-section ul a:hover {
   color: #1a73e8;
-  font-weight: 500;
-  margin-bottom: 10px;
-  cursor: default;
 }
 
 address {
   font-style: normal;
   margin-bottom: 15px;
-}
-
-address p {
-  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
 }
 
 .social-links {
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.social-links p {
+.social-links a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1696,19 +1694,19 @@ address p {
   background-color: #e9ecef;
   border-radius: 50%;
   color: #555;
-  margin: 0;
-  cursor: default;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-.small {
-  font-size: 12px;
-  color: #6c757d;
+.social-links a:hover {
+  background-color: #d6d8db;
+  color: #2c3e50;
 }
 
 .payment-methods {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 15px;
+  padding: 20px;
   border-top: 1px solid #e7e7e7;
   text-align: center;
 }
@@ -1717,6 +1715,7 @@ address p {
   margin-bottom: 15px;
   font-size: 16px;
   font-weight: 500;
+  color: #2c3e50;
 }
 
 .payment-icons {
@@ -1726,13 +1725,9 @@ address p {
   flex-wrap: wrap;
 }
 
-.payment-icons p {
-  font-size: 12px;
-  color: #6c757d;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.payment-icons img {
+  max-width: 50px;
+  height: auto;
 }
 
 .footer-bottom {
@@ -1747,21 +1742,48 @@ address p {
 }
 
 .copyright {
-  margin-bottom: 15px;
+  font-size: 13px;
+  color: #6c757d;
+  text-align: center;
 }
 
 .legal-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 15px;
+  gap: 15px;
+  justify-content: center;
 }
 
-.legal-links p {
+.legal-links a {
   color: #6c757d;
   font-size: 13px;
-  margin: 0;
-  cursor: default;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+  color: #2c3e50;
+}
+.btn-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.return-home-btn-footer {
+  font-size: 20px;
+  padding: 12px 18px;
+  background-color: #e4c7b2;
+  border: 1px solid #bfa999;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+/* Effetto hover più armonioso */
+.return-home-btn-footer:hover {
+  background-color: #d6b4a0;
+  border-color: #a89080;
+  transform: scale(1.03);
 }
 /*--------/FOOTER--------*/
 
@@ -1864,3 +1886,271 @@ address p {
     width: calc(100% / 2);
   }
 }
+
+/*------HELP------*/
+.help-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.help-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.help-text {
+  font-size: 16px;
+  color: #555;
+}
+
+.help-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.help-list li {
+  font-size: 14px;
+  padding: 8px 0;
+  color: #444;
+}
+/*------/HELP------*/
+
+/*------RETURNPOLICY------*/
+.return-policy-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.return-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.return-text,
+.return-note {
+  font-size: 16px;
+  color: #555;
+}
+
+.return-list {
+  text-align: left;
+  padding: 0;
+}
+
+.return-list li {
+  font-size: 14px;
+  padding: 8px 0;
+  color: #444;
+}
+/*------/RETURNPOLICY------*/
+
+/*------FAQ------*/
+/* Container principale */
+.faq-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titolo FAQ */
+.faq-title {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Lista FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* FAQ Item */
+.faq-item {
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* FAQ Item Aperto */
+.faq-item.open {
+  background: #e8e8e8;
+}
+
+/* Pulsante Domanda */
+.faq-question {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.3s;
+}
+
+.faq-question:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Icona "+" e "-" */
+.faq-icon {
+  font-size: 22px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Contenitore risposta */
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+/* Risposta aperta */
+.faq-item.open .faq-answer-wrapper {
+  max-height: 100px;
+  padding: 10px 20px;
+}
+
+/* Testo risposta */
+.faq-answer {
+  font-size: 16px;
+  color: #555;
+}
+/*------/FAQ------*/
+
+/*------ABOUT------*/
+.our-story-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: #f5f5f5; /* Grigio chiaro elegante */
+  color: #333; /* Testo scuro per contrasto */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Effetto morbido */
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.our-story-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50; /* Blu/grigio sofisticato */
+  margin-bottom: 20px;
+}
+
+.our-story-text {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  font-weight: 400;
+  color: #4a4a4a; /* Grigio scuro ma non troppo pesante */
+}
+/*------/ABOUT------*/
+
+/*------TEAM------*/
+.team-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: #f8f8f8; /* Grigio molto chiaro */
+  color: #2c3e50; /* Blu/grigio elegante */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.team-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.team-intro {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+}
+
+.team-member {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.team-member:last-child {
+  border-bottom: none;
+}
+
+.team-member:hover {
+  color: #e79c3abd; /* Blu raffinato */
+  transform: translateY(-3px);
+}
+/*------/TEAM------*/
+
+/*------BLOG------*/
+.blog-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.blog-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.blog-intro {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.blog-text {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/*------/BLOG------*/
+

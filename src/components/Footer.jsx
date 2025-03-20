@@ -1,60 +1,47 @@
+import { Link } from "react-router";
+
 export default function Footer() {
   return (
-    <footer className="bookstore-footer container">
+    <footer className="bookstore-footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>La Nostra Libreria</h3>
+          <h3>📚 La Nostra Libreria</h3>
           <p>
             Dal 2010 portiamo il piacere della lettura direttamente a casa tua,
             con una selezione curata di libri per ogni gusto e interesse.
           </p>
-          <p className="btn-link">La nostra storia</p>
         </div>
 
         <div className="footer-section">
-          <h3>Scopri</h3>
+          <h3>🛠️ Supporto e Assistenza</h3>
           <ul>
-            <li>
-              <p>Novità del mese</p>
-            </li>
-            <li>
-              <p>Bestseller</p>
-            </li>
-            <li>
-              <p>Autori del momento</p>
-            </li>
-            <li>
-              <p>Offerte speciali</p>
-            </li>
-            <li>
-              <p>Consigliati per te</p>
-            </li>
-          </ul>
-        </div>
-
-        <div className="footer-section">
-          <h3>Servizi Clienti</h3>
-          <ul>
-            <li>
+            <Link to="help">
               <p>Assistenza clienti</p>
-            </li>
-            <li>
+            </Link>
+            <Link to="return-policy">
               <p>Politica di reso</p>
-            </li>
-            <li>
-              <p>Domande frequenti</p>
-            </li>
-            <li>
-              <p>Lascia un feedback</p>
-            </li>
-            <li>
-              <p>Garanzia soddisfatti</p>
-            </li>
+            </Link>
+            <Link to="FAQ">
+              <p>FAQ</p>
+            </Link>
           </ul>
         </div>
-
         <div className="footer-section">
-          <h3>Contatti</h3>
+          <h3>ℹ️ Scopri di più su di noi</h3>
+          <ul>
+            <Link to="/about">
+              <p>La nostra storia e mission</p>
+            </Link>
+            <Link to="/team">
+              <p>Il nostro team</p>
+            </Link>
+            <Link to="/blog">
+              <p>Blog e novità</p>
+            </Link>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h3>📩 Contatti</h3>
           <address>
             <p>
               Via dei Libri, 42
@@ -67,28 +54,28 @@ export default function Footer() {
         </div>
 
         <div className="footer-section">
-          <h3>Seguici</h3>
-          <div className="social-links">
-            <p aria-label="Facebook">
-              <i className="fa fa-facebook"></i>
-            </p>
-            <p aria-label="Instagram">
-              <i className="fa fa-instagram"></i>
-            </p>
-            <p aria-label="Twitter">
-              <i className="fa fa-twitter"></i>
-            </p>
-            <p aria-label="Pinterest">
-              <i className="fa fa-pinterest"></i>
-            </p>
-            <p aria-label="Goodreads">
-              <i className="fa fa-goodreads"></i>
-            </p>
-          </div>
           <div className="newsletter">
             <h4>Ricevi novità e offerte</h4>
             <p className="small">
               Iscriviti per ricevere consigli di lettura e promozioni esclusive!
+            </p>
+          </div>
+          <h3>Seguici</h3>
+          <div className="social-links">
+            <p aria-label="Facebook">
+              <i class="fa-brands fa-square-facebook"></i>
+            </p>
+            <p aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </p>
+            <p aria-label="Twitter">
+              <i class="fa-brands fa-twitter"></i>
+            </p>
+            <p aria-label="Pinterest">
+              <i class="fa-brands fa-pinterest-p"></i>
+            </p>
+            <p aria-label="Goodreads">
+              <i class="fa-brands fa-goodreads"></i>
             </p>
           </div>
         </div>
@@ -128,8 +115,8 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="copyright">
           <p>
-            &copy; {new Date().getFullYear()} La Tua Libreria Srl. Tutti i
-            diritti riservati.
+            &copy; {new Date().getFullYear()} La BookHeaven Srl. Tutti i diritti
+            riservati.
           </p>
         </div>
         <div className="legal-links">
