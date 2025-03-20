@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 export default function BookPage({ addToCart }) {
   const [book, setBook] = useState({});
   const [relatedBooks, setRelatedBooks] = useState([]);
+  const [sameGenreBooks, setSameGenreBooks] = useState([]);
+  const [sameAuthorBooks, setSameAuthorBooks] = useState([]);
   const { slug } = useParams();
   const { setAlert } = useAlertContext();
 
@@ -24,8 +26,8 @@ export default function BookPage({ addToCart }) {
         return axios.get(`/books/related-books/${bookData.id}`);
       })
       .then((res) => {
-        setRelatedBooks(res.data);
         console.log("Libri correlati:", res.data);
+        setRelatedBooks(res.data);
       })
       .catch((err) => {
         if (err.response?.status === 404) {
@@ -33,6 +35,19 @@ export default function BookPage({ addToCart }) {
         }
       });
   }, [slug]);
+
+  // **Nuovo useEffect per filtrare i libri dopo che book e relatedBooks sono stati caricati**
+  useEffect(() => {
+    if (book && relatedBooks.length > 0) {
+      const sameGenreBooks = relatedBooks.filter((b) => b.genre === book.genre);
+      const sameAuthorBooks = relatedBooks.filter(
+        (b) => b.author === book.author
+      );
+      setSameGenreBooks(sameGenreBooks);
+      setSameAuthorBooks(sameAuthorBooks);
+    }
+  }, [book, relatedBooks]);
+
   //funzione per chiamare addToCart con l'Alert
   const handleAddToCart = (book) => {
     addToCart(book); // Chiamata alla funzione passata da App
@@ -61,18 +76,36 @@ export default function BookPage({ addToCart }) {
           <span className="margin-cart">Aggiungi al Carrello</span>
         </button>
       </div>
-      <div className="relate-title">
-        <h2>Libri correlati</h2>
-      </div>
-      <div className="related-books">
-        {relatedBooks.length > 0 ? (
-          relatedBooks.map((book) => (
-            <BookCard key={book.id} {...book} addToCart={addToCart} />
-          ))
-        ) : (
-          <p>Nessun libro correlato disponibile.</p>
-        )}
-      </div>
+      {/* Sezione per libri dello stesso genere */}
+      {sameGenreBooks.length > 0 && (
+        <div className="related-category">
+          <div className="relate-title">
+            <h2>Altri libri {book.category}</h2>
+          </div>
+
+          <div className="related-books">
+            {sameGenreBooks.map((book) => (
+              <BookCard key={book.id} {...book} addToCart={addToCart} />
+            ))}
+          </div>
+        </div>
+      )}
+      {/* Sezione per libri dello stesso autore */}
+      {sameAuthorBooks.length > 0 && (
+        <div className="related-category">
+          <div className="relate-title">
+            <h2>Altri libri di {book.author}</h2>
+          </div>
+          <div className="related-books">
+            {sameAuthorBooks.map((book) => (
+              <BookCard key={book.id} {...book} addToCart={addToCart} />
+            ))}
+          </div>
+        </div>
+      )}
+      {sameGenreBooks.length === 0 &&
+        sameAuthorBooks.length === 0 &&
+        relatedBooks.length === 0 && <p>Nessun libro correlato disponibile.</p>}
     </section>
   );
 }
