@@ -394,7 +394,7 @@ export default function Checkout() {
 
             <div className="camp-container">
               <input
-                type="text"
+                type="number"
                 name="phone"
                 placeholder="Telefono"
                 value={formData.phone}
@@ -419,7 +419,7 @@ export default function Checkout() {
               />
               <input
                 className="small-input"
-                type="text"
+                type="number"
                 name="house_number"
                 placeholder="N'"
                 value={shipmentDetails.house_number}
@@ -447,7 +447,7 @@ export default function Checkout() {
 
               <input
                 className="small-input"
-                type="text"
+                type="number"
                 name="zip_code"
                 placeholder="CAP"
                 value={shipmentDetails.zip_code}
