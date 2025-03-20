@@ -129,11 +129,12 @@ nav {
 
 /* --------HOMEPAGE-------- */
 
-  /* background: linear-gradient(135deg, #a4a8ce, #d6a987); */
+/* background: linear-gradient(135deg, #a4a8ce, #d6a987); */
 
 .book-slider-container {
   text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.336), rgba(0, 0, 0, 0.315)), url(../public/img/room86.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.336), rgba(0, 0, 0, 0.315)),
+    url(../img/room86.jpg);
   background-blend-mode: multiply;
   padding: 40px 0;
   background-repeat: no-repeat;
@@ -401,11 +402,11 @@ nav {
   margin-left: 10px;
 }
 .title-last {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  color: #8B5E3C; 
+  color: #8b5e3c;
   margin: 40px 0 20px;
   position: relative;
   display: inline-block;
@@ -420,21 +421,21 @@ nav {
 }
 
 .title-last-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .title-last::after {
   content: "";
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #D4AF37, #8B5E3C); 
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #d4af37, #8b5e3c);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
 
 .add-book {
@@ -2073,9 +2074,9 @@ address {
   margin: 60px auto;
   padding: 40px;
   border-radius: 12px;
-  background-color: #f5f5f5; 
-  color: #333; 
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
+  background-color: #f5f5f5;
+  color: #333;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   animation: fadeIn 0.8s ease-in-out;
 }
@@ -2092,7 +2093,7 @@ address {
   line-height: 1.8;
   margin-bottom: 15px;
   font-weight: 400;
-  color: #4a4a4a; 
+  color: #4a4a4a;
 }
 /*------/ABOUT------*/
 
@@ -2102,8 +2103,8 @@ address {
   margin: 60px auto;
   padding: 40px;
   border-radius: 12px;
-  background-color: #f8f8f8; 
-  color: #2c3e50; 
+  background-color: #f8f8f8;
+  color: #2c3e50;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   animation: fadeIn 0.8s ease-in-out;
@@ -2140,7 +2141,7 @@ address {
 }
 
 .team-member:hover {
-  color: #e79c3abd; 
+  color: #e79c3abd;
   transform: translateY(-3px);
 }
 /*------/TEAM------*/
@@ -2177,4 +2178,3 @@ address {
 }
 
 /*------/BLOG------*/
-
