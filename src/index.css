@@ -1,6 +1,5 @@
 /* --------GENERAL-------- */
 * {
-  /* margin: 0 auto; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -82,6 +81,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px;
 }
 nav i,
 h4 {
@@ -182,7 +182,7 @@ nav {
   margin-left: 10px;
 }
 .book-slider {
-  width: 100%;
+  /* width: 100%; */
   max-width: 1000px;
   gap: 50px;
   margin: auto;
@@ -430,6 +430,9 @@ nav {
 /*-----Modifiche bottone cuore-------*/
 .wishlist-button {
   color: #ff4d4d;
+}
+.description {
+  padding-right: 180px;
 }
 .search-wish button {
   background-color: #f0f0f0;
@@ -1198,7 +1201,6 @@ nav {
   flex-direction: row;
   gap: 20px;
   padding: 20px;
-  height: 100vh;
   max-width: 1000px;
   margin: 40px auto;
 }
@@ -1486,7 +1488,7 @@ form button:hover {
   gap: 8px;
 }
 .book-relate-card {
-  width: calc((100% / 6) - 7px);
+  width: calc((100% / 6) - 8px);
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1590,7 +1592,7 @@ form button:hover {
   background: white;
   transition: transform 0.2s ease-in-out;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
+  margin: 20px 20px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -1798,6 +1800,91 @@ address {
   right: 0;
   z-index: 1000;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*---MEDIUM-----*/
+
+@media screen and (max-width: 930px) {
+  .related-books {
+    gap: 0px;
+  }
+  .book-relate-card {
+    width: calc(100% / 5);
+  }
+  .product-details {
+    width: 65%;
+  }
+  .product-image {
+    width: 35%;
+  }
+}
+
+/*---SMALL-----*/
+
+@media screen and (max-width: 760px) {
+  .book-relate-card {
+    width: calc(100% / 4);
+  }
+  .product-content {
+    display: block;
+  }
+  .product-details {
+    width: 100%;
+  }
+  .product-image {
+    width: 50%;
+    margin: auto;
+  }
+  .product-image img {
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  .checkout-container {
+    display: block;
+  }
+  .books-details {
+    width: 100%;
+  }
+  .order-summary {
+    width: 100%;
+  }
+  .description {
+    padding-right: 100px;
+  }
+}
+
+/*---X-SMALL-----*/
+
+@media screen and (max-width: 650px) {
+  .book-relate-card {
+    width: calc(100% / 3);
+  }
+  .description {
+    padding-right: 50px;
+  }
+  .row-x {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+  }
+  nav i,
+  h4 {
+    font-size: 16px;
+  }
+  nav h4 {
+    font-size: 20px;
+  }
+  nav {
+    gap: 18px;
+  }
+}
+/*---XX-SMALL-----*/
+
+@media screen and (max-width: 550px) {
+  .book-relate-card {
+    width: calc(100% / 2);
+  }
 }
 
 /*------HELP------*/
@@ -2066,3 +2153,4 @@ address {
 }
 
 /*------/BLOG------*/
+

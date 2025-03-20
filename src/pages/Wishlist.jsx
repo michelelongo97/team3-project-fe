@@ -82,7 +82,7 @@ export default function WishlistPage() {
                       </div>
                     </div>
                     <div className="info-book">
-                      <div>{book.description}</div>
+                      <p className="description">{book.description}</p>
                       <div className="prova">
                         <div className="search-buy-detail"></div>
 
