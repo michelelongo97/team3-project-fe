@@ -10,6 +10,12 @@ import Wishlist from "./pages/Wishlist";
 import BookPage from "./pages/BookPage";
 import Checkout from "./pages/Checkout";
 import { useState, useEffect } from "react";
+import Help from "./pages/Help";
+import ReturnPolicy from "./pages/ReturnPolicy";
+import FAQ from "./pages/FAQ";
+import OurStory from "./pages/OurStory";
+import Team from "./pages/Team";
+import Blog from "./pages/Blog";
 
 import axios from "./api/axios";
 
@@ -82,6 +88,12 @@ export default function App() {
                 }
               />
               <Route index path="/wishlist" element={<Wishlist />} />
+              <Route path="/help" element={<Help/>}/>
+              <Route path="/return-policy" element={<ReturnPolicy/>}/>
+              <Route path="/FAQ" element={<FAQ/>}/>
+              <Route path="/about" element={<OurStory/>}/>
+              <Route path="/team" element={<Team/>}/>
+              <Route path="/blog" element={<Blog/>}/>
             </Route>
           </Routes>
         </WishlistProvider>
