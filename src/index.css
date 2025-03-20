@@ -64,7 +64,7 @@ body {
   font-size: 20px;
   bottom: 20px;
   right: 20px;
-  z-index: 2;
+  z-index: 20;
   max-width: 300px;
   text-align: center;
 }
@@ -1474,11 +1474,10 @@ form button:hover {
 .related-books {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 8px;
 }
 .book-relate-card {
-  width: calc((100% / 6) - 40px);
+  width: calc((100% / 6) - 7px);
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
