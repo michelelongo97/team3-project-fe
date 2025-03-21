@@ -76,6 +76,10 @@ export default function Cart({ cartItems, setCartItems }) {
     fetchCart();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="cart-container">
       <h1 className="cart-title">Il tuo carrello</h1>

@@ -522,12 +522,13 @@ nav {
 }
 .search-book-details {
   display: flex;
+  gap: 10px;
   align-items: flex-start;
   position: relative;
 }
 .search-book-image-wrapper {
   flex: 0 0 150px;
-  margin-right: 25px;
+  /* margin-right: 25px; */
 }
 .search-book-author {
   color: gray;
@@ -638,7 +639,7 @@ nav {
 .searchbar-filter {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
   gap: 10px;
   margin: 30px auto;
 }
@@ -1011,7 +1012,6 @@ nav {
 .cart-item-price {
   display: flex;
   align-items: baseline;
-  gap: 10px;
   font-size: 24px;
   margin-bottom: 30px;
 }
@@ -1398,6 +1398,7 @@ nav {
   text-decoration: line-through;
   color: #555555;
   font-size: 16px;
+  padding: 0 10px;
 }
 
 /* Form Checkout */
@@ -1824,6 +1825,37 @@ address {
   border-color: #a89080;
   transform: scale(1.03);
 }
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .footer-section {
+    width: calc(100% / 3);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-section {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+
+  .footer-section.social {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 /*--------/FOOTER--------*/
 
 .free-shipping-banner {
@@ -1894,6 +1926,10 @@ address {
   .description {
     padding-right: 100px;
   }
+  .cart-item-price {
+    display: block;
+    text-align: right;
+  }
 }
 
 /*---X-SMALL-----*/
@@ -1945,7 +1981,6 @@ address {
     font-size: 18px;
   }
   .cart-item-price {
-    gap: 0;
     font-size: 22px;
     margin-bottom: 30px;
   }
@@ -1966,7 +2001,7 @@ address {
     flex-wrap: wrap;
   }
   .search-book-image-wrapper {
-    margin: auto;
+    margin: 0 auto;
   }
   .search-book-info {
     margin-top: 20px;

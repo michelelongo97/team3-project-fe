@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router";
 
 export default function FAQ() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
