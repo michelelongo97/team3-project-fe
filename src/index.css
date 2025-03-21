@@ -77,6 +77,9 @@ header {
   z-index: 10;
   padding: 0 10px;
 }
+.home-responsive {
+  display: none;
+}
 .row-x {
   display: flex;
   justify-content: space-between;
@@ -1941,6 +1944,12 @@ address {
     gap: 0;
     font-size: 22px;
     margin-bottom: 30px;
+  }
+  .home {
+    display: none;
+  }
+  .home-responsive {
+    display: block;
   }
 }
 /*---XX-SMALL-----*/

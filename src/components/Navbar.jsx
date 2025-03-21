@@ -9,7 +9,8 @@ export default function Navbar({ cartItems }) {
   return (
     <nav className="row-x">
       <Link to="/" className="navbar">
-        <h4>HOMEPAGE</h4>
+        <h4 className="home">HOMEPAGE</h4>
+        <i className="fa-solid fa-house home-responsive"></i>
       </Link>
 
       <Link to="/cart" className="navbar">
