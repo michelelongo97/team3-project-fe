@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import { useAlertContext } from "../context/AlertContext";
+
+
 
 export default function Checkout() {
   const location = useLocation();
   const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
   const [formVisible, setFormVisible] = useState(false); // Stato per controllare la visibilità del form
   const navigate = useNavigate();
+  const { setAlert  } = useAlertContext();
+  
+
+  
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -33,7 +40,7 @@ export default function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
-  const [useSameAddress, setUseSameAddress] = useState(false);
+  const [useSameAddress, setUseSameAddress] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const validateField = (fieldName, value) => {
@@ -172,9 +179,9 @@ export default function Checkout() {
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      alert("Dati inviati con successo!");
-    }
+   // if (Object.keys(newErrors).length === 0) {
+      //alert("Dati inviati con successo!");
+    //}
 
     setLoading(true);
     try {
@@ -184,9 +191,10 @@ export default function Checkout() {
         shipment_cost: shippingCost,
       });
 
-      alert(
-        `Ordine completato con successo! Numero ordine: ${response.data.order_number}`
-      );
+      setAlert({
+        type: "success",
+        message: "Ordine completato con successo!",
+      })
 
       // Svuota il carrello e il form
       setCartItems([]);
@@ -222,7 +230,10 @@ export default function Checkout() {
         "Errore durante il checkout:",
         error.response?.data?.message || error.message
       );
-      alert("C'è stato un problema con il checkout.");
+      setAlert({
+        type: "danger",
+        message: "Completa tutti campi correttamente!!",
+      });
     } finally {
       setLoading(false);
     }
@@ -382,7 +393,7 @@ export default function Checkout() {
                 type="email"
                 name="email"
                 placeholder="Email"
-                pattern="^(?=.{6,254}$)[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
+                
                 value={formData.email}
                 onChange={handleChange}
                 onBlur={(e) => handleBlur(e, "email")}
@@ -400,6 +411,7 @@ export default function Checkout() {
                 value={formData.phone}
                 onChange={handleChange}
                 onBlur={(e) => handleBlur(e, "phone")}
+                min={9}
                 required
                 title="Il numero di telefono deve contenere solo cifre."
               />
