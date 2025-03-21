@@ -1,8 +1,8 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function Blog() {
-useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

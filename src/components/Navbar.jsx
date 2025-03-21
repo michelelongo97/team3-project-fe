@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useWishlistContext } from "../context/WishlistContext";
 
 export default function Navbar({ cartItems }) {

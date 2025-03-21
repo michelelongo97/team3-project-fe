@@ -224,7 +224,7 @@ export default function Checkout() {
 
       setFormVisible(false); // Nasconde il form dopo il completamento
 
-      navigate("/");
+      navigate("/cart");
     } catch (error) {
       console.error(
         "Errore durante il checkout:",
