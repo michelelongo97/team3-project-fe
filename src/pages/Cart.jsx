@@ -149,17 +149,7 @@ export default function Cart({ cartItems, setCartItems }) {
                   </div>
                   <div className="cart-item-button">
                     <div className="cart-item-button-increment-decrement">
-                      <button
-                        onClick={() =>
-                          handleIncrement(item.book_id, item.quantity)
-                        }
-                        className="quantity-btn"
-                      >
-                        +
-                      </button>
-
-                      <p>{item.quantity}</p>
-
+ 
                       {item.quantity === 1 ? (
                         <button
                           disabled
@@ -180,6 +170,17 @@ export default function Cart({ cartItems, setCartItems }) {
                           -
                         </button>
                       )}
+
+                      <p>{item.quantity}</p>
+
+                        <button
+                        onClick={() =>
+                          handleIncrement(item.book_id, item.quantity)
+                        }
+                        className="quantity-btn"
+                      >
+                        +
+                      </button>
                     </div>
                     <div className="cart-item-button-remove">
                       <button
@@ -214,15 +215,15 @@ export default function Cart({ cartItems, setCartItems }) {
             <span>Totale:</span>
             <span className="total-amount">
               {cartItems.length > 0
-                ? cartItems
-                    .reduce((acc, item) => {
+                ?   
+                cartItems.reduce((acc, item) => {
                       const discount =
                         item.discount_type === "percentage" && item.value
                           ? item.price * (item.value / 100)
                           : item.discount_type === "fixed" && item.value
                           ? Math.min(item.price, item.value)
                           : 0;
-                      return acc + (item.price - discount);
+                      return acc + (item.price - discount) * item.quantity;
                     }, 0)
                     .toFixed(2)
                 : "0.00"}
