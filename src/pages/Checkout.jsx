@@ -40,8 +40,9 @@ export default function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
-  const [useSameAddress, setUseSameAddress] = useState(true);
+  const [useSameAddress, setUseSameAddress] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formErrors, setFormErrors] = React.useState({});
 
   const validateField = (fieldName, value) => {
     let error = "";
@@ -59,10 +60,18 @@ export default function Checkout() {
           error = "Inserisci un'email valida (esempio@email.com).";
         }
         break;
-      case "phone":
-        if (!/^\d{9,}$/.test(value)) {
-          error = "Il numero di telefono deve contenere almeno 9 cifre.";
-        }
+        case "phone":
+          
+          if (typeof value === "string") {
+              value = value.replace(/\s+/g, ""); 
+          } else {
+              value = String(value); 
+          }
+      
+          
+          if (!/^\d{9,}$/.test(value)) {
+              error = "Il numero di telefono deve contenere almeno 9 cifre consecutive.";
+          }
         break;
       case "street":
         if (value.trim().length < 5) {
@@ -89,6 +98,20 @@ export default function Checkout() {
         break;
     }
     return error;
+  };
+
+  const validateForm = (formData) => {
+    const errors = {};
+  
+    // Esegui la validazione su ogni campo
+    Object.keys(formData).forEach((fieldName) => {
+      const error = validateField(fieldName, formData[fieldName]);
+      if (error) {
+        errors[fieldName] = error; // Memorizza l'errore se presente
+      }
+    });
+  
+    return errors; // Restituisce un oggetto con tutti gli errori
   };
 
   // Calcolo del subtotale e del costo di spedizione
@@ -170,19 +193,26 @@ export default function Checkout() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validazione di tutti i campi al submit
-    const newErrors = {};
-    Object.keys(formData).forEach((key) => {
-      const error = validateField(key, formData[key]);
-      if (error) newErrors[key] = error;
-    });
+    const errors = validateForm(formData);
 
-    setErrors(newErrors);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      setAlert({
 
-   // if (Object.keys(newErrors).length === 0) {
-      //alert("Dati inviati con successo!");
-    //}
+        type: "danger",
+        message: "Completa tutti i campi correttamente!",
+      });
+      return;
+    } else {
+      console.log("Form inviato con successo!", formData)
+      setAlert({
+        type: "success",
+        message: "Dati inviati con successo!",
+      });
+      
+    }
 
+   
     setLoading(true);
     try {
       const response = await axios.post("/sales", {
@@ -230,6 +260,8 @@ export default function Checkout() {
         "Errore durante il checkout:",
         error.response?.data?.message || error.message
       );
+
+       
       setAlert({
         type: "danger",
         message: "Completa tutti campi correttamente!!",
@@ -393,7 +425,6 @@ export default function Checkout() {
                 type="email"
                 name="email"
                 placeholder="Email"
-                
                 value={formData.email}
                 onChange={handleChange}
                 onBlur={(e) => handleBlur(e, "email")}
@@ -409,9 +440,9 @@ export default function Checkout() {
                 name="phone"
                 placeholder="Telefono"
                 value={formData.phone}
+                min={9}
                 onChange={handleChange}
                 onBlur={(e) => handleBlur(e, "phone")}
-                min={9}
                 required
                 title="Il numero di telefono deve contenere solo cifre."
               />
