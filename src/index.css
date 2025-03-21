@@ -1913,12 +1913,77 @@ address {
   nav {
     gap: 18px;
   }
+  .searchbar-filter {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .book-slider {
+    display: none;
+  }
+  .book-slider-indicator {
+    display: none;
+  }
+
+  .item-info .item-title {
+    font-size: 20px;
+  }
+  .item-info .item-author {
+    font-size: 16px;
+  }
+  .item-info .available_quantity {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+  .item-info .availability {
+    font-size: 18px;
+  }
+  .cart-item-price {
+    gap: 0;
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
 }
 /*---XX-SMALL-----*/
 
 @media screen and (max-width: 550px) {
   .book-relate-card {
     width: calc(100% / 2);
+  }
+  .search-book-details {
+    flex-wrap: wrap;
+  }
+  .search-book-image-wrapper {
+    margin: auto;
+  }
+  .search-book-info {
+    margin-top: 20px;
+  }
+  .info-book {
+    align-items: center;
+  }
+  .cart-summary {
+    align-items: center;
+    padding: 20px 0;
+  }
+  .cart-total {
+    display: block;
+  }
+  .total-amount {
+    font-size: 26px;
+    padding-left: 4px;
+  }
+  .checkout-btn {
+    width: 50%;
+  }
+  .item-details {
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  .cart-image-container img {
+    width: 150px;
+  }
+  .item-info {
+    margin-top: 16px;
   }
 }
 
