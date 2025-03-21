@@ -1828,7 +1828,7 @@ address {
 
 .free-shipping-banner {
   background-color: #c94a41;
-  color: #333;
+  color: #ecdfdf;
   text-align: center;
   padding: 12px;
   font-size: 18px;
@@ -1839,6 +1839,10 @@ address {
   right: 0;
   z-index: 1000;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.free-shipping-banner span {
+  padding: 10px;
 }
 
 /*---MEDIUM-----*/
