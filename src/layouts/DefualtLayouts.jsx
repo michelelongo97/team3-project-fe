@@ -6,7 +6,8 @@ export default function DefaultLayout({ cartItems }) {
   return (
     <>
       <div className="free-shipping-banner">
-        📦 Spedizione gratuita per ordini superiori a 50€!
+        <i class="fa-solid fa-box"></i>
+        <span>Spedizione gratuita per ordini superiori a 50€!</span>
         <i className="fa-solid fa-cart-shopping"></i>
       </div>
 
