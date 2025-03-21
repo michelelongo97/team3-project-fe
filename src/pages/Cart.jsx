@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useWishlistContext } from "../context/WishlistContext";
 
 export default function Cart({ cartItems, setCartItems }) {
