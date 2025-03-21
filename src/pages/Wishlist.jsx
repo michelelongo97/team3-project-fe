@@ -41,6 +41,12 @@ export default function WishlistPage() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <section className="wishlist new-container">
       <h1>La tua Wishlist</h1>

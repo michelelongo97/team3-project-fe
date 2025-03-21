@@ -1,6 +1,13 @@
 import { Link } from "react-router";
+import { useEffect } from "react";
 
 export default function Team() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   const teamMembers = [
     "Alessandra Sinigaglia",
     "Erika Cutugno",

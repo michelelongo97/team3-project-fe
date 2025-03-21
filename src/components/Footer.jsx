@@ -53,7 +53,7 @@ export default function Footer() {
           </address>
         </div>
 
-        <div className="footer-section">
+        <div className="footer-section social">
           <div className="newsletter">
             <h4>Ricevi novità e offerte</h4>
             <p className="small">
@@ -69,7 +69,7 @@ export default function Footer() {
               <i class="fa-brands fa-instagram"></i>
             </p>
             <p aria-label="Twitter">
-              <i class="fa-brands fa-twitter"></i>
+              <i class="fa-brands fa-x-twitter"></i>
             </p>
             <p aria-label="Pinterest">
               <i class="fa-brands fa-pinterest-p"></i>
