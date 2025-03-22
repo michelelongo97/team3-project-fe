@@ -207,7 +207,7 @@ export default function Checkout() {
       console.log("Form inviato con successo!", formData)
       setAlert({
         type: "success",
-        message: "Dati inviati con successo!",
+        message: "Ordine completato con successo!",
       });
       
     }
@@ -223,7 +223,7 @@ export default function Checkout() {
 
       setAlert({
         type: "success",
-        message: "Ordine completato con successo!",
+        message: "Grazie per il tuo ordine! A breve riceverai un email con tutti i dettagli.",
       })
 
       // Svuota il carrello e il form
