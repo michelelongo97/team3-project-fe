@@ -12,21 +12,26 @@ export default function BookCard({
   id,
   addToCart,
 }) {
+  // Recupera lo stato della wishlist e le funzioni per aggiornarla dal contesto
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
+
+  // Stato per gestire eventuali messaggi di feedback (attualmente non usato)
   const [message, setMessage] = useState("");
 
+  // Sincronizza la wishlist al montaggio del componente
   useEffect(() => {
     syncWishlist();
   }, []);
 
+  // Fa scorrere la pagina in alto al montaggio del componente
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  //funzione per chiamare addToCart con l'Alert
+  // Funzione per aggiungere un libro al carrello e mostrare un avviso
   const handleAddToCart = (book) => {
-    addToCart(book); // Chiamata alla funzione passata da App
+    addToCart(book); // Chiamata alla funzione passata come prop
 
     setAlert({
       type: "success",
@@ -34,7 +39,7 @@ export default function BookCard({
     });
   };
 
-  // Crea l'oggetto book
+  // Crea un oggetto libro con le proprietà ricevute
   const book = {
     id,
     title,
@@ -42,39 +47,54 @@ export default function BookCard({
     author,
     price,
   };
+
+  // Funzione per generare uno slug dal titolo del libro (utile per gli URL)
   const generateSlug = (title) => {
     return title
       .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "");
+      .replace(/\s+/g, "-") // Sostituisce gli spazi con trattini
+      .replace(/[^\w-]+/g, ""); // Rimuove caratteri non alfanumerici
   };
+
   return (
-    // <div className="book-relate-container">
     <div className="book-relate-card">
+      {/* Link alla pagina del libro con uno slug nel percorso */}
       <Link to={`/books/${generateSlug(title)}`} className="book-relate-link">
+        {/* Immagine del libro */}
         <img src={image} alt={title} className="book-relate-image" />
+
+        {/* Titolo del libro */}
         <h3 className="book-relate-title book-title">{title}</h3>
+
+        {/* Nome dell'autore */}
         <p className="book-relate-author">{author}</p>
+
+        {/* Prezzo del libro */}
         <p className="book-relate-price">{price}€</p>
+
+        {/* Sezione con i pulsanti di wishlist e carrello */}
         <div className="add-book">
+          {/* Pulsante per aggiungere/rimuovere dalla wishlist */}
           <button
             className="wishlist-button"
             onClick={(e) => {
-              e.preventDefault();
-              toggleWishlist(id);
+              e.preventDefault(); // Previene la navigazione involontaria
+              toggleWishlist(id); // Aggiunge/rimuove il libro dalla wishlist
             }}
           >
+            {/* Cambia l'icona in base alla presenza del libro nella wishlist */}
             {wishlist.some((b) => b.id === id) ? (
-              <i className="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-heart"></i> // Libro in wishlist
             ) : (
-              <i className="fa-regular fa-heart"></i>
+              <i className="fa-regular fa-heart"></i> // Libro non in wishlist
             )}
           </button>
 
+          {/* Pulsante per aggiungere il libro al carrello */}
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleAddToCart(book);
+              e.preventDefault(); // Previene la navigazione
+              handleAddToCart(book); // Aggiunge il libro al carrello
             }}
           >
             <i className="fa-solid fa-cart-shopping"></i>
@@ -82,6 +102,5 @@ export default function BookCard({
         </div>
       </Link>
     </div>
-    // </div>
   );
 }

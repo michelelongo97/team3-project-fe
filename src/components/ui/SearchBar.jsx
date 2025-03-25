@@ -5,48 +5,66 @@ import axios from "../../api/axios";
 import { Link, useSearchParams } from "react-router";
 
 export default function SearchBar({ addToCart }) {
+  // Recupera i parametri di ricerca dall'URL (es. ?q=harry+potter&sort=prezzo)
   const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Stato per il testo di ricerca, inizializzato con il valore dell'URL se presente
   const [search, setSearch] = useState(searchParams.get("q") || "");
+
+  // Stato per memorizzare i risultati della ricerca
   const [result, setResult] = useState(null);
+
+  // Stato per il criterio di ordinamento (default: "recenti")
   const [sortBy, setSortBy] = useState(searchParams.get("sort") || "recenti");
+
+  // Recupera il contesto della wishlist
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
+  
+  // Recupera la funzione per mostrare gli alert
   const { setAlert } = useAlertContext();
 
+  // Sincronizza la wishlist all'avvio del componente
   useEffect(() => {
     syncWishlist();
   }, []);
 
+  // Se c'è un parametro di ricerca nell'URL, avvia la ricerca all'avvio del componente
   useEffect(() => {
     if (searchParams.get("q")) {
       fetchSearch();
     }
   }, []);
 
+  // Funzione per recuperare i risultati della ricerca dal server
   const fetchSearch = () => {
     if (!search.trim()) {
-      setResult(null);
+      setResult(null); // Se il campo di ricerca è vuoto, resetta i risultati
       return;
     }
     axios
-      .get(`/books/search?q=${search}`)
+      .get(`/books/search?q=${search}`) // Richiesta GET con il termine di ricerca
       .then((response) => {
-        setResult(response.data);
+        setResult(response.data); // Salva i risultati della ricerca nello stato
       })
       .catch((error) => {
         console.error("Errore nella ricerca:", error);
       });
   };
 
+  // Gestisce l'invio del form di ricerca
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Evita il refresh della pagina
     if (!search.trim()) return;
+    
+    // Aggiorna i parametri dell'URL con il nuovo valore di ricerca e il criterio di ordinamento
     setSearchParams({ q: search, sort: sortBy });
-    fetchSearch();
+
+    fetchSearch(); // Avvia la ricerca
   };
 
-  //funzione per chiamare addToCart con l'Alert
+  // Funzione per aggiungere un libro al carrello e mostrare un messaggio di conferma
   const handleAddToCart = (book) => {
-    addToCart(book); // Chiamata alla funzione passata da App
+    addToCart(book); // Chiamata alla funzione passata dal componente padre
 
     setAlert({
       type: "success",
@@ -54,6 +72,7 @@ export default function SearchBar({ addToCart }) {
     });
   };
 
+  // Genera uno slug per l'URL del libro (es. "Harry Potter" → "harry-potter")
   const generateSlug = (title) => {
     return title
       .toLowerCase()
@@ -61,26 +80,28 @@ export default function SearchBar({ addToCart }) {
       .replace(/[^\w-]+/g, "");
   };
 
+  // Funzione per ordinare i risultati della ricerca in base al criterio selezionato
   const sortResults = (books) => {
     if (!books) return [];
 
     return [...books].sort((a, b) => {
-      if (sortBy === "prezzo") return a.price - b.price;
-      if (sortBy === "nome")
-        return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
-      if (sortBy === "recenti") return new Date(b.date) - new Date(a.date);
+      if (sortBy === "prezzo") return a.price - b.price; // Ordina per prezzo crescente
+      if (sortBy === "nome") return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1; // Ordina per titolo alfabetico
+      if (sortBy === "recenti") return new Date(b.date) - new Date(a.date); // Ordina per data di uscita
       return 0;
     });
   };
 
   return (
     <section className="new-container">
+      {/* Barra di ricerca e filtro */}
       <div className="searchbar-filter">
         <form
           onSubmit={handleSubmit}
           className="search-bar row-x"
           id="searchbar"
         >
+          {/* Campo input per la ricerca */}
           <input
             type="text"
             placeholder="Cerca un libro..."
@@ -95,12 +116,13 @@ export default function SearchBar({ addToCart }) {
           </button>
         </form>
 
+        {/* Sezione per la selezione del criterio di ordinamento */}
         <div className="sort-section">
           <div>Ordina per:</div>
           <select
             onChange={(e) => {
               setSortBy(e.target.value);
-              setSearchParams({ q: search, sort: e.target.value });
+              setSearchParams({ q: search, sort: e.target.value }); // Aggiorna i parametri dell'URL
             }}
             value={sortBy}
             className="sort-select"
@@ -111,8 +133,12 @@ export default function SearchBar({ addToCart }) {
           </select>
         </div>
       </div>
+
+      {/* Sezione dei risultati */}
       <div>
+        {/* Se non ci sono risultati */}
         {result === null ? null : result.length > 0 ? (
+          // Se ci sono risultati, li mostra in ordine
           sortResults(result).map((book) => (
             <Link
               to={`/books/${generateSlug(book.title)}`}
@@ -121,6 +147,7 @@ export default function SearchBar({ addToCart }) {
             >
               <div className="book-search">
                 <div className="search-book-details">
+                  {/* Immagine del libro */}
                   <div className="search-book-image-wrapper">
                     <img
                       className="search-book-image"
@@ -130,12 +157,14 @@ export default function SearchBar({ addToCart }) {
                   </div>
                   <div className="search-book-info">
                     <div className="search-header">
+                      {/* Titolo e autore */}
                       <div className="search-book-title">
                         <h2>{book.title}</h2>
                         <div className="search-book-author">
                           di {book.author}
                         </div>
                       </div>
+                      {/* Pulsante per aggiungere/rimuovere dalla wishlist */}
                       <div className="search-wish">
                         <button
                           className="wishlist-button"
@@ -156,6 +185,7 @@ export default function SearchBar({ addToCart }) {
                       <div>{book.description}</div>
                       <div className="prova">
                         <div className="search-buy-detail">
+                          {/* Gestione dello sconto se presente */}
                           {book.discountId &&
                           new Date() >= new Date(book.start_date) &&
                           new Date() <= new Date(book.end_date) ? (
@@ -191,6 +221,7 @@ export default function SearchBar({ addToCart }) {
                           ) : (
                             <p className="search-book-price">{book.price}€</p>
                           )}
+                          {/* Pulsante per aggiungere al carrello */}
                           <button
                             onClick={(e) => {
                               e.preventDefault();
@@ -212,12 +243,10 @@ export default function SearchBar({ addToCart }) {
             </Link>
           ))
         ) : (
-          <div className="no-results">
-            <h2>La tua ricerca: {search}</h2>
-            <p>Ops! Purtroppo non siamo riusciti a trovare alcun risultato.</p>
-          </div>
+          <div className="no-results">Nessun risultato trovato</div>
         )}
       </div>
     </section>
   );
 }
+

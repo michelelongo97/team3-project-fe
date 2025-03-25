@@ -4,20 +4,27 @@ import { Link } from "react-router-dom";
 import { useWishlistContext } from "../context/WishlistContext";
 
 export default function Cart({ cartItems, setCartItems }) {
+  // Stato per gestire i messaggi di errore o successo
   const [message, setMessage] = useState("");
+
+  // Otteniamo la wishlist e la funzione per aggiungere/rimuovere elementi dalla wishlist
   const { wishlist, toggleWishlist } = useWishlistContext();
+
+  // Variabile per eventuali sconti (al momento non utilizzata)
   let discount = 0;
 
+  // Funzione per calcolare il totale del carrello
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       return total + item.price * item.quantity;
     }, 0);
   };
 
+  // Funzione per recuperare il carrello dal server
   const fetchCart = async () => {
     try {
-      const response = await axios.get("/cart");
-      setCartItems(response.data.cart);
+      const response = await axios.get("/cart"); // Chiamata API per ottenere il carrello
+      setCartItems(response.data.cart); // Aggiorniamo lo stato del carrello con i dati ricevuti
       setMessage(response.data.message || "Carrello recuperato con successo.");
     } catch (error) {
       setMessage(
@@ -27,13 +34,14 @@ export default function Cart({ cartItems, setCartItems }) {
     }
   };
 
-  console.log(cartItems);
+  console.log(cartItems); // Debug: stampa i dati del carrello nella console
 
+  // Funzione per rimuovere un articolo dal carrello
   const removeFromCart = async (book_id, quantity) => {
     try {
-      await axios.delete(`/cart/remove/${book_id}/ ${quantity}`);
+      await axios.delete(`/cart/remove/${book_id}/${quantity}`); // Chiamata API per rimuovere l'articolo
       setMessage("Articolo rimosso dal carrello.");
-      fetchCart();
+      fetchCart(); // Aggiorniamo il carrello dopo la rimozione
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -42,6 +50,7 @@ export default function Cart({ cartItems, setCartItems }) {
     }
   };
 
+  // Funzione per aggiornare la quantità di un articolo nel carrello
   const updateQuantity = async (bookId, newQuantity) => {
     try {
       await axios.put("/cart/update-quantity", {
@@ -49,7 +58,7 @@ export default function Cart({ cartItems, setCartItems }) {
         quantity: newQuantity,
       });
       setMessage("Quantità aggiornata con successo.");
-      fetchCart();
+      fetchCart(); // Aggiorniamo il carrello dopo la modifica della quantità
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -58,11 +67,13 @@ export default function Cart({ cartItems, setCartItems }) {
     }
   };
 
+  // Aumenta la quantità di un articolo
   const handleIncrement = (bookId, currentQuantity) => {
     const newQuantity = currentQuantity + 1;
     updateQuantity(bookId, newQuantity);
   };
 
+  // Diminuisce la quantità di un articolo (fino a un minimo di 1)
   const handleDecrement = (bookId, currentQuantity) => {
     const newQuantity = currentQuantity - 1;
     if (newQuantity >= 1) {
@@ -72,10 +83,12 @@ export default function Cart({ cartItems, setCartItems }) {
     }
   };
 
+  // Recuperiamo il carrello quando il componente viene montato
   useEffect(() => {
     fetchCart();
   }, []);
 
+  // Scorriamo la pagina all'inizio quando il componente viene caricato
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -149,7 +162,6 @@ export default function Cart({ cartItems, setCartItems }) {
                   </div>
                   <div className="cart-item-button">
                     <div className="cart-item-button-increment-decrement">
- 
                       {item.quantity === 1 ? (
                         <button
                           disabled
@@ -173,7 +185,7 @@ export default function Cart({ cartItems, setCartItems }) {
 
                       <p>{item.quantity}</p>
 
-                        <button
+                      <button
                         onClick={() =>
                           handleIncrement(item.book_id, item.quantity)
                         }
@@ -215,8 +227,8 @@ export default function Cart({ cartItems, setCartItems }) {
             <span>Totale:</span>
             <span className="total-amount">
               {cartItems.length > 0
-                ?   
-                cartItems.reduce((acc, item) => {
+                ? cartItems
+                    .reduce((acc, item) => {
                       const discount =
                         item.discount_type === "percentage" && item.value
                           ? item.price * (item.value / 100)

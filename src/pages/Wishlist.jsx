@@ -5,15 +5,25 @@ import { useAlertContext } from "../context/AlertContext";
 import axios from "../api/axios";
 
 export default function WishlistPage() {
-  const { wishlist, error, toggleWishlist, syncWishlist } =
-    useWishlistContext();
+  // Recupera lo stato della wishlist e le funzioni dal contesto
+  const { wishlist, error, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
+
+  // Stato per gestire i messaggi di errore o successo
   const [message, setMessage] = useState("");
+
+  // Sincronizza la wishlist all'avvio della pagina
   useEffect(() => {
     syncWishlist();
   }, []);
 
-  //Carrello
+  /**
+   * Funzione per aggiungere un libro al carrello.
+   * Effettua una richiesta HTTP POST per aggiungere un libro con quantità predefinita di 1.
+   * Se l'operazione ha successo, aggiorna il messaggio e mostra un avviso.
+   * Se si verifica un errore, cattura il messaggio di errore e lo visualizza.
+   * @param {Object} book - Oggetto del libro da aggiungere al carrello.
+   */
   const addToCart = (book) => {
     axios
       .post("/cart", {
@@ -21,7 +31,7 @@ export default function WishlistPage() {
         quantity: 1,
       })
       .then((res) => {
-        setMessage(res.data.message);
+        setMessage(res.data.message); // Imposta il messaggio di conferma
         setAlert({
           type: "success",
           message: "Articolo aggiunto al carrello",
@@ -30,18 +40,25 @@ export default function WishlistPage() {
       .catch((err) => {
         setMessage(
           err.response?.data?.message ||
-            "Errore durante l'aggiunta al carrello."
+          "Errore durante l'aggiunta al carrello."
         );
       });
   };
-  //slug
+
+  /**
+   * Funzione per generare uno slug da un titolo.
+   * Converte il titolo in minuscolo, sostituisce gli spazi con trattini e rimuove i caratteri non alfanumerici.
+   * @param {string} title - Titolo del libro.
+   * @returns {string} - Slug generato.
+   */
   const generateSlug = (title) => {
     return title
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "");
+      .toLowerCase()       // Converti tutto in minuscolo
+      .replace(/\s+/g, "-") // Sostituisci gli spazi con "-"
+      .replace(/[^\w-]+/g, ""); // Rimuovi caratteri speciali
   };
 
+  // Quando la pagina viene caricata, scrolla automaticamente in cima
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
