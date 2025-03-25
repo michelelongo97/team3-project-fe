@@ -3,18 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { useAlertContext } from "../context/AlertContext";
 
-
-
 export default function Checkout() {
   const location = useLocation();
-  const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
-  const [formVisible, setFormVisible] = useState(false); // Stato per controllare la visibilità del form
   const navigate = useNavigate();
-  const { setAlert  } = useAlertContext();
-  
+  const { setAlert } = useAlertContext();
 
-  
+  // Stato che memorizza gli articoli presenti nel carrello,
+  // prendendoli dallo stato passato dalla pagina precedente (se disponibile).
+  const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
 
+  // Stato che gestisce la visibilità del form di checkout
+  const [formVisible, setFormVisible] = useState(false);
+
+  // Stato che memorizza i dati inseriti nel form dall'utente
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -23,6 +24,8 @@ export default function Checkout() {
     shipment_address: "",
     billing_address: "",
   });
+
+  // Stato che memorizza i dettagli dell'indirizzo di spedizione
   const [shipmentDetails, setShipmentDetails] = useState({
     street: "",
     house_number: "",
@@ -31,6 +34,7 @@ export default function Checkout() {
     province: "",
   });
 
+  // Stato che memorizza i dettagli dell'indirizzo di fatturazione
   const [billingDetails, setBillingDetails] = useState({
     street: "",
     house_number: "",
@@ -39,194 +43,151 @@ export default function Checkout() {
     province: "",
   });
 
+  // Stato per memorizzare eventuali errori di validazione nei campi del form
   const [errors, setErrors] = useState({});
-  const [useSameAddress, setUseSameAddress] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formErrors, setFormErrors] = React.useState({});
 
+  // Stato per gestire se l'utente vuole usare lo stesso indirizzo di spedizione anche per la fatturazione
+  const [useSameAddress, setUseSameAddress] = useState(false);
+
+  // Stato per indicare se il form sta elaborando un'operazione
+  const [loading, setLoading] = useState(false);
+
+  // Stato per tenere traccia di tutti gli errori del form
+  const [formErrors, setFormErrors] = useState({});
+
+  /**
+   * Funzione per validare i singoli campi del form
+   * @param {string} fieldName - Il nome del campo da validare
+   * @param {string} value - Il valore inserito dall'utente
+   * @returns {string} - Il messaggio di errore se il valore non è valido, altrimenti stringa vuota
+   */
   const validateField = (fieldName, value) => {
     let error = "";
     switch (fieldName) {
       case "first_name":
       case "last_name":
+        // Nome e cognome devono contenere almeno 2 caratteri
         if (value.trim().length < 2) {
           error = `${
             fieldName === "first_name" ? "Il nome" : "Il cognome"
           } deve avere almeno 2 caratteri.`;
         }
         break;
+
       case "email":
+        // Controlla che l'email sia in un formato valido
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
           error = "Inserisci un'email valida (esempio@email.com).";
         }
         break;
-        case "phone":
-          
-          if (typeof value === "string") {
-              value = value.replace(/\s+/g, ""); 
-          } else {
-              value = String(value); 
-          }
-      
-          
-          if (!/^\d{9,}$/.test(value)) {
-              error = "Il numero di telefono deve contenere almeno 9 cifre consecutive.";
-          }
+
+      case "phone":
+        // Rimuove gli spazi e verifica che ci siano almeno 9 cifre consecutive
+        if (!/^\d{9,}$/.test(value?.toString().replace(/\s+/g, ""))) {
+          error =
+            "Il numero di telefono deve contenere almeno 9 cifre consecutive.";
+        }
         break;
+
       case "street":
+        // La via deve avere almeno 5 caratteri
         if (value.trim().length < 5) {
           error = "La via deve avere almeno 5 caratteri.";
         }
         break;
+
       case "house_number":
+        // Il numero civico deve essere un numero
         if (!/^\d+$/.test(value)) {
           error = "Il numero civico deve essere un valore numerico.";
         }
         break;
+
       case "city":
+        // La città deve avere almeno 2 caratteri
         if (value.trim().length < 2) {
           error = "La città deve avere almeno 2 caratteri.";
         }
         break;
+
       case "province":
+        // La provincia deve essere scritta per intero (es. "Milano")
         if (value.trim().length < 4) {
           error =
             "La provincia deve essere scritta per intero (esempio: Milano).";
         }
         break;
+
       default:
         break;
     }
     return error;
   };
 
+  /**
+   * Funzione che controlla tutti i campi del form e restituisce un oggetto con gli errori
+   * @param {Object} formData - I dati del form da validare
+   * @returns {Object} - Oggetto contenente eventuali errori di validazione
+   */
   const validateForm = (formData) => {
     const errors = {};
-  
-    // Esegui la validazione su ogni campo
+
+    // Esegue la validazione su ogni campo del form
     Object.keys(formData).forEach((fieldName) => {
       const error = validateField(fieldName, formData[fieldName]);
       if (error) {
-        errors[fieldName] = error; // Memorizza l'errore se presente
+        errors[fieldName] = error; // Salva l'errore nel campo corrispondente
       }
     });
-  
-    return errors; // Restituisce un oggetto con tutti gli errori
+
+    return errors;
   };
 
-  // Calcolo del subtotale e del costo di spedizione
-  const subtotal = cartItems.reduce((total, item) => {
-    let discountedPrice = item.price;
-
-    if (item.discount_type === "percentage" && item.value) {
-      discountedPrice = item.price - (item.price * item.value) / 100;
-    } else if (item.discount_type === "fixed" && item.value) {
-      discountedPrice = Math.max(0, item.value);
-    }
-
-    return total + discountedPrice * item.quantity;
-  }, 0);
-
-  const shippingCost = subtotal > 50 ? 0 : 4.99; // Calcola la spedizione solo se il totale è inferiore a 50€
-
-  const handleShipmentChange = (e) => {
-    const { name, value } = e.target;
-    setShipmentDetails({ ...shipmentDetails, [name]: value });
-    setFormData((prev) => ({
-      ...prev,
-      shipment_address: `${shipmentDetails.street}, ${shipmentDetails.house_number}, ${shipmentDetails.city}, ${shipmentDetails.province}, ${shipmentDetails.zip_code}`,
-    }));
-  };
-
-  const handleBillingChange = (e) => {
-    const { name, value } = e.target;
-    setBillingDetails({ ...billingDetails, [name]: value });
-    setFormData((prev) => ({
-      ...prev,
-      billing_address: `${billingDetails.street}, ${billingDetails.house_number}, ${billingDetails.city}, ${billingDetails.province}, ${billingDetails.zip_code}`,
-    }));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-
-    // Validazione quando l'utente lascia il campo
-    const error = validateField(name, value);
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
-  };
-
-  const handleCheckboxChange = (e) => {
-    const isChecked = e.target.checked;
-    console.log("Checkbox selezionata:", isChecked);
-
-    const fullShipmentAddress = `${shipmentDetails.street}, ${shipmentDetails.house_number}, ${shipmentDetails.city}, ${shipmentDetails.province}, ${shipmentDetails.zip_code}`;
-    console.log("Shipment Address:", fullShipmentAddress);
-
-    setUseSameAddress(isChecked);
-
-    if (isChecked) {
-      setFormData((prev) => ({
-        ...prev,
-        billing_address: fullShipmentAddress,
-      }));
-      setBillingDetails({ ...shipmentDetails });
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        billing_address: "",
-      }));
-      setBillingDetails({
-        street: "",
-        house_number: "",
-        city: "",
-        zip_code: "",
-        province: "",
-      });
-    }
-  };
-
+  /**
+   * Gestisce l'invio del form
+   * Controlla se ci sono errori e, in caso positivo, mostra un messaggio di avviso.
+   * Se non ci sono errori, invia i dati al server e svuota il carrello.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Esegue la validazione dell'intero form
     const errors = validateForm(formData);
 
+    // Se ci sono errori, mostra un avviso e non procede con l'invio
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors)
+      setFormErrors(errors);
       setAlert({
-
         type: "danger",
         message: "Completa tutti i campi correttamente!",
       });
       return;
-    } else {
-      console.log("Form inviato con successo!", formData)
-      setAlert({
-        type: "success",
-        message: "Ordine completato con successo!",
-      });
-      
     }
 
-   
+    console.log("Form inviato con successo!", formData);
+    setAlert({
+      type: "success",
+      message: "Ordine completato con successo!",
+    });
+
     setLoading(true);
+
     try {
-      const response = await axios.post("/sales", {
+      // Simula la chiamata al server per completare l'ordine
+      await axios.post("/sales", {
         ...formData,
         total_price: subtotal + shippingCost,
         shipment_cost: shippingCost,
       });
 
+      // Mostra un messaggio di conferma all'utente
       setAlert({
         type: "success",
-        message: "Grazie per il tuo ordine! A breve riceverai un email con tutti i dettagli.",
-      })
+        message:
+          "Grazie per il tuo ordine! A breve riceverai un'email con i dettagli.",
+      });
 
-      // Svuota il carrello e il form
+      // Svuota il carrello e i campi del form
       setCartItems([]);
       setFormData({
         first_name: "",
@@ -244,6 +205,7 @@ export default function Checkout() {
         zip_code: "",
         province: "",
       });
+
       setBillingDetails({
         street: "",
         house_number: "",
@@ -252,19 +214,16 @@ export default function Checkout() {
         province: "",
       });
 
-      setFormVisible(false); // Nasconde il form dopo il completamento
+      // Nasconde il form dopo la conferma
+      setFormVisible(false);
 
+      // Reindirizza l'utente al carrello dopo l'acquisto
       navigate("/cart");
     } catch (error) {
-      console.error(
-        "Errore durante il checkout:",
-        error.response?.data?.message || error.message
-      );
-
-       
+      console.error("Errore durante il checkout:", error);
       setAlert({
         type: "danger",
-        message: "Completa tutti campi correttamente!!",
+        message: "Si è verificato un errore durante il checkout!",
       });
     } finally {
       setLoading(false);

@@ -5,61 +5,73 @@ import { useAlertContext } from "../../context/AlertContext";
 import axios from "../../api/axios";
 
 export default function BestSellers({ addToCart }) {
+  // Recupera lo stato della wishlist e le funzioni per aggiornarla dal contesto
   const { wishlist, toggleWishlist, syncWishlist } = useWishlistContext();
   const { setAlert } = useAlertContext();
+
+  // Stato per memorizzare i dati dei best seller e gestire eventuali errori
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+
+  // Riferimento per lo slider della lista dei best seller
   const sliderRef = useRef(null);
 
+  // Sincronizza la wishlist al montaggio del componente
   useEffect(() => {
     syncWishlist();
   }, []);
 
+  // Funzione per recuperare i best seller dal server
   const fetchBestSellers = () => {
     axios
       .get("/books/best-sellers")
       .then((res) => {
-        setData(res.data);
+        setData(res.data); // Aggiorna lo stato con i dati ricevuti
       })
       .catch((error) => {
-        setError(error.message);
-        console.error("Errore nell ottenere i libri più venduti:", error);
+        setError(error.message); // Salva l'errore nello stato
+        console.error("Errore nell'ottenere i libri più venduti:", error);
       });
   };
 
+  // Effettua la chiamata API quando il componente viene montato
   useEffect(() => {
     fetchBestSellers();
   }, []);
 
+  // Funzione per scorrere la lista dei best seller lateralmente
   const scroll = (direction) => {
     if (sliderRef.current) {
-      const scrollAmount = 300;
+      const scrollAmount = 300; // Distanza di scorrimento
       sliderRef.current.scrollBy({
         left: direction * scrollAmount,
-        behavior: "smooth",
+        behavior: "smooth", // Scorrimento fluido
       });
     }
   };
 
+  // Genera uno slug dal titolo di un libro per URL leggibili
   const generateSlug = (title) => {
     return title
       .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "");
+      .replace(/\s+/g, "-") // Sostituisce gli spazi con trattini
+      .replace(/[^\w-]+/g, ""); // Rimuove caratteri non alfanumerici
   };
 
+  // Aggiunge un libro al carrello e mostra un avviso di conferma
   const handleAddToCart = (book) => {
-    addToCart(book); 
+    addToCart(book);
 
     setAlert({
       type: "success",
       message: "Articolo aggiunto al carrello",
     });
   };
+
   return (
     <section>
       <div className="title-last-container">
-      <h1 className="title-last">I NOSTRI BESTSELLER</h1>
+        <h1 className="title-last">I NOSTRI BESTSELLER</h1>
       </div>
       {error && <p className="error-message">Errore: {error}</p>}
       {data.length > 0 ? (
